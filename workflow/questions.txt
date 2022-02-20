@@ -1,0 +1,3 @@
+Ce fichier est prevu pour acceuillir toutes les questions non urgentes que l'on
+pourrait se poser pendant le projet. L'idee est d'y repondre au plus tard avant
+le depart du "sprint" concerne par la question.

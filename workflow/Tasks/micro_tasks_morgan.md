@@ -1,16 +1,18 @@
 Template:
 
-*** Macro Task Name ***
-- [ ] Micro Task A (Temps estime) 
+**_ Macro Task Name _**
+
+- [ ] Micro Task A (Temps estime)
 - [ ] Micro Task B (Temps estime)
 - [ ] Micro Task C (Temps estime)
 
-*** Learn Rust ***
-- [ ] Chapter1
-- [ ] Chapter2
+**_ Learn Rust _**
+
+- [x] Chapter1
+- [x] Chapter2
 - [ ] Chapter3
 - [ ] Chapter4
-- [ ] Chapter5
+- [ ] Chapter5ß
 - [ ] Chapter6
 - [ ] Chapter7
 - [ ] Chapter8

@@ -1,14 +1,16 @@
 Template d'une macro-task :
 
-- [x] (who) task-name {difficulte/10}
+- [x] (who) task-name {difficulty/10}
+
 
 ***************************** Currently Assigned Macro Tasks ***************************** 
 
-- [ ] (Everyone) OpenGL Hello World {5/10}
-
-<p> calls discord / messages, chacun se documente et expérimente de son cote pour trouver la bonne manière de manipuler une fenêtre, et de dessiner dedans.</p>
+- [ ] (Everyone) Apprentissage du Rust {7.5/10}
 
 ***************************** Macro Tasks Backlog *****************************
+
+- [ ] (Everyone) OpenGL Hello World {5/10}
+<p> calls discord / messages, chacun se documente et expérimente de son cote pour trouver la bonne manière de manipuler une fenêtre, et de dessiner dedans.</p>
 
 - [ ] () Etudier la pipeline de rasterization d'OpenGL {/10}
 

@@ -6,9 +6,9 @@ Template:
 - [ ] Micro Task C (Temps estime)
 
 *** Learn Rust ***
-- [ ] Chapter1
-- [ ] Chapter2
-- [ ] Chapter3
+- [x] Chapter1
+- [x] Chapter2
+- [ ] Chapter3 (40%)
 - [ ] Chapter4
 - [ ] Chapter5
 - [ ] Chapter6

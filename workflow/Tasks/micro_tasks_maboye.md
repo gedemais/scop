@@ -9,8 +9,8 @@ Template:
 - [ X] Chapter1
 - [ X] Chapter2
 - [ X] Chapter3
-- [ ] Chapter4
-- [ ] Chapter5
+- [ X] Chapter4
+- [ X] Chapter5
 - [ ] Chapter6
 - [ ] Chapter7
 - [ ] Chapter8

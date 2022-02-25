@@ -11,7 +11,7 @@ Template:
 - [ X] Chapter3
 - [ X] Chapter4
 - [ X] Chapter5
-- [ ] Chapter6
+- [ X] Chapter6
 - [ ] Chapter7
 - [ ] Chapter8
 - [ ] Chapter9

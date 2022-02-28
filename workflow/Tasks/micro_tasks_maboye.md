@@ -13,8 +13,8 @@ Template:
 - [x] Chapter5
 - [x] Chapter6
 - [x] Chapter7
-- [ ] Chapter8
-- [ ] Chapter9
+- [x] Chapter8
+- [x] Chapter9
 - [ ] Chapter10
 - [ ] Chapter11
 - [ ] Chapter12

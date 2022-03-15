@@ -6,6 +6,4 @@ Architecture:
 
 Code :
 
-Rust :
-
 Correction :

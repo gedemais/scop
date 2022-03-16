@@ -6,6 +6,8 @@
 
 # include "libft.h"
 
+# include "error.h"
+
 enum					e_default_settings_values
 {
 	DSV_W_XPOS = 200,
@@ -53,5 +55,7 @@ typedef struct	s_env
 	t_settings	settings;
 	//t_events	events;
 }				t_env;
+
+unsigned char	setup(t_env *env, int argc, char **argv);
 
 #endif

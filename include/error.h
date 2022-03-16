@@ -16,7 +16,7 @@ typedef	struct	s_error
 	bool	usage;
 }				t_error;
 
-extern const t_error	*errors[ERR_MAX] = {
+extern const t_error	errors[ERR_MAX] = {
 		[ERR_INVALID_ARGC] = {"Invalid number of arguments ", true}
 };
 

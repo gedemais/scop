@@ -18,7 +18,9 @@ SRC_PATH=src/
 SRC_NAME=main.c\
 		 error.c\
 		 free.c\
-		 setup/setup.c
+		 setup/settings.c\
+		 setup/setup.c\
+		 setup/setup_utils.c
 
 SRC=$(addprefix $(SRC_PATH), $(SRC_NAME))
 

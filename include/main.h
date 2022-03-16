@@ -6,6 +6,12 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <errno.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <limits.h>
 
 # include "libft.h"
 
@@ -19,6 +25,15 @@ enum					e_default_settings_values
 	DSV_W_HGT = 400,
 	DSV_ROTATION_SPEED = 10,
 	DSV_TRANSITION_SPEED = 10
+};
+
+enum					e_settings
+{
+	SET_WIN_HEIGHT,
+	SET_WIN_WIDTH,
+	SET_ROTATION_SPEED,
+	SET_TRANSITION_SPEED,
+	SET_MAX
 };
 
 enum					e_keys
@@ -41,8 +56,8 @@ typedef struct	s_settings
 {
 	uint16_t	w_wdt;
 	uint16_t	w_hgt;
-	float		rotation_speed;
-	float		transition_speed;
+	uint16_t	rotation_speed;
+	uint16_t	transition_speed;
 }				t_settings;
 
 /*typedef struct	s_event
@@ -60,9 +75,12 @@ typedef struct	s_env
 }				t_env;
 
 unsigned char	setup(t_env *env, int argc, char **argv);
+unsigned char	load_settings(t_env *env);
 
-void	error_handler(t_env *env, unsigned char code);
+char			*read_file(int fd, size_t *file_size);
 
-void	free_env(t_env *env);
+void			error_handler(t_env *env, unsigned char code);
+
+void			free_env(t_env *env);
 
 #endif

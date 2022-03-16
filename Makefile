@@ -15,12 +15,14 @@ ifeq ($(OPTI), 1)
 endif
 
 SRC_PATH=src/
-SRC_NAME=main.c
+SRC_NAME=main.c\
+		 setup/setup.c
 
 SRC=$(addprefix $(SRC_PATH), $(SRC_NAME))
 
 INC_PATH=include/
-INC_NAME=main.h
+INC_NAME=main.h\
+		 error.h
 INC=$(addprefix $(INC_PATH), $(INC_NAME))
 
 OBJS=$(SRC:.c=.o)

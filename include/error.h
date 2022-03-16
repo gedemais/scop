@@ -17,7 +17,7 @@ typedef	struct	s_error
 }				t_error;
 
 static const t_error	errors[ERR_MAX] = {
-		[ERR_INVALID_ARGC] = {"Invalid number of arguments ", true}
+		[ERR_INVALID_ARGC] = {"Invalid number of arguments.", true}
 };
 
 #endif

@@ -16,6 +16,8 @@ endif
 
 SRC_PATH=src/
 SRC_NAME=main.c\
+		 error.c\
+		 free.c\
 		 setup/setup.c
 
 SRC=$(addprefix $(SRC_PATH), $(SRC_NAME))

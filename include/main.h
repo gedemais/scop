@@ -2,6 +2,9 @@
 # define MAIN_H
 
 # include <OpenGL/gl.h>
+
+# include <unistd.h>
+# include <stdio.h>
 # include <stdbool.h>
 
 # include "libft.h"
@@ -57,5 +60,9 @@ typedef struct	s_env
 }				t_env;
 
 unsigned char	setup(t_env *env, int argc, char **argv);
+
+void	error_handler(t_env *env, unsigned char code);
+
+void	free_env(t_env *env);
 
 #endif

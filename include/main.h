@@ -78,6 +78,8 @@ unsigned char	setup(t_env *env, int argc, char **argv);
 unsigned char	load_settings(t_env *env);
 
 unsigned char	readlines(char *path, char ***lines);
+unsigned char	load_obj_file(char *path);
+unsigned char	load_mtl_file(char *path);
 
 void			error_handler(t_env *env, unsigned char code);
 

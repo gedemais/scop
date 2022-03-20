@@ -7,8 +7,8 @@ enum	e_error_id
 {
 	ERR_NONE,
 	ERR_INVALID_ARGC,
-	ERR_OPENING_SETTINGS,
-	ERR_READING_SETTINGS,
+	ERR_OPENING_FILE,
+	ERR_READING_FILE,
 	ERR_MALLOC_FAILED,
 	ERR_INVALID_SYNTAX,
 	ERR_OUT_OF_BOUNDS_VALUE,
@@ -25,8 +25,8 @@ typedef	struct	s_error
 
 static const t_error	errors[ERR_MAX] = {
 		[ERR_INVALID_ARGC] = {"Invalid number of arguments.", true},
-		[ERR_OPENING_SETTINGS] = {"Can not open Settings.toml.", false},
-		[ERR_READING_SETTINGS] = {"Settings.toml reading failed.", false},
+		[ERR_OPENING_FILE] = {"Can not open file.", false},
+		[ERR_READING_FILE] = {"Can not read file.", false},
 		[ERR_MALLOC_FAILED] = {"malloc() call failed.", false},
 		[ERR_INVALID_SYNTAX] = {"Invalid syntax in Settings.toml", false},
 		[ERR_OUT_OF_BOUNDS_VALUE] = {"Out of bounds value in Settings.toml", false},

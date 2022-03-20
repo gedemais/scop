@@ -25,13 +25,14 @@ unsigned char	readlines(char *path, char ***lines)
 	// Open path to get fd and file size
 	if ((fd = open(path, O_RDONLY)) == -1)
 	{
+		ft_putendl_fd(path, 2);
 		perror(strerror(errno));
-		return (ERR_OPENING_SETTINGS);
+		return (ERR_OPENING_FILE);
 	}
 
 	// Map file in memory
 	if (!(file = read_file(fd, &file_size)))
-		return (ERR_READING_SETTINGS);
+		return (ERR_READING_FILE);
 
 	// Split file to lines
 	if (!(*lines = ft_strsplit(file, "\n")))

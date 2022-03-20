@@ -10,7 +10,7 @@ Template:
 
 **_ obj_parser_basics  _**
 - [x] Creer le loading wrapper pour les fichiers obj et mtl (readlines)
-- [ ] Designer chaque type de ligne utilise avec des identifiants
+- [x] Designer chaque type de ligne utilise avec des identifiants
 - [ ] Creer les loaders pour chaque identifiants (A link avec les data structures dans une future branche)
 
 ----------------- DONE -----------------

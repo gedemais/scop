@@ -77,7 +77,7 @@ typedef struct	s_env
 unsigned char	setup(t_env *env, int argc, char **argv);
 unsigned char	load_settings(t_env *env);
 
-char			*read_file(int fd, size_t *file_size);
+unsigned char	readlines(char *path, char ***lines);
 
 void			error_handler(t_env *env, unsigned char code);
 

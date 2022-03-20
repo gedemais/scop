@@ -1,34 +1,5 @@
 #include "main.h"
 
-static unsigned char	settings_readlines(char ***lines)
-{
-	char		*file;
-	size_t		file_size;
-	int			fd;
-
-	// Open path to get fd and file size
-	if ((fd = open("Settings.toml", O_RDONLY)) == -1)
-	{
-		perror(strerror(errno));
-		return (ERR_OPENING_SETTINGS);
-	}
-
-	// Map file in memory
-	if (!(file = read_file(fd, &file_size)))
-		return (ERR_READING_SETTINGS);
-
-	// Split file to lines
-	if (!(*lines = ft_strsplit(file, "\n")))
-	{
-		munmap(file, file_size);
-		return (ERR_MALLOC_FAILED);
-	}
-
-	// Free file mapping
-	munmap(file, file_size);
-	return (ERR_NONE);
-}
-
 static unsigned char	load_integer(char *line, char *token, long long int *n)
 {
 	*n = ft_atoi(token);
@@ -47,7 +18,7 @@ static unsigned char	assign_value(t_env *env, unsigned int j, char *line, char *
 
 	// Read value associated to key (integer)
 
-	if (j <= SET_TRANSITION_SPEED
+	if (j <= SET_TRANSITION_SPEED // if the information to load is an integer
 		&& (code = load_integer(line, token, &n)) != ERR_NONE)
 			return (code);
 	//else if ((code = load_(line, token, &n)) != ERR_NONE)
@@ -134,7 +105,7 @@ unsigned char			load_settings(t_env *env)
 	char			**lines;
 	unsigned char	code;
 
-	if ((code = settings_readlines(&lines)) != ERR_NONE)
+	if ((code = readlines("Settings.toml", &lines)) != ERR_NONE)
 		return (code);
 
 	if ((code = loader(env, lines)) != ERR_NONE)
@@ -145,9 +116,9 @@ unsigned char			load_settings(t_env *env)
 
 	ft_free_ctab(lines);
 
-	printf("%d\n", env->settings.w_hgt);
-	printf("%d\n", env->settings.w_wdt);
-	printf("%d\n", env->settings.rotation_speed);
-	printf("%d\n", env->settings.transition_speed);
+	printf("w_hgt : %d\n", env->settings.w_hgt);
+	printf("w_wdt : %d\n", env->settings.w_wdt);
+	printf("rotation_speed : %d\n", env->settings.rotation_speed);
+	printf("transition_speed : %d\n", env->settings.transition_speed);
 	return (ERR_NONE);
 }

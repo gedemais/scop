@@ -13,7 +13,7 @@ enum	e_obj_lines_id
 	OBJ_MAX
 };
 
-enum	e_obj_lines_id
+enum	e_mtl_lines_id
 {
 	MTL_COMMENT,
 	MTL_NEWMTL,

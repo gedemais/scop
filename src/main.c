@@ -4,7 +4,7 @@ static unsigned char	scop(t_env *env, int argc, char **argv)
 {
 	unsigned char	code;
 
-	if ((code = setup(env, argc, argv)) != ERR_NONE)
+	if ((code = init(env, argc, argv)) != ERR_NONE)
 		return (code);
 	return (ERR_NONE);
 }

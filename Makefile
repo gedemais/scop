@@ -18,8 +18,7 @@ SRC_PATH=src/
 SRC_NAME=main.c\
 		 error.c\
 		 free.c\
-		 parser/load_obj_file.c\
-		 parser/load_mtl_file.c\
+		 load_obj_file.c\
 		 init/settings.c\
 		 init/init.c\
 		 init/init_utils.c

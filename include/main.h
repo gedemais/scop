@@ -16,6 +16,7 @@
 # include "libft.h"
 
 # include "error.h"
+# include "parser.h"
 
 enum					e_default_settings_values
 {
@@ -78,8 +79,8 @@ unsigned char	init(t_env *env, int argc, char **argv);
 unsigned char	load_settings(t_env *env);
 
 unsigned char	readlines(char *path, char ***lines);
-unsigned char	load_obj_file(char *path);
-unsigned char	load_mtl_file(char *path);
+unsigned char	load_obj_file(t_env *env, char *path);
+unsigned char	load_mtl_file(t_env *env, char *path);
 
 void			error_handler(t_env *env, unsigned char code);
 

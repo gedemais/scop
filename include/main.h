@@ -74,7 +74,7 @@ typedef struct	s_env
 	//t_events	events;
 }				t_env;
 
-unsigned char	setup(t_env *env, int argc, char **argv);
+unsigned char	init(t_env *env, int argc, char **argv);
 unsigned char	load_settings(t_env *env);
 
 unsigned char	readlines(char *path, char ***lines);

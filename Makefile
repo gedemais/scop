@@ -32,12 +32,14 @@ OBJS=$(SRC:.c=.o)
 ########################## Librarys ######################
 LIB_PATH = libft/
 LIB = libft/libft.a
+LIB_GLAD = glad/include/
+GLAD = glad/libglad.a
 ##########################################################
 
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
-	$(CC) $(FLAGS) -I$(INC_PATH) -I$(LIB_PATH) -o $(NAME) $(OBJS) $(LIB) -lpthread -framework OpenGL
+	$(CC) $(FLAGS) -I$(INC_PATH) -I$(LIB_PATH) -I$(LIB_GLAD) -o $(NAME) $(OBJS) $(LIB) $(GLAD) -lpthread -lglfw -framework OpenGL
 
 $(SRC_PATH)%.o: $(SRC_PATH)%.c $(INC)
 	@tput civis

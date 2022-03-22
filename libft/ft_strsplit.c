@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:29:00 by gedemais          #+#    #+#             */
-/*   Updated: 2019/09/21 17:20:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2022/03/16 19:10:23 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ char	**ft_strsplit(char *str, char *charset)
 		return (NULL);
 	while (j < words)
 	{
-		while (is_sep(str[i], charset))
+		while (str[i] && is_sep(str[i], charset))
 			i++;
 		if (!(tab[j] = ft_strdup_sep(&str[i], charset)))
 			return (NULL);
-		while (!(is_sep(str[i], charset)))
+		while (str[i] && !(is_sep(str[i], charset)))
 			i++;
 		j++;
 	}

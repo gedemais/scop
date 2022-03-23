@@ -65,10 +65,12 @@ $(LIB_VEC): $(LIB_VEC_PATH)
 clean:
 	@rm -rf $(OBJS)
 	@make -C $(LIB_PATH) clean
+	@make -C $(LIB_VEC_PATH) clean
 	@echo "Libft clean"
 
 fclean: clean
 	@make -C $(LIB_PATH) fclean
+	@make -C $(LIB_VEC_PATH) fclean
 	@rm -rf $(NAME)
 	@rm -rf $(NAME).dSYM
 

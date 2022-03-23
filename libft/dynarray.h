@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 18:03:19 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/10 18:03:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2022/03/22 01:48:19 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_dynarray
 	int			cell_size;
 	int			nb_cells;
 	int			byte_size;
+	uint32_t	pad;
 }				t_dynarray;
 
 int				init_dynarray(t_dynarray *arr, int cell_size, int nb_cells);

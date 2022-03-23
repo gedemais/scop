@@ -20,5 +20,20 @@ int						main(int argc, char **argv)
 		error_handler(&env, code);
 		return (code);
 	}
+
+	t_vec3d	*v;
+	for (unsigned int i = 0; (int)i < env.scene.vertexs.nb_cells; i++)
+	{
+		v = dyacc(&env.scene.vertexs, (int)i);
+		printf("%f %f %f %f\n", (double)v->x, (double)v->y, (double)v->z, (double)v->w);
+	}
+
+	t_face	*f;
+	for (unsigned int i = 0; (int)i < env.scene.faces.nb_cells; i++)
+	{
+		f = dyacc(&env.scene.faces, (int)i);
+		printf("%d %d %d\n", f->a, f->b, f->c);
+	}
+
 	return (ERR_NONE);
 }

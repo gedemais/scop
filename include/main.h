@@ -14,9 +14,11 @@
 #include <limits.h>
 
 # include "libft.h"
+# include "lib_vec.h"
 
 # include "error.h"
 # include "parser.h"
+# include "scene.h"
 
 enum					e_default_settings_values
 {
@@ -72,6 +74,7 @@ typedef struct	s_settings
 typedef struct	s_env
 {
 	t_settings	settings;
+	t_scene		scene;
 	//t_events	events;
 }				t_env;
 

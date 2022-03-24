@@ -10,7 +10,7 @@ void	error_handler(t_env *env, unsigned char code)
 
 	msg = &errors[code].msg[0];
 
-	write(2, "./scop : ", 9);
+	write(2, "scop : ", 7);
 	write(2, "error : ", 8);
 	write(2, msg, strlen(msg));
 	write(2, "\n", 1);

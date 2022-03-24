@@ -8,8 +8,8 @@ static const char		*obj_lines_ids[OBJ_MAX] = {	[OBJ_COMMENT] = "#",
 											[OBJ_FACE] = "f",
 											[OBJ_SMOOTH_SHADING] = "s"};
 
-static uint16_t	used_mtl = USHRT_MAX;
-static uint32_t	current_mesh = UINT_MAX;
+static int16_t	used_mtl = SHRT_MAX;
+static int32_t	current_mesh = INT_MAX;
 
 ////////////////////////////// Loading Functions //////////////////////////////
 
@@ -48,6 +48,9 @@ static unsigned char	obj_vertex_loader(t_env *env, char **tokens)
 {
 	t_vec3d	new;
 
+	if (ft_tablen(tokens) != 4)
+		return (ERR_INVALID_VERTEX_FORMAT);
+
 	if (env->scene.vertexs.c == NULL
 		&& init_dynarray(&env->scene.vertexs, sizeof(t_vec3d), 256))
 		return (ERR_MALLOC_FAILED);
@@ -72,6 +75,15 @@ static unsigned char	obj_usemtl_loader(t_env *env, char **tokens)
 	return (ERR_NONE);
 }
 
+static unsigned char	check_face_indexes(t_env *env, t_face new)
+{
+	if (new.a < 0 || new.a >= env->scene.vertexs.nb_cells
+		|| new.b < 0 || new.b >= env->scene.vertexs.nb_cells
+		|| new.c < 0 || new.c >= env->scene.vertexs.nb_cells)
+		return (ERR_INVALID_VERTEX_INDEX_FOR_FACE);
+	return (ERR_NONE);
+}
+
 static unsigned char	triangulation(t_env *env, t_mesh *parent, uint32_t a_index, char **tokens, unsigned short nb_vertexs)
 {
 	t_face	news[2];
@@ -79,13 +91,13 @@ static unsigned char	triangulation(t_env *env, t_mesh *parent, uint32_t a_index,
 	if (nb_vertexs == 4) // Quad -> 2 triangles
 	{
 		uint32_t	b_index = a_index + 1;
-		news[0].a = (unsigned int)ft_atoi(tokens[1]);
-		news[0].b = (unsigned int)ft_atoi(tokens[2]);
-		news[0].c = (unsigned int)ft_atoi(tokens[3]);
+		news[0].a = (int32_t)ft_atoi(tokens[1]) - 1;
+		news[0].b = (int32_t)ft_atoi(tokens[2]) - 1;
+		news[0].c = (int32_t)ft_atoi(tokens[3]) - 1;
 
-		news[1].a = (unsigned int)ft_atoi(tokens[1]);
-		news[1].b = (unsigned int)ft_atoi(tokens[3]);
-		news[1].c = (unsigned int)ft_atoi(tokens[4]);
+		news[1].a = (int32_t)ft_atoi(tokens[1]) - 1;
+		news[1].b = (int32_t)ft_atoi(tokens[3]) - 1;
+		news[1].c = (int32_t)ft_atoi(tokens[4]) - 1;
 
 		if (push_dynarray(&env->scene.faces, &news[0], false)
 			|| push_dynarray(&env->scene.faces, &news[1], false))
@@ -94,6 +106,10 @@ static unsigned char	triangulation(t_env *env, t_mesh *parent, uint32_t a_index,
 		if (push_dynarray(&parent->faces, &a_index, false)
 			|| push_dynarray(&parent->faces, &b_index, false))
 			return (ERR_MALLOC_FAILED);
+
+		if (check_face_indexes(env, news[0]) != ERR_NONE
+			|| check_face_indexes(env, news[1]) != ERR_NONE)
+			return (ERR_INVALID_VERTEX_INDEX_FOR_FACE);
 	}
 	return (ERR_NONE);
 }
@@ -116,21 +132,21 @@ static unsigned char	obj_face_loader(t_env *env, char **tokens)
 
 	if (nb_vertexs == 3)
 	{
-		new.a = (unsigned int)ft_atoi(tokens[1]);
-		new.b = (unsigned int)ft_atoi(tokens[2]);
-		new.c = (unsigned int)ft_atoi(tokens[3]);
+		new.a = (int32_t)ft_atoi(tokens[1]) - 1;
+		new.b = (int32_t)ft_atoi(tokens[2]) - 1;
+		new.c = (int32_t)ft_atoi(tokens[3]) - 1;
 		new.mtl = used_mtl;
+
+		if (push_dynarray(&env->scene.faces, &new, false)
+			|| push_dynarray(&parent->faces, &face_index, false))
+			return (ERR_MALLOC_FAILED);
+
+		return (check_face_indexes(env, new));
 	}
-	else if (nb_vertexs > 3)
+	else if (nb_vertexs < 5)
 		return (triangulation(env, parent, face_index, tokens, nb_vertexs));
-	else
-		return (ERR_INVALID_PRIMITIVE_DESCRIPTION);
 
-	if (push_dynarray(&env->scene.faces, &new, false)
-		|| push_dynarray(&parent->faces, &face_index, false))
-		return (ERR_MALLOC_FAILED);
-
-	return (ERR_NONE);
+	return (ERR_INVALID_PRIMITIVE_DESCRIPTION);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -153,7 +169,7 @@ static unsigned char	obj_loader(t_env *env, char *line)
 	for (unsigned int i = 0; i < OBJ_MAX; i++)
 		if (ft_strcmp(tokens[0], obj_lines_ids[i]) == 0)
 		{
-			if ((i == OBJ_VERTEX || i == OBJ_FACE) && current_mesh == UINT_MAX)
+			if ((i == OBJ_VERTEX || i == OBJ_FACE) && current_mesh == INT_MAX)
 				return (ERR_NO_DEFINED_OBJECT);
 			return (obj_loading_fts[i] ? obj_loading_fts[i](env, tokens) : ERR_NONE);
 		}

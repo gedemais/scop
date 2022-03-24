@@ -65,7 +65,7 @@ static unsigned char	loader(t_env *env, char **lines)
 		{
 			ft_putendl_fd(lines[i], 2);
 			ft_free_ctab(tokens);
-			return (ERR_INVALID_SYNTAX);
+			return (ERR_INVALID_SETTINGS_SYNTAX);
 		}
 
 		found = false;

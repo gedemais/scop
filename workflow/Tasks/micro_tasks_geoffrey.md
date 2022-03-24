@@ -9,11 +9,15 @@ Template:
 ----------------- TODO -----------------
 
 **_ obj_parser_basics  _**
-- [x] Creer le loading wrapper pour les fichiers obj et mtl (readlines)
-- [x] Designer chaque type de ligne utilise avec des identifiants
+- [x] Creer le loading wrapper pour les fichiers obj (readlines)
 - [x] Identifier les types de chaque ligne pour l'obj
-- [ ] Identifier les types de chaque ligne pour le mtl
-- [ ] Creer les loaders pour chaque identifiants (A link avec les data structures dans une future branche)
+- [x] Creer les loaders pour chaque identifiant
+- [x] Link les identifiants aux loaders pour remplir les data structures
+- [ ] Securiser le parser
+- [ ] Refactor / comments
+- [ ] Identifier les types de lignes pour le mtl
+- [ ] Creer les loaders (mtllib et usemtl)
+- [ ] Link les identifiants aux loaders pour remplir les data structures
 
 ----------------- DONE -----------------
 

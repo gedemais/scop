@@ -14,12 +14,14 @@ Template:
 - [x] Creer les loaders pour chaque identifiant
 - [x] Link les identifiants aux loaders pour remplir les data structures
 - [x] Securiser le parser
-- [ ] Refactor / comments
-- [ ] Identifier les types de lignes pour le mtl
-- [ ] Creer les loaders (mtllib et usemtl)
+- [x] Refactor / comments
+- [x] Identifier les types de lignes pour le mtl
+- [X] Creer les loaders (mtllib et usemtl)
+- [ ] Definir un nom de mesh par defaut et supprimer l'erreur no defined object
 - [ ] Link les identifiants aux loaders pour remplir les data structures
 - [ ] Securiser les loaders
 - [ ] Refactor / comments
+- [ ] Free toutes les allocations faites par init
 
 ----------------- DONE -----------------
 

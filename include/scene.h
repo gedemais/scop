@@ -8,6 +8,21 @@ typedef	struct	s_mesh
 	char		*name;
 }				t_mesh;
 
+typedef	struct		s_color
+{
+	float	r;
+	float	g;
+	float	b;
+	float	a;
+}					t_color;
+
+typedef	struct		s_mtl
+{
+	t_color			color;
+	char			*name; // Name
+	char			**texture; // Images data arrays. NULL if no texture.
+}					t_mtl;
+
 typedef	struct	s_face
 {
 	int32_t		a;
@@ -22,6 +37,7 @@ typedef struct	s_scene
 	t_dynarray	meshs;
 	t_dynarray	vertexs;
 	t_dynarray	faces;
+	t_dynarray	mtls;
 }				t_scene;
 
 #endif

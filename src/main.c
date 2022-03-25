@@ -44,7 +44,6 @@ int						main(int argc, char **argv)
 //	for (unsigned int i = 0; (int)i < m->faces.nb_cells; i++)
 //	{
 //		index = dyacc(&m->faces, (int)i);
-//		assert(index == )
 //		printf("%u\n", *index);
 //	}
 

@@ -24,7 +24,15 @@ enum	e_mtl_lines_id
 	MTL_Ni,
 	MTL_d,
 	MTL_ILLUM,
+	MTL_MAP_KD,
 	MTL_MAX
 };
+
+/*
+ * Globals keeping track of the index of the mesh we are currently
+ * loading, and of which material is applied for currently loaded face.
+ */
+static int16_t	used_mtl;
+static int32_t	current_mesh;
 
 #endif

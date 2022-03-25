@@ -18,7 +18,10 @@ SRC_PATH=src/
 SRC_NAME=main.c\
 		 error.c\
 		 free.c\
-		 load_obj_file.c\
+		 parser/load_obj_file.c\
+		 parser/load_faces.c\
+		 parser/load_mtl_file.c\
+		 parser/mtl_loaders.c\
 		 init/settings.c\
 		 init/init.c\
 		 init/init_utils.c
@@ -30,6 +33,7 @@ INC_NAME=main.h\
 		 error.h\
 		 parser.h\
 		 scene.h
+
 INC=$(addprefix $(INC_PATH), $(INC_NAME))
 
 OBJS=$(SRC:.c=.o)

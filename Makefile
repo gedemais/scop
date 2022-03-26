@@ -102,6 +102,7 @@ clean:
 	@make -C $(LIB_GLAD_PATH) clean
 
 fclean: clean
+	@rm -rf $(NAME)
 	@make -C $(LIB_PATH) fclean
 	@make -C $(LIB_VEC_PATH) fclean
 	@make -C $(LIBBMP_PATH) fclean

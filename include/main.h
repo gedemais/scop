@@ -21,6 +21,7 @@
 # include "error.h"
 # include "parser.h"
 # include "scene.h"
+# include "keys.h"
 
 enum					e_default_settings_values
 {
@@ -38,22 +39,33 @@ enum					e_settings
 	SET_WIN_WIDTH,
 	SET_ROTATION_SPEED,
 	SET_TRANSITION_SPEED,
+/*	SET_KEY_EXIT,
+	SET_KEY_TOGGLE_ROTATION,
+	SET_KEY_TOGGLE_TEXTURE,
+	SET_KEY_INCREASE_ROTATION_SPEED,
+	SET_KEY_DECREASE_ROTATION_SPEED_DOWN,
+	SET_KEY_MOVE_OBJECT_FORWARD,
+	SET_KEY_MOVE_OBJECT_BACKWARD,
+	SET_KEY_MOVE_OBJECT_UP,
+	SET_KEY_MOVE_OBJECT_DOWN,
+	SET_KEY_MOVE_OBJECT_LEFT,
+	SET_KEY_MOVE_OBJECT_RIGHT,*/
 	SET_MAX
 };
 
 enum					e_keys
 {
 	KEY_EXIT,
-	KEY_ROTATION,
-	KEY_TRANSITION,
-	KEY_ROTATION_SPEED_UP,
-	KEY_ROTATION_SPEED_DOWN,
-	KEY_MOVE_X_FORWARD,
-	KEY_MOVE_X_BACKWARD,
-	KEY_MOVE_Y_FORWARD,
-	KEY_MOVE_Y_BACKWARD,
-	KEY_MOVE_Z_FORWARD,
-	KEY_MOVE_Z_BACKWARD,
+	KEY_TOGGLE_ROTATION,
+	KEY_TOGGLE_TEXTURE,
+	KEY_INCREASE_ROTATION_SPEED,
+	KEY_DECREASE_ROTATION_SPEED,
+	KEY_MOVE_OBJECT_FORWARD,
+	KEY_MOVE_OBJECT_BACKWARD,
+	KEY_MOVE_OBJECT_UP,
+	KEY_MOVE_OBJECT_DOWN,
+	KEY_MOVE_OBJECT_LEFT,
+	KEY_MOVE_OBJECT_RIGHT,
 	KEY_MAX
 };
 
@@ -63,6 +75,8 @@ typedef struct	s_settings
 	uint16_t	w_hgt;
 	uint16_t	rotation_speed;
 	uint16_t	transition_speed;
+	uint8_t		keys[KEY_MAX];
+	char		pad;
 }				t_settings;
 
 /*typedef struct	s_event
@@ -76,6 +90,7 @@ typedef struct	s_settings
 typedef struct	s_env
 {
 	t_settings	settings;
+	char		pad[4];
 	t_scene		scene;
 	char		*obj_path;
 	//t_events	events;

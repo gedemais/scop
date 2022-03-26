@@ -10,8 +10,10 @@ Template:
 **_ key_binder  _**
 - [x] Creer un tableau de correspondance char* <=> GLFW_KEY_*
 - [x] Importer la lib glad et lui ajouter un Makefile dependant de celui de scop
-- [X] Documenter les settings + bindings dans le README
-- [ ] Creer un tableau de pointeurs sur fonction et l'initialiser on fly avec les bindings
+- [x] Documenter les settings + bindings dans le README
+- [ ] Ajouter les identifiants d'actions aux proprietes a charger dans Settings.toml
+- [ ] Creer un tableau de pointeurs sur fonction qui match les keys
+- [ ] Initialiser ce tableau on fly avec les bindings dans assign_value
 
 ----------------- DONE -----------------
 

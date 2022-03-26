@@ -6,10 +6,8 @@
 
 <h4> Actions </h4>
 <ul>
-	<li>move_forward</li>
-	<li>move_backward</li>
-	<li>move_left</li>
-	<li>move_right</li>
+	<li>exit</li>
+	<li>toggle_rotation</li>
 	<li>toggle_texture</li>
 	<li>increase_rotation_speed</li>
 	<li>decrease_rotation_speed</li>

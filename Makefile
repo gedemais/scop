@@ -87,6 +87,11 @@ $(LIBBMP): $(LIBBMP_PATH)
 	@echo "Making libbmp..."
 	@make -C $(LIBBMP_PATH)
 
+$(LIB_GLAD): $(LIB_GLAD_PATH)
+	@echo "Making libglad..."
+	@make -C $(LIB_GLAD_PATH)
+
+
 ###################################################################
 
 clean:
@@ -94,12 +99,12 @@ clean:
 	@make -C $(LIB_PATH) clean
 	@make -C $(LIB_VEC_PATH) clean
 	@make -C $(LIBBMP_PATH) clean
+	@make -C $(LIB_GLAD_PATH) clean
 
 fclean: clean
 	@make -C $(LIB_PATH) fclean
 	@make -C $(LIB_VEC_PATH) fclean
 	@make -C $(LIBBMP_PATH) fclean
-	@rm -rf $(NAME)
-	@rm -rf $(NAME).dSYM
+	@make -C $(LIB_GLAD_PATH) fclean
 
 re: fclean all

@@ -1,85 +1,22 @@
 <h1> Scop </h1>
 <p> Projet de prise en main d'API graphique sur GPU.</br>Le but ici est d'afficher a l'ecran une forme 3D chargee depuis un fichier obj</p>
 
-GLFW_KEY_SPACE = "space"
-GLFW_KEY_COMMA = ","
-GLFW_KEY_MINUS = "-"
-GLFW_KEY_0 = "0"
-GLFW_KEY_1 = "1"
-GLFW_KEY_2 = "2"
-GLFW_KEY_3 = "3"
-GLFW_KEY_4 = "4"
-GLFW_KEY_5 = "5"
-GLFW_KEY_6 = "6"
-GLFW_KEY_7 = "7"
-GLFW_KEY_8 = "8"
-GLFW_KEY_9 = "9"
-GLFW_KEY_SEMICOLON = ";"
-GLFW_KEY_EQUAL = "="
-GLFW_KEY_A = "a"
-GLFW_KEY_B = "b"
-GLFW_KEY_C = "c"
-GLFW_KEY_D = "d"
-GLFW_KEY_E = "e"
-GLFW_KEY_F = "f"
-GLFW_KEY_G = "g"
-GLFW_KEY_H = "h"
-GLFW_KEY_I = "i"
-GLFW_KEY_J = "j"
-GLFW_KEY_K = "k"
-GLFW_KEY_L = "l"
-GLFW_KEY_M = "m"
-GLFW_KEY_N = "n"
-GLFW_KEY_O = "o"
-GLFW_KEY_P = "p"
-GLFW_KEY_Q = "q"
-GLFW_KEY_R = "r"
-GLFW_KEY_S = "s"
-GLFW_KEY_T = "t"
-GLFW_KEY_U = "u"
-GLFW_KEY_V = "v"
-GLFW_KEY_W = "w"
-GLFW_KEY_X = "x"
-GLFW_KEY_Y = "y"
-GLFW_KEY_Z = "z"
-GLFW_KEY_ESCAPE = "escape"
-GLFW_KEY_ENTER = "enter"
-GLFW_KEY_TAB = "tab"
-GLFW_KEY_BACKSPACE = "backspace"
-GLFW_KEY_RIGHT = "right"
-GLFW_KEY_LEFT = "left"
-GLFW_KEY_DOWN = "down"
-GLFW_KEY_UP = "up"
-GLFW_KEY_F1 = "f1"
-GLFW_KEY_F2 = "f2"
-GLFW_KEY_F3 = "f3"
-GLFW_KEY_F4 = "f4"
-GLFW_KEY_F5 = "f5"
-GLFW_KEY_F6 = "f6"
-GLFW_KEY_F7 = "f7"
-GLFW_KEY_F8 = "f8"
-GLFW_KEY_F9 = "f9"
-GLFW_KEY_F10 = "f10"
-GLFW_KEY_F11 = "f11"
-GLFW_KEY_F12 = "f12"
-GLFW_KEY_F13 = "f13"
-GLFW_KEY_F14 = "f14"
-GLFW_KEY_F15 = "f15"
-GLFW_KEY_F16 = "f16"
-GLFW_KEY_F17 = "f17"
-GLFW_KEY_F18 = "f18"
-GLFW_KEY_F19 = "f19"
-GLFW_KEY_F20 = "f20"
-GLFW_KEY_F21 = "f21"
-GLFW_KEY_F22 = "f22"
-GLFW_KEY_F23 = "f23"
-GLFW_KEY_F24 = "f24"
-GLFW_KEY_F25 = "f25"
-GLFW_KEY_LEFT_SHIFT = "lshift"
-GLFW_KEY_LEFT_CONTROL = "lctrl"
-GLFW_KEY_LEFT_ALT = "lalt"
-GLFW_KEY_LEFT_SUPER = "lcmd"
-GLFW_KEY_RIGHT_SHIFT = "rshift"
-GLFW_KEY_RIGHT_CONTROL = "rctrl"
-GLFW_KEY_RIGHT_ALT = "ralt"
-GLFW_KEY_RIGHT_SUPER = "rcmd"
+<h2> Key Bindings </h2>
+<p> Key bindings are adjustable in Settings.toml, with the following keys and values :
+
+<h3> Actions </h3>
+<ul>
+	<li>move_cam_forward</li>
+	<li>move_cam_backward</li>
+	<li>move_cam_left</li>
+	<li>move_cam_right</li>
+	<li>toggle_texture</li>
+	<li>increase_rotation_speed</li>
+	<li>decrease_rotation_speed</li>
+	<li>move_object_forward</li>
+	<li>move_object_backward</li>
+	<li>move_object_up</li>
+	<li>move_object_down</li>
+	<li>move_object_left</li>
+	<li>move_object_right</li>
+</ul>

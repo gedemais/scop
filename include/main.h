@@ -1,7 +1,8 @@
 #ifndef MAIN_H
 # define MAIN_H
 
-# include <OpenGL/gl.h>
+# include "glad.h"
+# include <GLFW/glfw3.h>
 
 # include <unistd.h>
 # include <stdio.h>
@@ -95,6 +96,7 @@ unsigned char	mtl_texture_image_loader(t_env *env, char **tokens);
 
 unsigned char	init(t_env *env, int argc, char **argv);
 unsigned char	load_settings(t_env *env);
+unsigned char	key_binder(char **tokens);
 
 
 void			error_handler(t_env *env, unsigned char code);

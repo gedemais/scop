@@ -1,7 +1,10 @@
 NAME=scop
 
 CC=gcc
-FLAGS= -Wall -Werror -Wextra -Weverything
+FLAGS = -Wall -Werror -Wextra -Weverything
+FLAGS += -Wno-documentation
+FLAGS += -Wno-documentation-unknown-command
+FLAGS += -Wno-reserved-id-macro
 
 # Flags variables
 DEBUG ?= 0
@@ -23,6 +26,7 @@ SRC_NAME=main.c\
 		 parser/load_mtl_file.c\
 		 parser/mtl_loaders.c\
 		 init/settings.c\
+		 init/key_binder.c\
 		 init/init.c\
 		 init/init_utils.c
 
@@ -49,19 +53,27 @@ LIB_VEC=$(LIB_VEC_PATH)/lib_vec.a
 
 LIBBMP_PATH=$(LIBS_PATH)/libbmp
 LIBBMP=$(LIBBMP_PATH)/libbmp.a
+
+LIB_GLAD_PATH = $(LIBS_PATH)/glad
+GLAD_PATH = $(LIB_GLAD_PATH)/include/glad/
+KHR_PATH = $(LIBS_PATH)/include/KHR/
+LIB_GLAD = $(LIB_GLAD_PATH)/libglad.a
+
 ##########################################################
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(LIB_VEC) $(LIBBMP) $(OBJS)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIB) $(LIB_VEC) $(LIBBMP) -lpthread -framework OpenGL
+$(NAME): $(LIB) $(LIB_VEC) $(LIBBMP) $(LIB_GLAD) $(OBJS)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIB) $(LIB_VEC) $(LIBBMP) $(LIB_GLAD) -lpthread -lglfw -framework OpenGL
 
 $(SRC_PATH)%.o: $(SRC_PATH)%.c $(INC)
 	@tput civis
 	@printf " Compiling $<"
 	@printf "                                       \\r"
 	@tput cnorm
-	@$(CC) $(FLAGS) -I$(INC_PATH) -I$(LIB_PATH) -I$(LIB_VEC_PATH) -I$(LIBBMP_PATH) -o $@ -c $<
+	@$(CC) $(FLAGS) -I$(INC_PATH) -I$(LIB_PATH) -I$(LIB_VEC_PATH) -I$(LIBBMP_PATH) -I$(GLAD_PATH) -o $@ -c $<
+
+########################## Library rules ##########################
 
 $(LIB): $(LIB_PATH)
 	@echo "Making Libft..."
@@ -74,6 +86,8 @@ $(LIB_VEC): $(LIB_VEC_PATH)
 $(LIBBMP): $(LIBBMP_PATH)
 	@echo "Making libbmp..."
 	@make -C $(LIBBMP_PATH)
+
+###################################################################
 
 clean:
 	@rm -rf $(OBJS)

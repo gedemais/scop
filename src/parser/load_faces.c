@@ -51,7 +51,7 @@ static unsigned char	load_face(t_env *env, char **tokens, t_mesh *parent, uint32
 	t_face	new;
 
 	ft_memset(&new, 0, sizeof(t_face));
-	new.mtl = used_mtl; // Material assignation
+	new.mtl = used_mtl; // Material assignment
 	assign_face_indexes(&new, tokens, (int[3]){1, 2, 3});
 
 	// Moves instance in the pool.
@@ -68,6 +68,11 @@ unsigned char	obj_face_loader(t_env *env, char **tokens)
 	t_mesh			*parent; // Mesh composed by the face
 	uint32_t		face_index; // Index of the instance in the faces pool
 	uint32_t		nb_vertexs; // Number of vertexs of the face line
+	unsigned char	code;
+
+	if (!(parent = dyacc(&env->scene.meshs, (int)current_mesh))
+		&& (code = create_default_mesh(env)))
+		return (code);
 
 	parent = dyacc(&env->scene.meshs, (int)current_mesh);
 	face_index = (uint32_t)env->scene.faces.nb_cells;

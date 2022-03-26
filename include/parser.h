@@ -1,6 +1,8 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# define DISPLAY_DATA true
+
 enum	e_obj_lines_id
 {
 	OBJ_COMMENT,

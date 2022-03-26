@@ -16,11 +16,18 @@ typedef	struct		s_color
 	float	a;
 }					t_color;
 
+typedef struct		s_texture
+{
+	unsigned char	*img_data;
+	int				w;
+	int				h;
+}					t_texture;
+
 typedef	struct		s_mtl
 {
+	t_texture		texture;
 	t_color			color;
-	char			*name; // Name
-	char			**texture; // Images data arrays. NULL if no texture.
+	char			*name;
 }					t_mtl;
 
 typedef	struct	s_face

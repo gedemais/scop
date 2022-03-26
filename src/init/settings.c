@@ -116,9 +116,12 @@ unsigned char			load_settings(t_env *env)
 
 	ft_free_ctab(lines);
 
-	printf("w_hgt : %d\n", env->settings.w_hgt);
-	printf("w_wdt : %d\n", env->settings.w_wdt);
-	printf("rotation_speed : %d\n", env->settings.rotation_speed);
-	printf("transition_speed : %d\n", env->settings.transition_speed);
+	if (DISPLAY_DATA)
+	{
+		printf("w_hgt : %d\n", env->settings.w_hgt);
+		printf("w_wdt : %d\n", env->settings.w_wdt);
+		printf("rotation_speed : %d\n", env->settings.rotation_speed);
+		printf("transition_speed : %d\n", env->settings.transition_speed);
+	}
 	return (ERR_NONE);
 }

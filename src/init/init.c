@@ -21,7 +21,7 @@ unsigned char	init(t_env *env, int argc, char **argv)
 	if (argc != 2)
 		return (ERR_INVALID_ARGC);
 
-	if (   (code = load_obj_path(env, argv[1])) != ERR_NONE
+	if ((code = load_obj_path(env, argv[1])) != ERR_NONE
 		|| (code = load_obj_file(env, argv[1])) != ERR_NONE
 		|| (code = load_settings(env)) != ERR_NONE)
 		return (code);

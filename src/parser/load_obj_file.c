@@ -73,15 +73,31 @@ static unsigned char	obj_vertex_loader(t_env *env, char **tokens)
 	if (push_dynarray(&env->scene.vertexs, &new, false))
 		return (ERR_MALLOC_FAILED);
 
-	ft_free_ctab(tokens); // Free tokens array
 	return (ERR_NONE);
 }
 
 static unsigned char	obj_usemtl_loader(t_env *env, char **tokens)
 {
-	(void)env;
-	(void)tokens;
-	printf("%s\n", __FUNCTION__);
+	t_mtl	*mtl; // Pointer used to iterate through materials
+	bool	found = false; // Triggers an error if the name given to usemtl is not found in materials pool
+
+	if (ft_tablen(tokens) != 2) // Syntax check
+		return (ERR_INVALID_SYNTAX_FOR_USEMTL_INSTRUCTION);
+
+	for (int i = 0; i < env->scene.mtls.nb_cells; i++) // Iterates through mtls pool
+	{
+		mtl = dyacc(&env->scene.mtls, i); // Material pointer assignment
+		if (ft_strcmp(mtl->name, tokens[1]) == 0) // Comparison with mtl name
+		{
+			found = true;
+			used_mtl = (int16_t)i; // Update of currently used mtl
+			break;
+		}
+	}
+
+	if (!found)
+		return (ERR_INVALID_NAME_FOR_USEMTL_INSTRUCTION);
+
 	return (ERR_NONE);
 }
 
@@ -90,6 +106,7 @@ static unsigned char	obj_usemtl_loader(t_env *env, char **tokens)
 static unsigned char	obj_loader(t_env *env, char *line)
 {
 	char				**tokens;
+	unsigned char		code;
 
 	// Split the line in tokens by whitespaces.
 	if (!(tokens = ft_strsplit(line, "\b\t\v\f\r ")))
@@ -99,14 +116,44 @@ static unsigned char	obj_loader(t_env *env, char *line)
 	for (unsigned int i = 0; i < OBJ_MAX; i++)
 		if (ft_strcmp(tokens[0], obj_lines_ids[i]) == 0)
 		{
-			// Security check, if no objects are declared, then we can't add vertex or face.
-			if ((i == OBJ_VERTEX || i == OBJ_FACE) && current_mesh == INT_MAX) // Initial value check
-				return (ERR_NO_DEFINED_OBJECT);
-			return (obj_loading_fts[i] ? obj_loading_fts[i](env, tokens) : ERR_NONE);
+			if (obj_loading_fts[i])
+			{
+				code = obj_loading_fts[i](env, tokens);
+				ft_free_ctab(tokens);
+				return (code);
+			}
+			ft_free_ctab(tokens);
+			return (ERR_NONE);
 		}
 	// Free tokens strings array
 	ft_free_ctab(tokens);
 	return (ERR_INVALID_OBJ_LINE_ID);
+}
+
+unsigned char	create_default_mesh(t_env *env)
+{
+	t_mesh	m; // New default mesh
+
+	// Initializes mesh with default values
+	m.o = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
+	if (init_dynarray(&env->scene.meshs, sizeof(t_mesh), 1)
+		|| !(m.name = ft_strdup("default"))
+		|| init_dynarray(&m.faces, sizeof(uint32_t), 256))
+		return (ERR_MALLOC_FAILED);
+
+	// Adds the enterity of faces indexes to the mesh faces pool
+	for (uint32_t i = 0; i < (uint32_t)env->scene.faces.nb_cells; i++)
+		if (push_dynarray(&env->scene.faces, &i, false))
+			return (ERR_MALLOC_FAILED);
+
+	// Moves default mesh in meshs pool
+	if (push_dynarray(&env->scene.meshs, &m, false))
+		return (ERR_MALLOC_FAILED);
+
+	// Updates current mesh index value
+	current_mesh = env->scene.meshs.nb_cells - 1;
+
+	return (ERR_NONE);
 }
 
 unsigned char			load_obj_file(t_env *env, char *path)
@@ -122,8 +169,17 @@ unsigned char			load_obj_file(t_env *env, char *path)
 
 	// Iterate through lines to load obj data.
 	for (unsigned int i = 0; lines[i]; i++)
-		if ((code = obj_loader(env, lines[i])))
+		if ((code = obj_loader(env, lines[i])) != ERR_NONE)
+		{
+			ft_free_ctab(lines);
 			return (code);
+		}
 
+	if (env->scene.meshs.c == NULL && (code = create_default_mesh(env)) != ERR_NONE)
+	{
+		ft_free_ctab(lines);
+		return (code);
+	}
+	ft_free_ctab(lines);
 	return (ERR_NONE);
 }

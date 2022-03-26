@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "lib_vec.h"
+# include "bmp.h"
 
 # include "error.h"
 # include "parser.h"
@@ -83,11 +84,12 @@ unsigned char	readlines(char *path, char ***lines);
 unsigned char	load_obj_file(t_env *env, char *path);
 
 unsigned char	obj_face_loader(t_env *env, char **tokens);
+unsigned char	create_default_mesh(t_env *env);
 unsigned char	obj_mtllib_loader(t_env *env, char **tokens);
 
 
 unsigned char	mtl_newmtl_loader(t_env *env, char **tokens);
-unsigned char	mtl_ambient_color_loader(t_env *env, char **tokens);
+unsigned char	mtl_diffuse_color_loader(t_env *env, char **tokens);
 unsigned char	mtl_alpha_component_loader(t_env *env, char **tokens);
 unsigned char	mtl_texture_image_loader(t_env *env, char **tokens);
 

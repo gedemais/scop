@@ -16,12 +16,12 @@ Template:
 - [x] Securiser le parser
 - [x] Refactor / comments
 - [x] Identifier les types de lignes pour le mtl
-- [X] Creer les loaders (mtllib et usemtl)
-- [ ] Definir un nom de mesh par defaut et supprimer l'erreur no defined object
-- [ ] Link les identifiants aux loaders pour remplir les data structures
-- [ ] Securiser les loaders
-- [ ] Refactor / comments
-- [ ] Free toutes les allocations faites par init
+- [x] Creer les loaders (mtllib et usemtl)
+- [x] Link les identifiants aux loaders pour remplir les data structures
+- [x] Securiser les loaders
+- [x] Definir un nom de mesh par defaut et supprimer l'erreur no defined object
+- [x] Refactor / comments
+- [x] Free toutes les allocations faites par init
 
 ----------------- DONE -----------------
 

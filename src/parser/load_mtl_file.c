@@ -19,8 +19,8 @@ static unsigned char	(*mtl_loading_fts[MTL_MAX])(t_env *, char **) = {
 									  [MTL_COMMENT] = NULL,
 									  [MTL_NEWMTL] = mtl_newmtl_loader,
 									  [MTL_Ns] = NULL,
-									  [MTL_Ka] = mtl_ambient_color_loader,
-									  [MTL_Kd] = NULL,
+									  [MTL_Ka] = NULL,
+									  [MTL_Kd] = mtl_diffuse_color_loader,
 									  [MTL_Ks] = NULL,
 									  [MTL_Ni] = NULL,
 									  [MTL_d] = mtl_alpha_component_loader,
@@ -30,16 +30,27 @@ static unsigned char	(*mtl_loading_fts[MTL_MAX])(t_env *, char **) = {
 
 static unsigned char	mtl_loader(t_env *env, char *line)
 {
-	char	**tokens;
+	char			**tokens;
+	unsigned char	code;
 
 	if (!(tokens = ft_strsplit(line, "\b\t\v\f\r ")))
 		return (ERR_MALLOC_FAILED);
 
 	for (unsigned int i = 0; i < MTL_MAX; i++)
 		if (ft_strcmp(tokens[0], mtl_lines_ids[i]) == 0)
-			return (mtl_loading_fts[i] ? mtl_loading_fts[i](env, tokens) : ERR_NONE);
+		{
+			if (mtl_loading_fts[i])
+			{
+				code = mtl_loading_fts[i](env, tokens);
+				ft_free_ctab(tokens);
+				return (code);
+			}
+			ft_free_ctab(tokens);
+			return (ERR_NONE);
+		}
 
-	return (ERR_NONE);
+	ft_free_ctab(tokens);
+	return (ERR_MTL_LINE_ID_NOT_FOUND);
 }
 
 static unsigned char	load_mtl_file(t_env *env)

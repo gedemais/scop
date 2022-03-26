@@ -7,3 +7,8 @@ Architecture:
 Code :
 
 Correction :
+
+Bonus eventuels :
+
+Implementer la lumiere speculaire dans le moteur de rendu (peut etre utile pour ft_vox).
+Implementer des keys-bindings (Bonus gratos pour ft_vox)

@@ -1,7 +1,7 @@
 NAME=scop
 
 CC=gcc
-FLAGS= -Wall -Werror -Wextra -Weverything
+FLAGS= -Wall -Werror -Wextra
 
 # Flags variables
 DEBUG ?= 0
@@ -20,13 +20,15 @@ SRC_NAME=main.c\
 		 free.c\
 		 setup/settings.c\
 		 setup/setup.c\
-		 setup/setup_utils.c
+		 setup/setup_utils.c\
+		 rendering/display.c
 
 SRC=$(addprefix $(SRC_PATH), $(SRC_NAME))
 
 INC_PATH=include/
 INC_NAME=main.h\
 		 error.h
+
 INC=$(addprefix $(INC_PATH), $(INC_NAME))
 
 OBJS=$(SRC:.c=.o)
@@ -34,21 +36,22 @@ OBJS=$(SRC:.c=.o)
 ########################## Librarys ######################
 LIB_PATH = libft/
 LIB = libft/libft.a
-LIB_GLAD = glad/include/
-GLAD = glad/libglad.a
+GLAD_PATH = glad/include/glad/
+KHR_PATH = glad/include/KHR/
+LIB_GLAD = glad/libglad.a
 ##########################################################
 
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
-	$(CC) $(FLAGS) -I$(INC_PATH) -I$(LIB_PATH) -I$(LIB_GLAD) -o $(NAME) $(OBJS) $(LIB) $(GLAD) -lpthread -lglfw -framework OpenGL
+	$(CC) $(FLAGS) -I$(INC_PATH) -I$(LIB_PATH) -I$(GLAD_PATH) -I$(KHR_PATH) -o $(NAME) $(OBJS) $(LIB) $(LIB_GLAD) -lpthread -lglfw -framework OpenGL
 
-$(SRC_PATH)%.o: $(SRC_PATH)%.c $(INC)
+$(SRC_PATH)%.o: $(SRC_PATH)%.c $(INC) 
 	@tput civis
 	@printf " Compiling $<"
 	@printf "                                       \\r"
 	@tput cnorm
-	@$(CC) $(FLAGS) -I$(INC_PATH) -I$(LIB_PATH) -o $@ -c $<
+	@$(CC) $(FLAGS) -I$(INC_PATH) -I$(LIB_PATH) -I$(GLAD_PATH) -o $@ -c $<
 
 $(LIB): $(LIB_PATH)
 	@echo "Making Libft..."

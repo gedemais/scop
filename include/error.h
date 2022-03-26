@@ -1,7 +1,7 @@
 #ifndef ERROR_H
-#define ERROR_H
+# define ERROR_H
 
-#include <stdbool.h>
+# include <stdbool.h>
 
 enum e_error_id
 {
@@ -29,7 +29,6 @@ static const t_error errors[ERR_MAX] = {
 	[ERR_INVALID_ARGC] = {"Invalid number of arguments.", true},
 	[ERR_FAILED_WIN] = {"Failed to create GLFW window", true},
 	[ERR_FAILED_GLAD] = {"Failed to initialize GLAD", true},
-	[ERR_INVALID_ARGC] = {"Invalid number of arguments.", true},
 	[ERR_OPENING_SETTINGS] = {"Can not open Settings.toml.", false},
 	[ERR_READING_SETTINGS] = {"Settings.toml reading failed.", false},
 	[ERR_MALLOC_FAILED] = {"malloc() call failed.", false},

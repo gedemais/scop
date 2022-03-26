@@ -4,12 +4,12 @@
 <h2> Key Bindings </h2>
 <p> Key bindings are adjustable in Settings.toml, with the following keys and values :
 
-<h3> Actions </h3>
+<h4> Actions </h4>
 <ul>
-	<li>move_cam_forward</li>
-	<li>move_cam_backward</li>
-	<li>move_cam_left</li>
-	<li>move_cam_right</li>
+	<li>move_forward</li>
+	<li>move_backward</li>
+	<li>move_left</li>
+	<li>move_right</li>
 	<li>toggle_texture</li>
 	<li>increase_rotation_speed</li>
 	<li>decrease_rotation_speed</li>
@@ -19,4 +19,32 @@
 	<li>move_object_down</li>
 	<li>move_object_left</li>
 	<li>move_object_right</li>
+</ul>
+
+<h4> Keys </h4>
+<ul>
+	<li>0-9</li>
+	<li>a-z</li>
+	<li>space</li>
+	<li>escape</li>
+	<li>enter</li>
+	<li>tab</li>
+	<li>backspace</li>
+	<li>right</li>
+	<li>left</li>
+	<li>down</li>
+	<li>up</li>
+	<li>f1-f22</li>
+	<li>lshift</li>
+	<li>lctrl</li>
+	<li>lalt</li>
+	<li>lsuper</li>
+	<li>rshift</li>
+	<li>rctrl</li>
+	<li>ralt</li>
+	<li>rsuper</li>
+	<li>,</li>
+	<li>-</li>
+	<li>;</li>
+	<li>=</li>
 </ul>

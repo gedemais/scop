@@ -163,11 +163,11 @@ static const char			*gl_str_ids[82] = {
 							"lshift",
 							"lctrl",
 							"lalt",
-							"lcmd",
+							"lsuper",
 							"rshift",
 							"rctrl",
 							"ralt",
-							"rcmd"
+							"rsuper"
 };
 
 unsigned char	key_binder(char **tokens)

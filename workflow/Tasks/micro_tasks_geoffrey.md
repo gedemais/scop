@@ -7,13 +7,7 @@ Template:
 - [ ] Micro Task C
 
 ----------------- TODO -----------------
-**_ key_binder  _**
-- [x] Creer un tableau de correspondance char* <=> GLFW_KEY_*
-- [x] Importer la lib glad et lui ajouter un Makefile dependant de celui de scop
-- [x] Documenter les settings + bindings dans le README
-- [ ] Ajouter les identifiants d'actions aux proprietes a charger dans Settings.toml
-- [ ] Creer un tableau de pointeurs sur fonction qui match les keys
-- [ ] Initialiser ce tableau on fly avec les bindings dans assign_value
+- [ ] Initialiser le tableau de psf on fly avec les bindings dans assign_value (todo after event handler system is ready)
 
 ----------------- DONE -----------------
 
@@ -36,3 +30,10 @@ Template:
 - [x] Definir un nom de mesh par defaut et supprimer l'erreur no defined object
 - [x] Refactor / comments
 - [x] Free toutes les allocations faites par init
+
+**_ key_binder  _**
+- [x] Creer un tableau de correspondance char* <=> GLFW_KEY_*
+- [x] Importer la lib glad et lui ajouter un Makefile dependant de celui de scop
+- [x] Documenter les settings + bindings dans le README
+- [x] Ajouter les identifiants d'actions aux proprietes a charger dans Settings.toml
+- [x] Creer un tableau de pointeurs sur fonction qui match les keys

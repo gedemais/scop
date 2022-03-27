@@ -8,7 +8,11 @@ Template:
 
 ----------------- TODO -----------------
 **_ events  _**
+- [ ] Refactor / Comment previous branches work
 - [ ] Initialiser le tableau de psf on fly avec les bindings dans assign_value
+- [ ] Creer des placeholders de fonctions d'actions
+- [ ] Remplir la fonction d'action exit
+- [ ] Linker les fonctions d'actions avec le systeme de detection d'appui
 
 ----------------- DONE -----------------
 

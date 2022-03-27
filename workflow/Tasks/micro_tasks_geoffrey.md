@@ -7,7 +7,8 @@ Template:
 - [ ] Micro Task C
 
 ----------------- TODO -----------------
-- [ ] Initialiser le tableau de psf on fly avec les bindings dans assign_value (todo after event handler system is ready)
+**_ events  _**
+- [ ] Initialiser le tableau de psf on fly avec les bindings dans assign_value
 
 ----------------- DONE -----------------
 

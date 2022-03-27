@@ -83,29 +83,33 @@ typedef struct	s_env
 	char		pad[4];
 	t_scene		scene;
 	char		*obj_path;
+	GLFWwindow	*window;
 	//t_events	events;
 }				t_env;
 
+unsigned char	init(t_env *env, int argc, char **argv);
+
+// OpenGL
+unsigned char   init_display(t_env *env);
+unsigned char   display_loop(t_env *env);
+//
+
+// Parsing
 unsigned char	readlines(char *path, char ***lines);
 unsigned char	load_obj_file(t_env *env, char *path);
+unsigned char	load_settings(t_env *env);
+unsigned char	obj_mtllib_loader(t_env *env, char **tokens);
 
 unsigned char	obj_face_loader(t_env *env, char **tokens);
 unsigned char	create_default_mesh(t_env *env);
-unsigned char	obj_mtllib_loader(t_env *env, char **tokens);
-
 
 unsigned char	mtl_newmtl_loader(t_env *env, char **tokens);
 unsigned char	mtl_diffuse_color_loader(t_env *env, char **tokens);
 unsigned char	mtl_alpha_component_loader(t_env *env, char **tokens);
 unsigned char	mtl_texture_image_loader(t_env *env, char **tokens);
 
-unsigned char	init(t_env *env, int argc, char **argv);
-unsigned char	load_settings(t_env *env);
-unsigned char	key_binder(char **tokens);
-
-
+// Ending
 void			error_handler(t_env *env, unsigned char code);
-
 void			free_env(t_env *env);
 
 // Function pointers array linking actions functions with key binds

@@ -6,6 +6,8 @@ static unsigned char	scop(t_env *env, int argc, char **argv)
 
 	if ((code = init(env, argc, argv)) != ERR_NONE)
 		return (code);
+
+	display_loop(env);
 	return (ERR_NONE);
 }
 

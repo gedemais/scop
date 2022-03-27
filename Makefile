@@ -27,6 +27,7 @@ SRC_NAME=main.c\
 		 parser/mtl_loaders.c\
 		 init/settings.c\
 		 init/init.c\
+		 init/init_opengl.c\
 		 init/init_utils.c
 
 SRC=$(addprefix $(SRC_PATH), $(SRC_NAME))

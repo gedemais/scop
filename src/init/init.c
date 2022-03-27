@@ -23,7 +23,8 @@ unsigned char	init(t_env *env, int argc, char **argv)
 
 	if ((code = load_obj_path(env, argv[1])) != ERR_NONE
 		|| (code = load_obj_file(env, argv[1])) != ERR_NONE
-		|| (code = load_settings(env)) != ERR_NONE)
+		|| (code = load_settings(env)) != ERR_NONE
+		|| (code = init_display(env)) != ERR_NONE)
 		return (code);
 
 	return (ERR_NONE);

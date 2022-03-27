@@ -34,6 +34,9 @@ enum	e_error_id
 	ERR_INVALID_ALPHA_VALUE,
 	ERR_MTL_LINE_ID_NOT_FOUND,
 	ERR_UNRECOGNIZED_KEY_ID,
+	ERR_GLFW_INIT,
+	ERR_FAILED_WIN,
+	ERR_FAILED_GLAD,
 	ERR_MAX
 };
 
@@ -71,7 +74,17 @@ static const t_error	errors[ERR_MAX] = {
 		[ERR_INVALID_RGB_VALUE_FOR_KD_INSTRUCTION] = {"Invalid RGB value for Kd instruction in .mtl file.", false},
 		[ERR_INVALID_ALPHA_VALUE] = {"Invalid alpha value for d instruction in .mtl file.", false},
 		[ERR_MTL_LINE_ID_NOT_FOUND] = {"Invalid line identifier in .mtl file.", false},
-		[ERR_UNRECOGNIZED_KEY_ID] = {"Unrecognized key id in Settings.toml", false}
+		[ERR_UNRECOGNIZED_KEY_ID] = {"Unrecognized key id in Settings.toml", false},
+		[ERR_GLFW_INIT] = {"GLFW initialization failed.", false},
+		[ERR_FAILED_WIN] = {"Failed to initialize window.", false},
+		[ERR_FAILED_GLAD] = {"Failed to initialize GLAD.", false}
+		//[] = {"", false}
+		//[] = {"", false}
+		//[] = {"", false}
+		//[] = {"", false}
+		//[] = {"", false}
+		//[] = {"", false}
+		//[] = {"", false}
 		//[] = {"", false}
 		//[] = {"", false}
 };

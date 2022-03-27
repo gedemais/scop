@@ -41,7 +41,6 @@ int						main(int argc, char **argv)
 			printf("%d %d %d\n", f->a, f->b, f->c);
 		}
 
-		
 		printf("---------------------- Mesh ----------------------\n");
 		t_mesh		*m = dyacc(&env.scene.meshs, 0);
 		uint32_t	*index;

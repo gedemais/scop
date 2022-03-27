@@ -26,7 +26,6 @@ SRC_NAME=main.c\
 		 parser/load_mtl_file.c\
 		 parser/mtl_loaders.c\
 		 init/settings.c\
-		 init/key_binder.c\
 		 init/init.c\
 		 init/init_utils.c
 

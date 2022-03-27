@@ -1,8 +1,9 @@
 #ifndef KEYS_H
 # define KEYS_H
 
+# define NB_KEYS 82
 
-static const unsigned short	gl_keys_values[82] = {
+static const unsigned short	gl_keys_values[NB_KEYS] = {
 							GLFW_KEY_SPACE,
 							GLFW_KEY_COMMA,
 							GLFW_KEY_MINUS,
@@ -87,7 +88,7 @@ static const unsigned short	gl_keys_values[82] = {
 							GLFW_KEY_RIGHT_SUPER
 };
 
-static const char			*gl_str_ids[82] = {
+static const char			*gl_str_ids[NB_KEYS] = {
 							"space",
 							",",
 							"-",
@@ -171,20 +172,5 @@ static const char			*gl_str_ids[82] = {
 							"ralt",
 							"rsuper"
 };
-
-/*
-static unsigned char	(*keys_fts[KEY_MAX])(t_env *env) = {
-	[KEY_EXIT] = ,
-	[KEY_TOGGLE_ROTATION] = ,
-	[KEY_TOGGLE_TEXTURE] = ,
-	[KEY_INCREASE_ROTATION_SPEED] = ,
-	[KEY_DECREASE_ROTATION_SPEED] = ,
-	[KEY_MOVE_OBJECT_FORWARD] = ,
-	[KEY_MOVE_OBJECT_BACKWARD] = ,
-	[KEY_MOVE_OBJECT_UP] = ,
-	[KEY_MOVE_OBJECT_DOWN] = ,
-	[KEY_MOVE_OBJECT_LEFT] = ,
-	[KEY_MOVE_OBJECT_RIGHT] = 
-};*/
 
 #endif

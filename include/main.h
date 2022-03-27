@@ -23,33 +23,23 @@
 # include "scene.h"
 # include "keys.h"
 
-enum					e_default_settings_values
-{
-	DSV_W_XPOS = 200,
-	DSV_W_YPOS = 200,
-	DSV_W_WDT = 400,
-	DSV_W_HGT = 400,
-	DSV_ROTATION_SPEED = 10,
-	DSV_TRANSITION_SPEED = 10
-};
-
 enum					e_settings
 {
 	SET_WIN_HEIGHT,
 	SET_WIN_WIDTH,
 	SET_ROTATION_SPEED,
 	SET_TRANSITION_SPEED,
-/*	SET_KEY_EXIT,
+	SET_KEY_EXIT,
 	SET_KEY_TOGGLE_ROTATION,
 	SET_KEY_TOGGLE_TEXTURE,
 	SET_KEY_INCREASE_ROTATION_SPEED,
-	SET_KEY_DECREASE_ROTATION_SPEED_DOWN,
+	SET_KEY_DECREASE_ROTATION_SPEED,
 	SET_KEY_MOVE_OBJECT_FORWARD,
 	SET_KEY_MOVE_OBJECT_BACKWARD,
 	SET_KEY_MOVE_OBJECT_UP,
 	SET_KEY_MOVE_OBJECT_DOWN,
 	SET_KEY_MOVE_OBJECT_LEFT,
-	SET_KEY_MOVE_OBJECT_RIGHT,*/
+	SET_KEY_MOVE_OBJECT_RIGHT,
 	SET_MAX
 };
 
@@ -117,5 +107,26 @@ unsigned char	key_binder(char **tokens);
 void			error_handler(t_env *env, unsigned char code);
 
 void			free_env(t_env *env);
+
+// Function pointers array linking actions functions with key binds
+static unsigned char	(*keys_fts[KEY_MAX])(t_env *env);
+
+static const char		*settings_keys[SET_MAX] = {
+										"window_height",
+										"window_width",
+										"rotation_speed",
+										"transition_speed",
+										"exit",
+										"toggle_rotation",
+										"toggle_texture",
+										"increase_rotation_speed",
+										"decrease_rotation_speed",
+										"move_object_forward",
+										"move_object_backward",
+										"move_object_up",
+										"move_object_down",
+										"move_object_left",
+										"move_object_right"
+										};
 
 #endif

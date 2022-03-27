@@ -11,20 +11,35 @@ static unsigned char	load_integer(char *line, char *token, long long int *n)
 	return (ERR_NONE);
 }
 
+static unsigned char	load_keybind(char *line, char *token, long long int *n)
+{
+	for (long long int i = 0; i < NB_KEYS; i++)
+		if (ft_strcmp(gl_str_ids[i], token) == 0)
+		{
+			*n = i;
+			return (ERR_NONE);
+		}
+
+	ft_putendl_fd(line, 2);
+	return (ERR_UNRECOGNIZED_KEY_ID);
+}
+
 static unsigned char	assign_value(t_env *env, unsigned int j, char *line, char *token)
 {
 	long long int	n = 0;
 	unsigned char	code;
 
-	// Read value associated to key (integer)
-
-	if (j <= SET_TRANSITION_SPEED // if the information to load is an integer
-		&& (code = load_integer(line, token, &n)) != ERR_NONE)
+	// Read value (integer)
+	if (j <= SET_TRANSITION_SPEED) // if the information to load is an integer
+	{
+		if ((code = load_integer(line, token, &n)) != ERR_NONE)
 			return (code);
-	//else if ((code = load_(line, token, &n)) != ERR_NONE)
-	//	return (code);
+	}
+	else if ((code = load_keybind(line, token, &n)) != ERR_NONE)
+		return (code);
 
 	switch (j) {
+	// Basics
 		case SET_WIN_HEIGHT:
 			env->settings.w_hgt = (uint16_t)n;
 			break;
@@ -37,6 +52,40 @@ static unsigned char	assign_value(t_env *env, unsigned int j, char *line, char *
 		case SET_TRANSITION_SPEED:
 			env->settings.transition_speed = (uint16_t)n;
 			break;
+	// Key Bindings
+		case SET_KEY_EXIT:
+			env->settings.keys[KEY_EXIT] = (uint8_t)n;
+			break;
+		case SET_KEY_TOGGLE_ROTATION:
+			env->settings.keys[KEY_TOGGLE_ROTATION] = (uint8_t)n;
+			break;
+		case SET_KEY_TOGGLE_TEXTURE:
+			env->settings.keys[KEY_TOGGLE_TEXTURE] = (uint8_t)n;
+			break;
+		case SET_KEY_INCREASE_ROTATION_SPEED:
+			env->settings.keys[KEY_INCREASE_ROTATION_SPEED] = (uint8_t)n;
+			break;
+		case SET_KEY_DECREASE_ROTATION_SPEED:
+			env->settings.keys[KEY_DECREASE_ROTATION_SPEED] = (uint8_t)n;
+			break;
+		case SET_KEY_MOVE_OBJECT_FORWARD:
+			env->settings.keys[KEY_MOVE_OBJECT_FORWARD] = (uint8_t)n;
+			break;
+		case SET_KEY_MOVE_OBJECT_BACKWARD:
+			env->settings.keys[KEY_MOVE_OBJECT_BACKWARD] = (uint8_t)n;
+			break;
+		case SET_KEY_MOVE_OBJECT_UP:
+			env->settings.keys[KEY_MOVE_OBJECT_UP] = (uint8_t)n;
+			break;
+		case SET_KEY_MOVE_OBJECT_DOWN:
+			env->settings.keys[KEY_MOVE_OBJECT_DOWN] = (uint8_t)n;
+			break;
+		case SET_KEY_MOVE_OBJECT_LEFT:
+			env->settings.keys[KEY_MOVE_OBJECT_LEFT] = (uint8_t)n;
+			break;
+		case SET_KEY_MOVE_OBJECT_RIGHT:
+			env->settings.keys[KEY_MOVE_OBJECT_RIGHT] = (uint8_t)n;
+			break;
 	};
 
 	return (ERR_NONE);
@@ -44,11 +93,6 @@ static unsigned char	assign_value(t_env *env, unsigned int j, char *line, char *
 
 static unsigned char	loader(t_env *env, char **lines)
 {
-	const char		*settings_keys[SET_MAX] = {
-										"window_height",
-										"window_width",
-										"rotation_speed",
-										"transition_speed"};
 	bool			founds[SET_MAX];
 	char			**tokens;
 	unsigned char	code;
@@ -122,6 +166,9 @@ unsigned char			load_settings(t_env *env)
 		printf("w_wdt : %d\n", env->settings.w_wdt);
 		printf("rotation_speed : %d\n", env->settings.rotation_speed);
 		printf("transition_speed : %d\n", env->settings.transition_speed);
+
+		for (unsigned int i = 0; i < KEY_MAX; i++)
+			printf("%s : %s\n", settings_keys[i], gl_str_ids[env->settings.keys[i]]);
 	}
 	return (ERR_NONE);
 }

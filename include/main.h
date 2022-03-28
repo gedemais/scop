@@ -1,8 +1,10 @@
 #ifndef MAIN_H
 # define MAIN_H
 
+// OpenGL Libs
 # include "glad.h"
 # include <GLFW/glfw3.h>
+// GLSL
 
 # include <unistd.h>
 # include <stdio.h>
@@ -14,15 +16,21 @@
 #include <fcntl.h>
 #include <limits.h>
 
+// Homemade libs
 # include "libft.h"
 # include "lib_vec.h"
 # include "bmp.h"
 
+// Local headers
 # include "error.h"
 # include "parser.h"
 # include "scene.h"
 # include "keys.h"
 
+# define ROTATION_SPEED_DELTA 1
+# define MOVE_SPEED_DELTA 0.01f
+
+// Settings instances
 enum					e_settings
 {
 	SET_WIN_HEIGHT,
@@ -43,6 +51,7 @@ enum					e_settings
 	SET_MAX
 };
 
+// Actions keys
 enum					e_keys
 {
 	KEY_EXIT,
@@ -59,6 +68,7 @@ enum					e_keys
 	KEY_MAX
 };
 
+// Settings data storing structure
 typedef struct	s_settings
 {
 	uint16_t	w_wdt;
@@ -66,27 +76,22 @@ typedef struct	s_settings
 	uint16_t	rotation_speed;
 	uint16_t	transition_speed;
 	uint8_t		keys[KEY_MAX];
-	char		pad;
+	bool		rotation;
+	bool		textured;
+	char		pad[3];
 }				t_settings;
 
-/*typedef struct	s_event
-{
-	bool		keys[NB_KEYS];
-	bool		buttons[BUTTON_MAX]; // Later
-	uint16_t	mouse_x; // Later
-	uint16_t	mouse_y; // Later
-}				t_event;*/
-
+// Main environment structure
 typedef struct	s_env
 {
 	t_settings	settings;
-	char		pad[4];
 	t_scene		scene;
 	char		*obj_path;
 	GLFWwindow	*window;
-	//t_events	events;
+	void		(*keybinds_fts[NB_KEYS])(struct s_env *env, int key); // Function pointers array linking actions functions with key binds
 }				t_env;
 
+// Initializes scop
 unsigned char	init(t_env *env, int argc, char **argv);
 
 // OpenGL
@@ -112,9 +117,19 @@ unsigned char	mtl_texture_image_loader(t_env *env, char **tokens);
 void			error_handler(t_env *env, unsigned char code);
 void			free_env(t_env *env);
 
-// Function pointers array linking actions functions with key binds
-static unsigned char	(*keys_fts[KEY_MAX])(t_env *env);
+// Transformation function
+void	rotate_mesh(t_env *env);
+void	transate_mesh(t_env *env);
 
+// Actions functions
+void	exit_scop(t_env *env, int key);
+void	toggle_rotation(t_env *env, int key);
+void	toggle_texture(t_env *env, int key);
+void	change_rotation_speed(t_env *env, int key);
+void	move_object(t_env *env, int key);
+
+
+// Settings.toml keys
 static const char		*settings_keys[SET_MAX] = {
 										"window_height",
 										"window_width",

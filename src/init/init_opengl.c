@@ -9,14 +9,13 @@ static t_env	*g_env = NULL;
 
 static void processInput(GLFWwindow *window)
 {
-	for (unsigned int i = 0; i < NB_KEYS; i++)
+	for (int i = 0; i < NB_KEYS; i++)
 	{
-		if (glfwGetKey(window, gl_keys_values[i]) == GLFW_PRESS)
-			printf("%u\n", i);
+		if (glfwGetKey(window, gl_keys_values[i]) == GLFW_PRESS
+			&& g_env->keybinds_fts[i])
+			g_env->keybinds_fts[i](g_env, i);
 	}
 }
-			//glfwSetWindowShouldClose(window, true);
-			// closes window
 
 /****************************************************************
  * The framebuffer size function takes a GLFWwindow as its first

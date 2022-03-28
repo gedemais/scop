@@ -1,8 +1,9 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# define DISPLAY_DATA true
+# define DISPLAY_DATA false
 
+// Handled .obj file line types
 enum	e_obj_lines_id
 {
 	OBJ_COMMENT,
@@ -15,6 +16,7 @@ enum	e_obj_lines_id
 	OBJ_MAX
 };
 
+// Handled .obj file line types
 enum	e_mtl_lines_id
 {
 	MTL_COMMENT,

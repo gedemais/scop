@@ -42,8 +42,8 @@ enum	e_error_id
 
 typedef	struct	s_error
 {
-	char	msg[64];
-	bool	usage;
+	char	msg[64]; // Error message
+	bool	usage; // Does usage needs to be displayed
 }				t_error;
 
 static const t_error	errors[ERR_MAX] = {

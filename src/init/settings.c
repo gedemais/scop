@@ -93,14 +93,15 @@ static unsigned char	assign_value(t_env *env, unsigned int j, char *line, char *
 
 static unsigned char	loader(t_env *env, char **lines)
 {
-	bool			founds[SET_MAX];
+	bool			founds[SET_MAX]; // Array used to check for missing Settings.
 	char			**tokens;
 	unsigned char	code;
-	bool			found;
+	bool			found; // Used to check if the current settings key exists.
 
-	memset(founds, 0, sizeof(bool) * SET_MAX);
-	for (unsigned int i = 0; lines[i]; i++)
+	memset(founds, 0, sizeof(bool) * SET_MAX); // No settings found yet, flat to 0.
+	for (unsigned int i = 0; lines[i]; i++) // Iterate through lines.
 	{
+		// Split in words
 		if (!(tokens = ft_strsplit(lines[i], " \b\t\v\f\r")))
 			return (ERR_MALLOC_FAILED);
 
@@ -113,6 +114,7 @@ static unsigned char	loader(t_env *env, char **lines)
 		}
 
 		found = false;
+		// Indentification of which setting the user is trying to set on this line.
 		for (unsigned int j = 0; j < SET_MAX; j++)
 			if (strcmp(tokens[0], settings_keys[j]) == 0)
 			{
@@ -125,7 +127,7 @@ static unsigned char	loader(t_env *env, char **lines)
 				founds[j] = true;
 			}
 
-		if (found == false)
+		if (found == false) // If identification failed.
 		{
 			ft_putendl_fd(lines[i], 2);
 			ft_free_ctab(tokens);
@@ -135,7 +137,7 @@ static unsigned char	loader(t_env *env, char **lines)
 	}
 
 	for (unsigned int i = 0; i < SET_MAX; i++)
-		if (founds[i] == false)
+		if (founds[i] == false) // If any settings are missing.
 		{
 			ft_putendl_fd(settings_keys[i], 2);
 			return (ERR_SETTING_KEY_NOT_FOUND);
@@ -149,6 +151,7 @@ unsigned char			load_settings(t_env *env)
 	char			**lines;
 	unsigned char	code;
 
+	// Reads file and splits it into lines
 	if ((code = readlines("Settings.toml", &lines)) != ERR_NONE)
 		return (code);
 
@@ -158,8 +161,10 @@ unsigned char			load_settings(t_env *env)
 		return (code);
 	}
 
+	// Free lines array
 	ft_free_ctab(lines);
 
+	// Settings debugging displays
 	if (DISPLAY_DATA)
 	{
 		printf("w_hgt : %d\n", env->settings.w_hgt);

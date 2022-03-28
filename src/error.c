@@ -1,5 +1,10 @@
 #include "main.h"
 
+/*
+ * This function is designed to display error messages depending
+ * on the value return by the error chain, if anyone.
+ */
+
 void	error_handler(t_env *env, unsigned char code)
 {
 	const char	*usage = "./scop [.obj file path]\n";
@@ -18,5 +23,6 @@ void	error_handler(t_env *env, unsigned char code)
 	if (errors[code].usage)
 		write(2, usage, strlen(usage));
 
+	// Free environment content before the main returns
 	free_env(env);
 }

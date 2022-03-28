@@ -5,6 +5,7 @@ FLAGS = -Wall -Werror -Wextra -Weverything
 FLAGS += -Wno-documentation
 FLAGS += -Wno-documentation-unknown-command
 FLAGS += -Wno-reserved-id-macro
+FLAGS += -Wno-missing-noreturn
 
 # Flags variables
 DEBUG ?= 0
@@ -21,6 +22,8 @@ SRC_PATH=src/
 SRC_NAME=main.c\
 		 error.c\
 		 free.c\
+		 actions/transform.c\
+		 actions/toggles.c\
 		 parser/load_obj_file.c\
 		 parser/load_faces.c\
 		 parser/load_mtl_file.c\

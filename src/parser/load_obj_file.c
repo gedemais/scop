@@ -175,6 +175,7 @@ unsigned char			load_obj_file(t_env *env, char *path)
 			return (code);
 		}
 
+	// Creation of a default mesh to contain vertices and faces if not declared yet.
 	if (env->scene.meshs.c == NULL && (code = create_default_mesh(env)) != ERR_NONE)
 	{
 		ft_free_ctab(lines);

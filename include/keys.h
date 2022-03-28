@@ -3,6 +3,7 @@
 
 # define NB_KEYS 82
 
+// Handled GL keys
 static const unsigned short	gl_keys_values[NB_KEYS] = {
 							GLFW_KEY_SPACE,
 							GLFW_KEY_COMMA,
@@ -88,6 +89,7 @@ static const unsigned short	gl_keys_values[NB_KEYS] = {
 							GLFW_KEY_RIGHT_SUPER
 };
 
+// Settings keys values for binding
 static const char			*gl_str_ids[NB_KEYS] = {
 							"space",
 							",",

@@ -4,10 +4,13 @@ static unsigned char	scop(t_env *env, int argc, char **argv)
 {
 	unsigned char	code;
 
+	// Initialization
 	if ((code = init(env, argc, argv)) != ERR_NONE)
 		return (code);
 
+	// Main loop launcher
 	display_loop(env);
+
 	return (ERR_NONE);
 }
 
@@ -24,7 +27,7 @@ int						main(int argc, char **argv)
 	}
 
 	//while(1);
-
+	// Debugging prints
 	if (DISPLAY_DATA == false)
 	{
 		printf("---------------------- Vertexs ----------------------\n");

@@ -97,6 +97,7 @@ unsigned char	init(t_env *env, int argc, char **argv);
 // OpenGL
 unsigned char   init_display(t_env *env);
 unsigned char   display_loop(t_env *env);
+void			processInput(GLFWwindow *window);
 //
 
 // Parsing
@@ -127,7 +128,6 @@ void	toggle_rotation(t_env *env, int key);
 void	toggle_texture(t_env *env, int key);
 void	change_rotation_speed(t_env *env, int key);
 void	move_object(t_env *env, int key);
-
 
 // Settings.toml keys
 static const char		*settings_keys[SET_MAX] = {

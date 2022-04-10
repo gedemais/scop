@@ -7,7 +7,7 @@ static t_env	*g_env = NULL;
  pressed/released this frame and react accordingly
 ****************************************************************/
 
-static void processInput(GLFWwindow *window)
+void	processInput(GLFWwindow *window)
 {
 	for (int i = 0; i < NB_KEYS; i++)
 	{

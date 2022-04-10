@@ -22,6 +22,7 @@ SRC_PATH=src/
 SRC_NAME=main.c\
 		 error.c\
 		 free.c\
+		 render.c\
 		 actions/transform.c\
 		 actions/toggles.c\
 		 parser/load_obj_file.c\

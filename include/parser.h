@@ -32,6 +32,8 @@ enum	e_mtl_lines_id
 	MTL_MAX
 };
 
+char		*read_file(int fd, size_t *file_size);
+
 /*
  * Globals keeping track of the index of the mesh we are currently
  * loading, and of which material is applied for currently loaded face.

@@ -37,6 +37,11 @@ enum	e_error_id
 	ERR_GLFW_INIT,
 	ERR_FAILED_WIN,
 	ERR_FAILED_GLAD,
+	ERR_FAILED_TO_COMPILE_SHADER,
+	ERR_UNCOMPATIBLE_OPENGL_VERSION,
+	ERR_OPENING_SHADER_FILE,
+	ERR_CHDIR_FAILED,
+	ERR_FAILED_TO_LINK_SHADER_PROGRAM,
 	ERR_MAX
 };
 
@@ -49,6 +54,7 @@ typedef	struct	s_error
 static const t_error	errors[ERR_MAX] = {
 		[ERR_INVALID_ARGC] = {"Invalid number of arguments.", true},
 		[ERR_OPENING_FILE] = {"Can not open file.", true},
+		[ERR_OPENING_SHADER_FILE] = {"Can not open shader source file.", false},
 		[ERR_READING_FILE] = {"Can not read file.", false},
 		[ERR_MALLOC_FAILED] = {"malloc() call failed.", false},
 		[ERR_INVALID_SETTINGS_SYNTAX] = {"Invalid syntax in Settings.toml.", false},
@@ -77,11 +83,11 @@ static const t_error	errors[ERR_MAX] = {
 		[ERR_UNRECOGNIZED_KEY_ID] = {"Unrecognized key id in Settings.toml", false},
 		[ERR_GLFW_INIT] = {"GLFW initialization failed.", false},
 		[ERR_FAILED_WIN] = {"Failed to initialize window.", false},
-		[ERR_FAILED_GLAD] = {"Failed to initialize GLAD.", false}
-		//[] = {"", false}
-		//[] = {"", false}
-		//[] = {"", false}
-		//[] = {"", false}
+		[ERR_FAILED_GLAD] = {"Failed to initialize GLAD.", false},
+		[ERR_FAILED_TO_COMPILE_SHADER] = {"OpenGL : Failed to compile shader.", false},
+		[ERR_UNCOMPATIBLE_OPENGL_VERSION] = {"Incompatible version of OpenGL.", false},
+		[ERR_CHDIR_FAILED] = {"Chdir failed.", false},
+		[ERR_FAILED_TO_LINK_SHADER_PROGRAM] = {"OpenGL : Failed to link shader program.", false}
 		//[] = {"", false}
 		//[] = {"", false}
 		//[] = {"", false}

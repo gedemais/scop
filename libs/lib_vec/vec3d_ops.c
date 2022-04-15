@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:10:39 by gedemais          #+#    #+#             */
-/*   Updated: 2022/03/22 02:00:39 by gedemais         ###   ########.fr       */
+/*   Updated: 2022/04/15 20:02:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec3d		zero_vector(void)
 {
-	return ((t_vec3d){0.0, 0.0, 0.0, 0.0});
+	return ((t_vec3d){0.0, 0.0, 0.0});
 }
 
 t_vec3d		vec_add(t_vec3d a, t_vec3d b)

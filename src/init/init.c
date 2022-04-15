@@ -47,7 +47,8 @@ unsigned char	init(t_env *env, int argc, char **argv)
 	if ((code = load_obj_path(env, argv[1])) != ERR_NONE // Generates .obj file path
 		|| (code = load_obj_file(env, argv[1])) != ERR_NONE // Loads obj data (vertices, faces, materials...)
 		|| (code = load_settings(env)) != ERR_NONE // Loads settings data from Settings.toml
-		|| (code = init_display(env)) != ERR_NONE) // Inits display with glad and glfw3
+		|| (code = init_display(env)) != ERR_NONE // Inits display with glad and glfw3
+		|| (code = init_shaders(env)) != ERR_NONE) // Load shader programs from .glsl files
 		return (code);
 
 	bind_actions_to_keys(env);

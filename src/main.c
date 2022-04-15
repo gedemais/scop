@@ -8,10 +8,9 @@ static unsigned char	scop(t_env *env, int argc, char **argv)
 	if ((code = init(env, argc, argv)) != ERR_NONE)
 		return (code);
 
+	//exit(EXIT_SUCCESS); // chrono init time
 	// Main loop launcher
-	display_loop(env);
-
-	return (ERR_NONE);
+	return (display_loop(env));
 }
 
 int						main(int argc, char **argv)
@@ -28,14 +27,14 @@ int						main(int argc, char **argv)
 
 	//while(1);
 	// Debugging prints
-	if (DISPLAY_DATA == false)
+	if (DISPLAY_DATA)
 	{
 		printf("---------------------- Vertexs ----------------------\n");
 		t_vec3d	*v;
 		for (unsigned int i = 0; (int)i < env.scene.vertexs.nb_cells; i++)
 		{
 			v = dyacc(&env.scene.vertexs, (int)i);
-			printf("%f %f %f %f\n", (double)v->x, (double)v->y, (double)v->z, (double)v->w);
+		//	printf("%f %f %f %f\n", (double)v->x, (double)v->y, (double)v->z, (double)v->w);
 		}
 
 		printf("---------------------- Faces ----------------------\n");

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 21:51:11 by gedemais          #+#    #+#             */
-/*   Updated: 2022/03/22 01:58:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2022/04/15 20:03:07 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_vec3d		vec_fdiv(t_vec3d a, float n)
 	ret.x = a.x / n;
 	ret.y = a.y / n;
 	ret.z = a.z / n;
-	ret.w = a.w / n;
 	return (ret);
 }
 

@@ -1,10 +1,13 @@
 #ifndef SCENE_H
 # define SCENE_H
 
+# define OBJ_SPEED 0.1f
+
 typedef	struct	s_mesh
 {
 	t_dynarray	faces;
 	t_vec3d		o;
+	char		pad[4];
 	char		*name;
 }				t_mesh;
 

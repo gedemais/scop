@@ -47,6 +47,7 @@ static void    framebuffer_size_callback(GLFWwindow *window, int width, int heig
 unsigned char   init_display(t_env *env)
 {
     GLFWwindow *window;
+	int			err;
 
 	g_env = env;
     /****************************************************************
@@ -59,8 +60,19 @@ unsigned char   init_display(t_env *env)
      option. A list of all the possible options and its corresponding values can be found at GLFW's window handling documentation.
     ****************************************************************/
 
-    if (glfwInit() != GLFW_TRUE)
+	err = glfwInit();
+
+    if (err != GLFW_TRUE)
 		return (ERR_GLFW_INIT);
+
+	if (!GL_VERSION_2_1)
+		return (ERR_UNCOMPATIBLE_OPENGL_VERSION);
+
+	if (chdir("../") == -1)
+	{
+		perror(strerror(errno));
+		return (ERR_CHDIR_FAILED);
+	}
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -106,5 +118,6 @@ unsigned char   init_display(t_env *env)
         return (ERR_FAILED_GLAD);
 
     env->window = window;
+
     return (ERR_NONE);
 }

@@ -6,6 +6,7 @@ FLAGS += -Wno-documentation
 FLAGS += -Wno-documentation-unknown-command
 FLAGS += -Wno-reserved-id-macro
 FLAGS += -Wno-missing-noreturn
+FLAGS += -Wno-incompatible-pointer-types-discards-qualifiers
 
 # Flags variables
 DEBUG ?= 0
@@ -32,6 +33,7 @@ SRC_NAME=main.c\
 		 init/settings.c\
 		 init/init.c\
 		 init/init_opengl.c\
+		 init/init_shaders.c\
 		 init/init_utils.c
 
 SRC=$(addprefix $(SRC_PATH), $(SRC_NAME))
@@ -39,8 +41,10 @@ SRC=$(addprefix $(SRC_PATH), $(SRC_NAME))
 INC_PATH=include/
 INC_NAME=main.h\
 		 error.h\
+		 keys.h\
 		 parser.h\
-		 scene.h
+		 scene.h\
+		 shaders.h
 
 INC=$(addprefix $(INC_PATH), $(INC_NAME))
 

@@ -9,7 +9,6 @@ typedef struct	s_vec3d
 	float		x;
 	float		y;
 	float		z;
-	float		w;
 }				t_vec3d;
 
 t_vec3d		vec_fdiv(t_vec3d a, float n);

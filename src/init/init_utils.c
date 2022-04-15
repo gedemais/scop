@@ -1,6 +1,6 @@
 #include "main.h"
 
-static char		*read_file(int fd, size_t *file_size)
+char		*read_file(int fd, size_t *file_size)
 {
 	struct stat	s;
 	char		*file;

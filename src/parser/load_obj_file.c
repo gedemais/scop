@@ -37,7 +37,7 @@ static unsigned char	obj_object_name_loader(t_env *env, char **tokens)
 	if (ft_tablen(tokens) != 2) // Format check
 		return (ERR_INVALID_OBJECT_NAME);
 
-	new.o = (t_vec3d){0.0, 0.0, 0.0, 0.0}; // Origin of the mesh in the scene
+	new.o = (t_vec3d){0.0, 0.0, 0.0}; // Origin of the mesh in the scene
 	if (!(new.name = ft_strdup(tokens[1])) // Copies mesh's name
 		|| init_dynarray(&new.faces, sizeof(uint32_t), 256)) // Initializes faces array in the new mesh object
 		return (ERR_MALLOC_FAILED);
@@ -135,7 +135,7 @@ unsigned char	create_default_mesh(t_env *env)
 	t_mesh	m; // New default mesh
 
 	// Initializes mesh with default values
-	m.o = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
+	m.o = (t_vec3d){0.0f, 0.0f, 0.0f};
 	if (init_dynarray(&env->scene.meshs, sizeof(t_mesh), 1)
 		|| !(m.name = ft_strdup("default"))
 		|| init_dynarray(&m.faces, sizeof(uint32_t), 256))
@@ -182,5 +182,6 @@ unsigned char			load_obj_file(t_env *env, char *path)
 		return (code);
 	}
 	ft_free_ctab(lines);
+
 	return (ERR_NONE);
 }

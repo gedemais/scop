@@ -116,8 +116,10 @@ static unsigned char	obj_loader(t_env *env, char *line)
 	for (unsigned int i = 0; i < OBJ_MAX; i++)
 		if (ft_strcmp(tokens[0], obj_lines_ids[i]) == 0)
 		{
+			// If this line indentifier is handled
 			if (obj_loading_fts[i])
 			{
+				// Then launch the corresponding function
 				code = obj_loading_fts[i](env, tokens);
 				ft_free_ctab(tokens);
 				return (code);
@@ -183,6 +185,7 @@ unsigned char			load_obj_file(t_env *env, char *path)
 	}
 	ft_free_ctab(lines);
 
+	// Normalize vertices for OpenGL display (i.e components between -1.0 and 1.0)
 	normalize_vertexs(env);
 
 	return (ERR_NONE);

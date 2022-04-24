@@ -21,10 +21,9 @@ glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 
 static unsigned char	render_scene(t_env *env)
 {
-	glUseProgram(env->shader_program);
-	glBindVertexArray(env->vao);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, env->ebo);
+	// Launch shaders-composed program
+	glUseProgram(env->shader_program); 
+	// Draw triangles by faces indices contained in faces data structure
 	glDrawElements(GL_LINES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
 	return (ERR_NONE);
 }
@@ -33,14 +32,17 @@ unsigned char   display_loop(t_env *env)
 {
 	unsigned char	code;
 
+	// Main rendering loop
     while (!glfwWindowShouldClose(env->window))
     {
         // Events handler
         processInput(env->window);
 
+		// Rendering
 		if ((code = render_scene(env)) != ERR_NONE)
 			return (code);
 
+		// Update window's content
         glfwSwapBuffers(env->window);
         glfwPollEvents();
     }

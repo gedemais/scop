@@ -51,13 +51,15 @@ static unsigned char	load_face(t_env *env, char **tokens, t_mesh *parent, uint32
 	t_face	new;
 
 	ft_memset(&new, 0, sizeof(t_face));
-	new.mtl = used_mtl; // Material assignment
+
 	assign_face_indexes(&new, tokens, (int[3]){1, 2, 3});
 
 	// Moves instance in the pool.
 	if (push_dynarray(&env->scene.faces, &new, false)
 		// Moves instance's pool index in the parent mesh.
-		|| push_dynarray(&parent->faces, &face_index, false)) 
+		|| push_dynarray(&parent->faces, &face_index, false)
+		// Moves used mtl to to used materials pool
+		|| push_dynarray(&env->scene.used_mtls, &used_mtl, false))
 		return (ERR_MALLOC_FAILED);
 	// Negative / pool bound test.
 	return (check_face_indexes(env, new));
@@ -80,6 +82,10 @@ unsigned char	obj_face_loader(t_env *env, char **tokens)
 
 	if (env->scene.faces.c == NULL // Initialization of faces pool
 		&& init_dynarray(&env->scene.faces, sizeof(t_face), 256))
+		return (ERR_MALLOC_FAILED);
+
+	if (env->scene.used_mtls.c == NULL // Initialization of faces pool
+		&& init_dynarray(&env->scene.used_mtls, sizeof(uint16_t), 16))
 		return (ERR_MALLOC_FAILED);
 
 	if (nb_vertexs == 3) // If the face is a polygon

@@ -51,7 +51,7 @@ unsigned char	init(t_env *env, int argc, char **argv)
 		|| (code = init_shaders(env)) != ERR_NONE) // Load shader programs from .glsl files
 		return (code);
 
-	bind_actions_to_keys(env);
+	bind_actions_to_keys(env); // Attribute action functions to keys loaded from settings file
 
 	return (ERR_NONE);
 }

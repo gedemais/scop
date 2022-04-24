@@ -9,11 +9,11 @@ static t_env	*g_env = NULL;
 
 void	processInput(GLFWwindow *window)
 {
-	for (int i = 0; i < NB_KEYS; i++)
+	for (int i = 0; i < NB_KEYS; i++) // Iterate through every keys
 	{
-		if (glfwGetKey(window, gl_keys_values[i]) == GLFW_PRESS
-			&& g_env->keybinds_fts[i])
-			g_env->keybinds_fts[i](g_env, i);
+		if (glfwGetKey(window, gl_keys_values[i]) == GLFW_PRESS // Is the key pressed ?
+			&& g_env->keybinds_fts[i]) // Is a function associated with a key ?
+			g_env->keybinds_fts[i](g_env, i); // Then let's launch it
 	}
 }
 
@@ -68,6 +68,7 @@ unsigned char   init_display(t_env *env)
 	if (!GL_VERSION_2_1)
 		return (ERR_UNCOMPATIBLE_OPENGL_VERSION);
 
+	// Bizarrely, calling glfwInit changes current working directory to './resources'
 	if (chdir("../") == -1)
 	{
 		perror(strerror(errno));

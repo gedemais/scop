@@ -38,8 +38,6 @@ typedef	struct	s_face
 	uint32_t		a;
 	uint32_t		b;
 	uint32_t		c;
-	int16_t		mtl;
-	int16_t		pad;
 }				t_face;
 
 typedef struct	s_scene
@@ -47,8 +45,8 @@ typedef struct	s_scene
 	t_dynarray	meshs;
 	t_dynarray	vertexs;
 	t_dynarray	faces;
+	t_dynarray	used_mtls;
 	t_dynarray	mtls;
-	uint32_t	*indices;
 }				t_scene;
 
 #endif

@@ -13,7 +13,7 @@ static unsigned char	load_integer(char *line, char *token, long long int *n)
 
 static unsigned char	load_keybind(char *line, char *token, long long int *n)
 {
-	for (long long int i = 0; i < NB_KEYS; i++)
+	for (unsigned int i = 0; i < NB_KEYS; i++)
 		if (ft_strcmp(gl_str_ids[i], token) == 0)
 		{
 			*n = i;

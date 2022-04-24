@@ -13,6 +13,8 @@ Template:
 - [x] Initialiser le tableau de psf on fly avec les bindings dans assign_value
 - [x] Remplir la fonction d'action exit
 - [x] Linker les fonctions d'actions avec le systeme de detection d'appui
+- [x] Developper la liste de faces en une liste d'indices et une liste de materiaux
+- [ ] Proteger tous les calls OpenGL
 - [ ] Refactor + comment review complets
 
 ----------------- DONE -----------------

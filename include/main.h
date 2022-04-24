@@ -15,6 +15,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <limits.h>
+#include <float.h>
 
 // Homemade libs
 # include "libft.h"
@@ -112,6 +113,7 @@ unsigned char	readlines(char *path, char ***lines);
 unsigned char	load_obj_file(t_env *env, char *path);
 unsigned char	load_settings(t_env *env);
 unsigned char	obj_mtllib_loader(t_env *env, char **tokens);
+void			normalize_vertexs(t_env *env);
 
 unsigned char	obj_face_loader(t_env *env, char **tokens);
 unsigned char	create_default_mesh(t_env *env);

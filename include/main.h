@@ -92,9 +92,9 @@ typedef struct	s_env
 	uint32_t	vertex_shader_id;
 	uint32_t	fragment_shader_id;
 	uint32_t	shader_program;
+	uint32_t	ebo;
 	uint32_t	vbo;
 	uint32_t	vao;
-	uint32_t	pad;
 	void		(*keybinds_fts[NB_KEYS])(struct s_env *env, int key); // Function pointers array linking actions functions with key binds
 }				t_env;
 

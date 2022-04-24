@@ -23,7 +23,9 @@ static unsigned char	render_scene(t_env *env)
 {
 	glUseProgram(env->shader_program);
 	glBindVertexArray(env->vao);
-	glDrawArrays(GL_TRIANGLES, 0, env->scene.vertexs.nb_cells);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, env->ebo);
+	glDrawElements(GL_TRIANGLES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
 	return (ERR_NONE);
 }
 

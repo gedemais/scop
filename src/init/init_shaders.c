@@ -108,6 +108,18 @@ static unsigned char	init_buffers(t_env *env)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
+	if (!(env->scene.indices = malloc((unsigned long)env->scene.faces.nb_cells * sizeof(uint32_t) * 3)))
+		return (ERR_MALLOC_FAILED);
+
+	for (int i = 0; i < env->scene.faces.nb_cells * 3; i += 3)
+	{
+		memcpy(&env->scene.indices[i], dyacc(&env->scene.faces, i / 3), sizeof(uint32_t) * 3);
+	}
+
+	glGenBuffers(1, &env->ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, env->ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)env->scene.faces.nb_cells * (GLsizeiptr)sizeof(uint32_t) * 3, env->scene.indices, GL_STATIC_DRAW);
+
 	return (ERR_NONE);
 }
 

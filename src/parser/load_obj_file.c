@@ -183,5 +183,7 @@ unsigned char			load_obj_file(t_env *env, char *path)
 	}
 	ft_free_ctab(lines);
 
+	normalize_vertexs(env);
+
 	return (ERR_NONE);
 }

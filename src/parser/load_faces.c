@@ -3,17 +3,17 @@
 static void	assign_face_indexes(t_face *new, char **tokens, int indexes[3])
 {
 	// Reads the faces components (indexes in vertexs pool)
-	new->a = (int32_t)ft_atoi(tokens[indexes[0]]) - 1;
-	new->b = (int32_t)ft_atoi(tokens[indexes[1]]) - 1;
-	new->c = (int32_t)ft_atoi(tokens[indexes[2]]) - 1;
+	new->a = (uint32_t)ft_atoi(tokens[indexes[0]]) - 1;
+	new->b = (uint32_t)ft_atoi(tokens[indexes[1]]) - 1;
+	new->c = (uint32_t)ft_atoi(tokens[indexes[2]]) - 1;
 }
 
 static unsigned char	check_face_indexes(t_env *env, t_face new)
 {
 	// Checks if vertexs indexes values are coherent with the rest of the file
-	if (new.a < 0 || new.a >= env->scene.vertexs.nb_cells
-		|| new.b < 0 || new.b >= env->scene.vertexs.nb_cells
-		|| new.c < 0 || new.c >= env->scene.vertexs.nb_cells)
+	if (new.a >= (unsigned int)env->scene.vertexs.nb_cells
+		|| new.b >= (unsigned int)env->scene.vertexs.nb_cells
+		|| new.c >= (unsigned int)env->scene.vertexs.nb_cells)
 		return (ERR_INVALID_VERTEX_INDEX_FOR_FACE);
 	return (ERR_NONE);
 }

@@ -30,6 +30,7 @@ SRC_NAME=main.c\
 		 parser/load_faces.c\
 		 parser/load_mtl_file.c\
 		 parser/mtl_loaders.c\
+		 parser/normalize.c\
 		 init/settings.c\
 		 init/init.c\
 		 init/init_opengl.c\

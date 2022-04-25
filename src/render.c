@@ -24,7 +24,7 @@ static unsigned char	render_scene(t_env *env)
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program); 
 	// Draw triangles by faces indices contained in faces data structure
-	glDrawElements(GL_LINES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
 	return (ERR_NONE);
 }
 

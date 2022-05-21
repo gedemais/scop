@@ -37,6 +37,7 @@ unsigned char   display_loop(t_env *env)
     {
         // Events handler
         processInput(env->window);
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		// Rendering
 		if ((code = render_scene(env)) != ERR_NONE)

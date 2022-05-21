@@ -32,11 +32,16 @@ unsigned char   display_loop(t_env *env)
 {
 	unsigned char	code;
 
+	// set clearcolor to black
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
 	// Main rendering loop
     while (!glfwWindowShouldClose(env->window))
     {
         // Events handler
         processInput(env->window);
+
+		// Prevents red flashing from happening by clearing the buffer
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// Rendering

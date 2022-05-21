@@ -118,6 +118,8 @@ unsigned char   init_display(t_env *env)
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         return (ERR_FAILED_GLAD);
 
+	glEnable(GL_CULL_FACE);
+
     env->window = window;
 
     return (ERR_NONE);

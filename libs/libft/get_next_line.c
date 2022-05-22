@@ -49,9 +49,7 @@ static void		ft_trim_line(char *str)
 static char		*ft_strealloc(char *s, size_t size)
 {
 	char	*new;
-	int		i;
 
-	i = 0;
 	if (!size || !(new = ft_strnew(size)))
 		return (NULL);
 	ft_strcpy(new, s);

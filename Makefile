@@ -8,6 +8,7 @@ FLAGS += -Wno-reserved-id-macro
 FLAGS += -Wno-missing-noreturn
 FLAGS += -Wno-incompatible-pointer-types-discards-qualifiers
 FLAGS += -Wno-poison-system-directories
+FLAGS += -Wno-unused-but-set-variable
 
 # Flags variables
 DEBUG ?= 0

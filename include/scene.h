@@ -1,7 +1,7 @@
 #ifndef SCENE_H
 # define SCENE_H
 
-# define OBJ_SPEED 0.1f
+# define OBJ_SPEED 0.01f
 
 typedef	struct	s_mesh
 {

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:21:30 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/22 03:36:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2022/05/22 19:08:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ static void		ft_trim_line(char *str)
 static char		*ft_strealloc(char *s, size_t size)
 {
 	char	*new;
-	int		i;
 
-	i = 0;
 	if (!size || !(new = ft_strnew(size)))
 		return (NULL);
 	ft_strcpy(new, s);

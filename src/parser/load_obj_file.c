@@ -34,10 +34,10 @@ static unsigned char	obj_object_name_loader(t_env *env, char **tokens)
 	t_mesh		new; // Newly created mesh
 
 	ft_memset(&new, 0, sizeof(t_mesh));
+	new.o = (t_vec3d){0.0f, 0.0f, 0.0f};
 	if (ft_tablen(tokens) != 2) // Format check
 		return (ERR_INVALID_OBJECT_NAME);
 
-	new.o = (t_vec3d){0.0, 0.0, 0.0}; // Origin of the mesh in the scene
 	if (!(new.name = ft_strdup(tokens[1])) // Copies mesh's name
 		|| init_dynarray(&new.faces, sizeof(uint32_t), 256)) // Initializes faces array in the new mesh object
 		return (ERR_MALLOC_FAILED);
@@ -99,6 +99,21 @@ static unsigned char	obj_usemtl_loader(t_env *env, char **tokens)
 		return (ERR_INVALID_NAME_FOR_USEMTL_INSTRUCTION);
 
 	return (ERR_NONE);
+}
+
+static void				set_mesh_origin(t_env *env)
+{
+	t_mesh	*m;
+	t_vec3d	*v;
+	t_vec3d	acc = {0.0f, 0.0f, 0.0f};
+
+	m = dyacc(&env->scene.meshs, 0);
+	for (int i = 0; i < env->scene.vertexs.nb_cells; i++)
+	{
+		v = dyacc(&env->scene.vertexs, i);
+		acc = vec_add(acc, *v);
+	}
+	m->o = vec_fdiv(acc, env->scene.vertexs.nb_cells);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -187,6 +202,9 @@ unsigned char			load_obj_file(t_env *env, char *path)
 
 	// Normalize vertices for OpenGL display (i.e components between -1.0 and 1.0)
 	normalize_vertexs(env);
+
+	// Place the origin of the mesh on its center by averaging its vertexs
+	set_mesh_origin(env);
 
 	return (ERR_NONE);
 }

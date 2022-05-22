@@ -14,9 +14,9 @@ Template:
 - [x] Remplir la fonction d'action exit
 - [x] Linker les fonctions d'actions avec le systeme de detection d'appui
 - [x] Developper la liste de faces en une liste d'indices et une liste de materiaux
+- [x] Placer l'origine du mesh a son centre
 - [ ] Proteger tous les calls OpenGL
 - [ ] Empecher la repetition frame par frame des boutons toggles
-- [ ] Placer l'origine du mesh a son centre
 - [ ] Refactor + comment review complets
 
 ----------------- DONE -----------------

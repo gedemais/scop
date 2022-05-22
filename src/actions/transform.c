@@ -3,6 +3,7 @@
 void	rotate_mesh(t_env *env, t_vec3d origin, float angle,
 		void (*rotation)(t_vec3d *v, t_vec3d m, float fcos, float fsin))
 {
+	t_mesh		*m;
 	GLsizeiptr	size;
 	t_vec3d		*v;
 	float		fcos;
@@ -20,6 +21,8 @@ void	rotate_mesh(t_env *env, t_vec3d origin, float angle,
 	}
 	size = (GLsizeiptr)sizeof(t_vec3d) * env->scene.vertexs.nb_cells;
 	glBufferData(GL_ARRAY_BUFFER, size, env->scene.vertexs.c, GL_STATIC_DRAW);
+	m = dyacc(&env->scene.meshs, 0);
+	rotation(&m->o, origin, fcos, fsin);
 }
 
 static void	translate_mesh(t_env *env, t_vec3d translation)

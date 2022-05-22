@@ -41,8 +41,12 @@ unsigned char   display_loop(t_env *env)
         // Events handler
         processInput(env->window);
 
-		// Prevents red flashing from happening by clearing the buffer
-		glClear(GL_COLOR_BUFFER_BIT);
+		// Clear the screen and the depth buffer
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// Enable depth test
+		glEnable(GL_DEPTH_TEST);
+		// Accept fragment if it closer to the camera than the former one
+		glDepthFunc(GL_LESS);
 
 		// Rendering
 		if ((code = render_scene(env)) != ERR_NONE)

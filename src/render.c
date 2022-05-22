@@ -21,10 +21,18 @@ glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 
 static unsigned char	render_scene(t_env *env)
 {
+	t_mesh	*m;
+
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program); 
 	// Draw triangles by faces indices contained in faces data structure
 	glDrawElements(GL_TRIANGLES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
+
+	if (env->settings.rotation)
+	{
+		m = dyacc(&env->scene.meshs, 0);
+		rotate_mesh(env, m->o, 0.01f, rotate_y);
+	}
 	return (ERR_NONE);
 }
 

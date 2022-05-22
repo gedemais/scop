@@ -27,6 +27,7 @@ SRC_NAME=main.c\
 		 render.c\
 		 actions/transform.c\
 		 actions/toggles.c\
+		 actions/rotate.c\
 		 parser/load_obj_file.c\
 		 parser/load_faces.c\
 		 parser/load_mtl_file.c\

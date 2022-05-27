@@ -101,12 +101,21 @@ typedef struct	s_env
 
 // Initializes scop
 unsigned char	init(t_env *env, int argc, char **argv);
+void			init_camera(t_env *env);
 
 // OpenGL
 unsigned char   init_display(t_env *env);
 unsigned char	init_shaders(t_env *env);
 unsigned char   display_loop(t_env *env);
 void			processInput(GLFWwindow *window);
+
+// Matrices
+t_vec3d			multiply_matrix(float m[4][4], t_vec3d o);
+void			matrix_mult_matrix(float m1[4][4], float m2[4][4], float ret[4][4]);
+t_vec3d			matrix_mult_vec(float m[4][4], t_vec3d i);
+void			matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up);
+void			inverse_matrix(float m[4][4], float r[4][4]);
+void			translation_matrix(float m[4][4], t_vec3d v);
 
 // Parsing
 unsigned char	readlines(char *path, char ***lines);

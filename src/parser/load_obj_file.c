@@ -34,7 +34,7 @@ static unsigned char	obj_object_name_loader(t_env *env, char **tokens)
 	t_mesh		new; // Newly created mesh
 
 	ft_memset(&new, 0, sizeof(t_mesh));
-	new.o = (t_vec3d){0.0f, 0.0f, 0.0f};
+	new.o = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
 	if (ft_tablen(tokens) != 2) // Format check
 		return (ERR_INVALID_OBJECT_NAME);
 
@@ -105,7 +105,7 @@ static void				set_mesh_origin(t_env *env)
 {
 	t_mesh	*m;
 	t_vec3d	*v;
-	t_vec3d	acc = {0.0f, 0.0f, 0.0f};
+	t_vec3d	acc = {0.0f, 0.0f, 0.0f, 0.0f};
 
 	m = dyacc(&env->scene.meshs, 0);
 	for (int i = 0; i < env->scene.vertexs.nb_cells; i++)
@@ -152,7 +152,7 @@ unsigned char	create_default_mesh(t_env *env)
 	t_mesh	m; // New default mesh
 
 	// Initializes mesh with default values
-	m.o = (t_vec3d){0.0f, 0.0f, 0.0f};
+	m.o = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
 	if (init_dynarray(&env->scene.meshs, sizeof(t_mesh), 1)
 		|| !(m.name = ft_strdup("default"))
 		|| init_dynarray(&m.faces, sizeof(uint32_t), 256))

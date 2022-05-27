@@ -42,6 +42,7 @@ enum	e_error_id
 	ERR_OPENING_SHADER_FILE,
 	ERR_CHDIR_FAILED,
 	ERR_FAILED_TO_LINK_SHADER_PROGRAM,
+	ERR_PRIMARY_MONITOR_NOT_FOUND,
 	ERR_MAX
 };
 
@@ -87,8 +88,8 @@ static const t_error	errors[ERR_MAX] = {
 		[ERR_FAILED_TO_COMPILE_SHADER] = {"OpenGL : Failed to compile shader.", false},
 		[ERR_UNCOMPATIBLE_OPENGL_VERSION] = {"Incompatible version of OpenGL.", false},
 		[ERR_CHDIR_FAILED] = {"Chdir failed.", false},
-		[ERR_FAILED_TO_LINK_SHADER_PROGRAM] = {"OpenGL : Failed to link shader program.", false}
-		//[] = {"", false}
+		[ERR_FAILED_TO_LINK_SHADER_PROGRAM] = {"OpenGL : Failed to link shader program.", false},
+		[ERR_PRIMARY_MONITOR_NOT_FOUND] = {"OpenGL : Failed to find primary monitor", false}
 		//[] = {"", false}
 		//[] = {"", false}
 		//[] = {"", false}

@@ -46,7 +46,7 @@ static void    framebuffer_size_callback(GLFWwindow *window, int width, int heig
 
 unsigned char   init_display(t_env *env)
 {
-    GLFWwindow *window;
+    GLFWwindow 	*window;
 	int			err;
 
 	g_env = env;
@@ -68,7 +68,7 @@ unsigned char   init_display(t_env *env)
 	if (!GL_VERSION_2_1)
 		return (ERR_UNCOMPATIBLE_OPENGL_VERSION);
 
-	// Bizarrely, calling glfwInit changes current working directory to './resources'
+	// Calling glfwInit changes current working directory of our process to './resources'
 	if (chdir("../") == -1)
 	{
 		perror(strerror(errno));
@@ -95,6 +95,7 @@ unsigned char   init_display(t_env *env)
     ****************************************************************/
 
     window = glfwCreateWindow(env->settings.w_wdt, env->settings.w_hgt, "Scop", NULL, NULL);
+
     if (window == NULL)
     {
         glfwTerminate();

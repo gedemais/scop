@@ -24,10 +24,13 @@ SRC_PATH=src/
 SRC_NAME=main.c\
 		 error.c\
 		 free.c\
+		 camera.c\
 		 render.c\
 		 actions/transform.c\
 		 actions/toggles.c\
 		 actions/rotate.c\
+		 matrices/matrix_ops.c \
+		 matrices/matrix_tools.c \
 		 parser/load_obj_file.c\
 		 parser/load_faces.c\
 		 parser/load_mtl_file.c\

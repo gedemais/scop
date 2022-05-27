@@ -6,7 +6,7 @@
 /*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2022/04/15 20:04:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:09:48 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ void		vec3d_swap(t_vec3d *a, t_vec3d *b)
 
 t_vec3d		abs_vector(t_vec3d vec)
 {
-	return ((t_vec3d){fabs(vec.x), fabs(vec.y), fabs(vec.z)});
+	return ((t_vec3d){fabs(vec.x), fabs(vec.y), fabs(vec.z), fabs(vec.w)});
 }

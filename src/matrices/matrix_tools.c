@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:34:14 by gedemais          #+#    #+#             */
-/*   Updated: 2022/05/26 16:18:05 by gedemais         ###   ########.fr       */
+/*   Updated: 2022/05/28 22:32:13 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,11 @@ void	translation_matrix(float m[4][4], t_vec3d v)
 	m[3][0] = v.x;
 	m[3][1] = v.y;
 	m[3][2] = v.z;
+}
+
+void	matrix_flattener(float m[4][4], float flat[16])
+{
+	for (int y = 0; y < 4; y++)
+		for (int x = 0; x < 4; x++)
+			flat[y * 4 + x] = m[y][x];
 }

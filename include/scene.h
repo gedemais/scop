@@ -50,6 +50,7 @@ typedef struct	s_camera_matrices
 	float		crx_m[4][4];
 	float		cry_m[4][4];
 	float		mvp[4][4];
+	float		flat_mvp[16];
 }				t_cam_mat;
 
 typedef	struct	s_camera
@@ -57,6 +58,7 @@ typedef	struct	s_camera
 	t_cam_mat	mats;
 	t_vec3d		pos;
 	t_vec3d		dir;
+	t_vec3d		up;
 	float		roll;
 	float		pitch;
 	float		yaw;

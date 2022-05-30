@@ -23,6 +23,8 @@ static unsigned char	render_scene(t_env *env)
 {
 	t_mesh	*m;
 
+	int mvp_loc = glGetUniformLocation(env->vertex_shader_id, "mvp");
+	glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, env->scene.cam.mats.flat_mvp);
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program); 
 	// Draw triangles by faces indices contained in faces data structure

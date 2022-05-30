@@ -116,6 +116,7 @@ t_vec3d			matrix_mult_vec(float m[4][4], t_vec3d i);
 void			matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up);
 void			inverse_matrix(float m[4][4], float r[4][4]);
 void			translation_matrix(float m[4][4], t_vec3d v);
+void			matrix_flattener(float m[4][4], float flat[16]);
 
 // Parsing
 unsigned char	readlines(char *path, char ***lines);

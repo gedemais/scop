@@ -17,6 +17,8 @@ static void	init_matrices(t_cam *cam)
 	i = 0;
 	while (i < 4)
 	{
+		ft_memset(&cam->mats.w_m[i][0], 0, sizeof(float) * 4);
+		ft_memset(&cam->mats.v_m[i][0], 0, sizeof(float) * 4);
 		ft_memset(&cam->mats.p_m[i][0], 0, sizeof(float) * 4);
 		ft_memset(&cam->mats.rx_m[i][0], 0, sizeof(float) * 4);
 		ft_memset(&cam->mats.ry_m[i][0], 0, sizeof(float) * 4);
@@ -24,6 +26,8 @@ static void	init_matrices(t_cam *cam)
 		ft_memset(&cam->mats.crx_m[i][0], 0, sizeof(float) * 4);
 		ft_memset(&cam->mats.cry_m[i][0], 0, sizeof(float) * 4);
 
+		cam->mats.w_m[i][i] = 1.0f;
+		cam->mats.v_m[i][i] = 1.0f;
 		cam->mats.p_m[i][i] = 1.0f;
 		cam->mats.rx_m[i][i] = 1.0f;
 		cam->mats.ry_m[i][i] = 1.0f;
@@ -34,7 +38,9 @@ static void	init_matrices(t_cam *cam)
 	}
 
 	init_projection_matrix(cam);
-	translation_matrix(cam->v_m);
+	matrix_pointat(cam->mats.v_m, cam->pos, vec_add(cam->pos, cam->dir), cam->up);
+	matrix_mult_matrix(cam->mats.p_m, cam->mats.v_m, cam->mats.mvp);
+	matrix_flattener(cam->mats.mvp, cam->mats.flat_mvp);
 }
 
 void		init_camera(t_env *env)
@@ -55,6 +61,7 @@ void		init_camera(t_env *env)
 
 	// Camera's starting position and orientation
 	cam->pos = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
+	cam->up = (t_vec3d){0.0f, 1.0f, 0.0f, 0.0f};
 	cam->dir = (t_vec3d){10.0f, 40.0f, 0.0f, 0.0f};
 
 	// Camera rotations

@@ -19,15 +19,43 @@
 glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 ************************************************************/
 
+static void				pipeline(t_env *env)
+{
+	t_vec3d	*v;
+
+	memcpy(env->scene.p_vertexs.c, env->scene.vertexs.c, sizeof(t_vec3d) * (unsigned long)env->scene.vertexs.nb_cells);
+
+	for (int i = 0; i < env->scene.p_vertexs.nb_cells; i++)
+	{
+		v = dyacc(&env->scene.p_vertexs, i);
+		*v = matrix_mult_vec(env->scene.cam.mats.w_m, *v);
+	}
+
+	for (int i = 0; i < env->scene.p_vertexs.nb_cells; i++)
+	{
+		v = dyacc(&env->scene.p_vertexs, i);
+		*v = matrix_mult_vec(env->scene.cam.mats.v_m, *v);
+	}
+
+	for (int i = 0; i < env->scene.p_vertexs.nb_cells; i++)
+	{
+		v = dyacc(&env->scene.p_vertexs, i);
+		*v = matrix_mult_vec(env->scene.cam.mats.p_m, *v);
+	}
+}
+
 static unsigned char	render_scene(t_env *env)
 {
-	t_mesh	*m;
+	GLsizeiptr	size;
+	t_mesh		*m;
 
 	compute_view_matrix(env);
 	compute_rotation_matrix(env);
-	matrix_mult_matrix(env->scene.cam.mats.w_m, env->scene.cam.mats.v_m, env->scene.cam.mats.mvp);
-	matrix_mult_matrix(env->scene.cam.mats.mvp, env->scene.cam.mats.p_m, env->scene.cam.mats.mvp);
-	matrix_flattener(env->scene.cam.mats.mvp, env->scene.cam.mats.flat_mvp);
+
+	pipeline(env);
+
+	size = (GLsizeiptr)sizeof(t_vec3d) * env->scene.p_vertexs.nb_cells;
+	glBufferData(GL_ARRAY_BUFFER, size, env->scene.p_vertexs.c, GL_STATIC_DRAW);
 
 //	for (int i = 0; i < 16; i++)
 //		printf("%f ", (double)env->scene.cam.mats.flat_mvp[i]);
@@ -37,11 +65,11 @@ static unsigned char	render_scene(t_env *env)
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program);
 
-	int mvp_loc = glGetUniformLocation(env->vertex_shader_id, "mvp");
-	glUniformMatrix4fv(mvp_loc, 1, GL_TRUE, env->scene.cam.mats.flat_mvp);
+//	int mvp_loc = glGetUniformLocation(env->vertex_shader_id, "mvp");
+//	glUniformMatrix4fv(mvp_loc, 1, GL_TRUE, env->scene.cam.mats.flat_mvp);
 
 	// Draw triangles by faces indices contained in faces data structure
-	glDrawElements(GL_TRIANGLES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_LINES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
 
 	if (env->settings.rotation)
 	{

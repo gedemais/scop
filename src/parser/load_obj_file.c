@@ -60,8 +60,10 @@ static unsigned char	obj_vertex_loader(t_env *env, char **tokens)
 	if (ft_tablen(tokens) != 4) // Check format
 		return (ERR_INVALID_VERTEX_FORMAT);
 
-	if (env->scene.vertexs.c == NULL // Initialization of vertexs pool
+	if ((env->scene.vertexs.c == NULL // Initialization of vertexs pool
 		&& init_dynarray(&env->scene.vertexs, sizeof(t_vec3d), 256))
+		|| (env->scene.p_vertexs.c == NULL // Initialization of vertexs pool
+		&& init_dynarray(&env->scene.p_vertexs, sizeof(t_vec3d), 256)))
 		return (ERR_MALLOC_FAILED);
 
 	// Reads the three float components of the vertex
@@ -70,7 +72,8 @@ static unsigned char	obj_vertex_loader(t_env *env, char **tokens)
 	new.z = (float)atof(tokens[3]);
 
 	// Moves the newly created vertex into the vertexs pool
-	if (push_dynarray(&env->scene.vertexs, &new, false))
+	if (push_dynarray(&env->scene.vertexs, &new, false)
+		|| push_dynarray(&env->scene.p_vertexs, &new, false))
 		return (ERR_MALLOC_FAILED);
 
 	return (ERR_NONE);

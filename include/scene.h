@@ -78,6 +78,7 @@ typedef struct	s_scene
 	t_cam		cam;
 	t_dynarray	meshs;
 	t_dynarray	vertexs;
+	t_dynarray	p_vertexs;
 	t_dynarray	faces;
 	t_dynarray	used_mtls;
 	t_dynarray	mtls;

@@ -59,7 +59,7 @@ void		init_camera(t_env *env)
 	// Camera's starting position and orientation
 	cam->pos = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
 	cam->up = (t_vec3d){0.0f, 1.0f, 0.0f, 0.0f};
-	cam->dir = (t_vec3d){10.0f, 40.0f, 0.0f, 0.0f};
+	cam->dir = (t_vec3d){0.0f, 0.0f, 1.0f, 0.0f};
 
 	// Camera rotations
 	cam->roll = 0;

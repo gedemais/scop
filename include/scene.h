@@ -41,6 +41,7 @@ typedef	struct	s_face
 
 typedef struct	s_camera_matrices
 {
+	float		c_m[4][4];
 	float		w_m[4][4];
 	float		v_m[4][4];
 	float		p_m[4][4];
@@ -49,6 +50,7 @@ typedef struct	s_camera_matrices
 	float		rz_m[4][4];
 	float		crx_m[4][4];
 	float		cry_m[4][4];
+	float		cr_m[4][4];
 	float		mvp[4][4];
 	float		flat_mvp[16];
 }				t_cam_mat;

@@ -23,10 +23,23 @@ static unsigned char	render_scene(t_env *env)
 {
 	t_mesh	*m;
 
-	int mvp_loc = glGetUniformLocation(env->vertex_shader_id, "mvp");
-	glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, env->scene.cam.mats.flat_mvp);
+	compute_view_matrix(env);
+	compute_rotation_matrix(env);
+	matrix_mult_matrix(env->scene.cam.mats.w_m, env->scene.cam.mats.v_m, env->scene.cam.mats.mvp);
+	matrix_mult_matrix(env->scene.cam.mats.mvp, env->scene.cam.mats.p_m, env->scene.cam.mats.mvp);
+	matrix_flattener(env->scene.cam.mats.mvp, env->scene.cam.mats.flat_mvp);
+
+//	for (int i = 0; i < 16; i++)
+//		printf("%f ", (double)env->scene.cam.mats.flat_mvp[i]);
+//	printf("\n");
+//	fflush(stdout);
+
 	// Launch shaders-composed program
-	glUseProgram(env->shader_program); 
+	glUseProgram(env->shader_program);
+
+	int mvp_loc = glGetUniformLocation(env->vertex_shader_id, "mvp");
+	glUniformMatrix4fv(mvp_loc, 1, GL_TRUE, env->scene.cam.mats.flat_mvp);
+
 	// Draw triangles by faces indices contained in faces data structure
 	glDrawElements(GL_TRIANGLES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
 

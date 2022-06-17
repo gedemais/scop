@@ -38,9 +38,6 @@ static void	init_matrices(t_cam *cam)
 	}
 
 	init_projection_matrix(cam);
-	matrix_pointat(cam->mats.v_m, cam->pos, vec_add(cam->pos, cam->dir), cam->up);
-	matrix_mult_matrix(cam->mats.p_m, cam->mats.v_m, cam->mats.mvp);
-	matrix_flattener(cam->mats.mvp, cam->mats.flat_mvp);
 }
 
 void		init_camera(t_env *env)

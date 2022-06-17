@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:14:55 by gedemais          #+#    #+#             */
-/*   Updated: 2022/05/26 16:03:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:23:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,37 @@ t_vec3d		matrix_mult_vec(float m[4][4], t_vec3d i)
 	v.z = i.x * m[0][2] + i.y * m[1][2] + i.z * m[2][2] + i.w * m[3][2];
 	v.w = i.x * m[0][3] + i.y * m[1][3] + i.z * m[2][3] + i.w * m[3][3];
 	return (v);
+}
+
+void	compute_view_matrix(t_env *env)
+{
+	t_cam	*cam;
+	t_vec3d	up;
+	t_vec3d	target;
+	float	yaw_rad;
+	float	pitch_rad;
+
+	cam = (t_cam*)&env->scene.cam;
+
+	cam->dir = (t_vec3d){0, 0, 1, 0};
+	up = (t_vec3d){0, -1, 0, 0};
+	target = (t_vec3d){0, 0, 1, 0};
+	yaw_rad = (float)ft_to_radians((double)cam->yaw);
+	pitch_rad = (float)ft_to_radians((double)cam->pitch);
+	update_yrotation_matrix(cam->mats.cry_m, yaw_rad);
+	update_xrotation_matrix(cam->mats.crx_m, pitch_rad);
+	matrix_mult_matrix(cam->mats.crx_m, cam->mats.cry_m, cam->mats.cr_m);
+	cam->dir = matrix_mult_vec(cam->mats.cr_m, target);
+	up = matrix_mult_vec(cam->mats.cr_m, (t_vec3d){0, -1, 0, 0});
+	target = vec_add(cam->pos, cam->dir);
+	matrix_pointat(cam->mats.c_m, cam->pos, target, up);
+	inverse_matrix(cam->mats.c_m, cam->mats.v_m);
+}
+
+void	compute_rotation_matrix(t_env *env)
+{
+	update_xrotation_matrix(env->scene.cam.mats.rx_m, 0);
+	update_yrotation_matrix(env->scene.cam.mats.ry_m, 0);
+	update_zrotation_matrix(env->scene.cam.mats.rz_m, 0);
+	matrix_mult_matrix(env->scene.cam.mats.rz_m, env->scene.cam.mats.rx_m, env->scene.cam.mats.w_m);
 }

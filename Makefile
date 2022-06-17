@@ -31,6 +31,7 @@ SRC_NAME=main.c\
 		 actions/rotate.c\
 		 matrices/matrix_ops.c \
 		 matrices/matrix_tools.c \
+		 matrices/rotation_matrices.c \
 		 parser/load_obj_file.c\
 		 parser/load_faces.c\
 		 parser/load_mtl_file.c\

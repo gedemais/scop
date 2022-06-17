@@ -118,6 +118,14 @@ void			inverse_matrix(float m[4][4], float r[4][4]);
 void			translation_matrix(float m[4][4], t_vec3d v);
 void			matrix_flattener(float m[4][4], float flat[16]);
 
+void			compute_view_matrix(t_env *env);
+void			compute_rotation_matrix(t_env *env);
+
+void			update_xrotation_matrix(float m[4][4], float theta);
+void			update_yrotation_matrix(float m[4][4], float theta);
+void			update_zrotation_matrix(float m[4][4], float theta);
+
+
 // Parsing
 unsigned char	readlines(char *path, char ***lines);
 unsigned char	load_obj_file(t_env *env, char *path);

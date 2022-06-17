@@ -9,11 +9,28 @@ static t_env	*g_env = NULL;
 
 void	processInput(GLFWwindow *window)
 {
+	static bool	toggle = false;
+
 	for (int i = 0; i < NB_KEYS; i++) // Iterate through every keys
 	{
 		if (glfwGetKey(window, gl_keys_values[i]) == GLFW_PRESS // Is the key pressed ?
 			&& g_env->keybinds_fts[i]) // Is a function associated with a key ?
+		{
+			if (gl_keys_values[i] == gl_keys_values[g_env->settings.keys[KEY_TOGGLE_ROTATION]])
+			{
+				if (toggle == true)
+					continue ;
+				toggle = true;
+			}
 			g_env->keybinds_fts[i](g_env, i); // Then let's launch it
+		}
+
+		if (glfwGetKey(window, gl_keys_values[i]) == GLFW_RELEASE // Is the key pressed ?
+			&& g_env->keybinds_fts[i]) // Is a function associated with a key ?
+		{
+			if (gl_keys_values[i] == gl_keys_values[g_env->settings.keys[KEY_TOGGLE_ROTATION]])
+				toggle = false;
+		}
 	}
 }
 

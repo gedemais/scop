@@ -117,7 +117,7 @@ static unsigned char	init_buffers(t_env *env)
 	glBindVertexArray(env->vao); // Bind vao array
 
 	// Configurate vertexs buffer
-	size = (GLsizeiptr)sizeof(t_vec3d) * env->scene.vertexs.nb_cells;
+	size = (GLsizeiptr)sizeof(t_vec3d) * env->scene.p_vertexs.nb_cells;
 	// Copies vertexs data into buffer
 	glBufferData(GL_ARRAY_BUFFER, size, env->scene.p_vertexs.c, GL_STATIC_DRAW);
 

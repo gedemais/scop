@@ -66,11 +66,9 @@ static unsigned char	render_scene(t_env *env)
 	// Draw triangles by faces indices contained in faces data structure
 	glDrawElements(GL_TRIANGLES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
 
-	if (env->settings.rotation)
-	{
-		m = dyacc(&env->scene.meshs, 0);
-		rotate_mesh(env, m->o, 0.01f, rotate_y);
-	}
+	if (env->settings.rotation && (m = dyacc(&env->scene.meshs, 0)))
+		rotate_mesh(env, m->o, (float)env->settings.rotation_speed / 100.0f, rotate_y);
+
 	return (ERR_NONE);
 }
 

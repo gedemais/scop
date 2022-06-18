@@ -75,8 +75,8 @@ typedef struct	s_settings
 {
 	uint16_t	w_wdt;
 	uint16_t	w_hgt;
-	uint16_t	rotation_speed;
-	uint16_t	transition_speed;
+	int16_t		rotation_speed;
+	int16_t		transition_speed;
 	uint8_t		keys[KEY_MAX];
 	bool		rotation;
 	bool		textured;

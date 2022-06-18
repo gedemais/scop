@@ -3,7 +3,7 @@
 static unsigned char	load_integer(char *line, char *token, long long int *n)
 {
 	*n = ft_atoi(token);
-	if (*n < 1 || *n > SHRT_MAX)
+	if (*n > SHRT_MAX)
 	{
 		ft_putendl_fd(line, 2);
 		return (ERR_OUT_OF_BOUNDS_VALUE);
@@ -47,10 +47,10 @@ static unsigned char	assign_value(t_env *env, unsigned int j, char *line, char *
 			env->settings.w_wdt = (uint16_t)n;
 			break;
 		case SET_ROTATION_SPEED:
-			env->settings.rotation_speed = (uint16_t)n;
+			env->settings.rotation_speed = (int16_t)n;
 			break;
 		case SET_TRANSITION_SPEED:
-			env->settings.transition_speed = (uint16_t)n;
+			env->settings.transition_speed = (int16_t)n;
 			break;
 	// Key Bindings
 		case SET_KEY_EXIT:

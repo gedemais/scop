@@ -57,11 +57,6 @@ static unsigned char	render_scene(t_env *env)
 	size = (GLsizeiptr)sizeof(t_vec3d) * env->scene.p_vertexs.nb_cells;
 	glBufferData(GL_ARRAY_BUFFER, size, env->scene.p_vertexs.c, GL_STATIC_DRAW);
 
-//	for (int i = 0; i < 16; i++)
-//		printf("%f ", (double)env->scene.cam.mats.flat_mvp[i]);
-//	printf("\n");
-//	fflush(stdout);
-
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program);
 
@@ -69,7 +64,7 @@ static unsigned char	render_scene(t_env *env)
 //	glUniformMatrix4fv(mvp_loc, 1, GL_TRUE, env->scene.cam.mats.flat_mvp);
 
 	// Draw triangles by faces indices contained in faces data structure
-	glDrawElements(GL_LINES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, env->scene.faces.nb_cells * 3, GL_UNSIGNED_INT, 0);
 
 	if (env->settings.rotation)
 	{

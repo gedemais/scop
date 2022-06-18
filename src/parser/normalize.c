@@ -44,6 +44,8 @@ void				normalize_vertexs(t_env *env)
 	t_dynarray	*vertexs;
 	float		mins[3];
 	float		maxs[3];
+	float		min;
+	float		max;
 
 	vertexs = &env->scene.vertexs;
 
@@ -51,6 +53,15 @@ void				normalize_vertexs(t_env *env)
 	dim_min_max(vertexs, X, &mins[0], &maxs[0]);
 	dim_min_max(vertexs, Y, &mins[1], &maxs[1]);
 	dim_min_max(vertexs, Z, &mins[2], &maxs[2]);
+
+	min = mins[0] < mins[1] ? mins[0] : mins[1];
+	min = min < mins[2] ? min : mins[2];
+
+	max = maxs[0] > maxs[1] ? maxs[0] : maxs[1];
+	max = max > maxs[2] ? max : maxs[2];
+
+	//printf("%f %f %f -> %f\n", (double)mins[0], (double)mins[1], (double)mins[2], (double)min);
+	//printf("%f %f %f -> %f\n", (double)maxs[0], (double)maxs[1], (double)maxs[2], (double)max);
 
 	// Normalize three dimensions
 	normalize_dim(vertexs, X, mins[0], maxs[0]);

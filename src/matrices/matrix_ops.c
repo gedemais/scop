@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:14:55 by gedemais          #+#    #+#             */
-/*   Updated: 2022/06/01 18:23:16 by gedemais         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:49:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	compute_view_matrix(t_env *env)
 	up = matrix_mult_vec(cam->mats.cr_m, (t_vec3d){0, -1, 0, 0});
 	target = vec_add(cam->pos, cam->dir);
 	matrix_pointat(cam->mats.c_m, cam->pos, target, up);
-	inverse_matrix(cam->mats.c_m, cam->mats.v_m);
 }
 
 void	compute_rotation_matrix(t_env *env)

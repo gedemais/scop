@@ -49,11 +49,11 @@ void		init_camera(t_env *env)
 
 	// Far and near plane definitions
 	cam->fnear = 0.01f;
-	cam->ffar = 1000.0f;
+	cam->ffar = 100000.0f;
 	cam->fdelta = cam->ffar - cam->fnear;
 
 	// FOV
-	cam->fovd = 80.0f;
+	cam->fovd = 90.0f;
 	cam->fovr = 1.0f / tanf(cam->fovd * 0.5f / 180.0f * 3.14159f);
 
 	// Camera's starting position and orientation

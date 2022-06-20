@@ -34,8 +34,8 @@ static void			normalize_dim(t_dynarray *vertexs, size_t dim, float min, float ma
 	for (int i = 0; i < vertexs->nb_cells; i++)
 	{
 		comp = (float*)dyacc(vertexs, i);
-		// Normalize to -1.0 <=> 1.0
-		comp[dim] = (((comp[dim] - min) * (1.0f - -1.0f)) / (max - min)) + -1.0f;
+		// Normalize
+		comp[dim] = (((comp[dim] - min) * (VERTEX_NORMALIZE_RANGE - -VERTEX_NORMALIZE_RANGE)) / (max - min)) + -VERTEX_NORMALIZE_RANGE;
 	}
 }
 

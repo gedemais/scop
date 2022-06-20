@@ -49,6 +49,7 @@ void	move_object(t_env *env, int key)
 	GLsizeiptr		size;
 	t_vec3d	tst = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
 
+	printf("YO\n");
 	if (key == env->settings.keys[KEY_MOVE_OBJECT_UP])
 		tst = vec_add(tst, (t_vec3d){0.0f, OBJ_SPEED, 0.0f, 0.0f});
 	if (key == env->settings.keys[KEY_MOVE_OBJECT_DOWN])

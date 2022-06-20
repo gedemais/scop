@@ -3,6 +3,8 @@
 
 # define DISPLAY_DATA false
 
+# define VERTEX_NORMALIZE_RANGE 0.5f
+
 // Handled .obj file line types
 enum	e_obj_lines_id
 {

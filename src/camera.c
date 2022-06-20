@@ -63,7 +63,7 @@ void		init_camera(t_env *env)
 
 	// Camera rotations
 	cam->roll = 0;
-	cam->pitch = 0;
+	cam->pitch = 50;
 	cam->yaw = 0;
 
 	init_matrices(cam);

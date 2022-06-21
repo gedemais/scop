@@ -25,7 +25,6 @@ void	rotate_mesh(t_env *env, t_vec3d origin, float angle,
 static void	translate_mesh(t_env *env, t_vec3d translation)
 {
 	t_mesh		*m;
-	t_vec3d		translated;
 	t_vec3d		*v;
 	int			i = 0;
 
@@ -34,8 +33,7 @@ static void	translate_mesh(t_env *env, t_vec3d translation)
 	while (i < env->scene.vertexs.nb_cells)
 	{
 		v = dyacc(&env->scene.vertexs, i);
-		translated = vec_add(*v, translation);
-		ft_memcpy(v, &translated, sizeof(t_vec3d));
+		*v = vec_add(*v, translation);
 		i++;
 	}
 	m = dyacc(&env->scene.meshs, 0);
@@ -46,25 +44,20 @@ static void	translate_mesh(t_env *env, t_vec3d translation)
 
 void	move_object(t_env *env, int key)
 {
-	GLsizeiptr		size;
 	t_vec3d	tst = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
 
-	printf("YO\n");
-	if (key == env->settings.keys[KEY_MOVE_OBJECT_UP])
+	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_OBJECT_UP]])
 		tst = vec_add(tst, (t_vec3d){0.0f, OBJ_SPEED, 0.0f, 0.0f});
-	if (key == env->settings.keys[KEY_MOVE_OBJECT_DOWN])
+	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_OBJECT_DOWN]])
 		tst = vec_add(tst, (t_vec3d){0.0f, -OBJ_SPEED, 0.0f, 0.0f});
-	if (key == env->settings.keys[KEY_MOVE_OBJECT_LEFT])
+	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_OBJECT_LEFT]])
 		tst = vec_add(tst, (t_vec3d){-OBJ_SPEED, 0.0f, 0.0f, 0.0f});
-	if (key == env->settings.keys[KEY_MOVE_OBJECT_RIGHT])
+	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_OBJECT_RIGHT]])
 		tst = vec_add(tst, (t_vec3d){OBJ_SPEED, 0.0f, 0.0f, 0.0f});
-	if (key == env->settings.keys[KEY_MOVE_OBJECT_FORWARD])
+	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_OBJECT_FORWARD]])
 		tst = vec_add(tst, (t_vec3d){0.0f, 0.0f, -OBJ_SPEED, 0.0f});
-	if (key == env->settings.keys[KEY_MOVE_OBJECT_BACKWARD])
+	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_OBJECT_BACKWARD]])
 		tst = vec_add(tst, (t_vec3d){0.0f, 0.0f, OBJ_SPEED, 0.0f});
 
-	(void)key;
 	translate_mesh(env, tst);
-	size = (GLsizeiptr)sizeof(t_vec3d) * env->scene.vertexs.nb_cells;
-	glBufferData(GL_ARRAY_BUFFER, size, env->scene.vertexs.c, GL_STATIC_DRAW);
 }

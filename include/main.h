@@ -146,6 +146,7 @@ void			error_handler(t_env *env, unsigned char code);
 void			free_env(t_env *env);
 
 // Transformation function
+void			translate_mesh(t_env *env, t_vec3d translation);
 void			rotate_mesh(t_env *env, t_vec3d origin, float angle,
 				void (*rotation)(t_vec3d *v, t_vec3d m, float fcos, float fsin));
 void			rotate_x(t_vec3d *v, t_vec3d m, float fcos, float fsin);

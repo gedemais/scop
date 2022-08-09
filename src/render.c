@@ -19,43 +19,13 @@
 glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 ************************************************************/
 
-static void				pipeline(t_env *env)
-{
-	t_vec3d	*v;
-
-	memcpy(env->scene.p_vertexs.c, env->scene.vertexs.c, sizeof(t_vec3d) * (unsigned long)env->scene.vertexs.nb_cells);
-
-	for (int i = 0; i < env->scene.p_vertexs.nb_cells; i++)
-	{
-		v = dyacc(&env->scene.p_vertexs, i);
-		*v = matrix_mult_vec(env->scene.cam.mats.w_m, *v);
-	}
-
-	for (int i = 0; i < env->scene.p_vertexs.nb_cells; i++)
-	{
-		v = dyacc(&env->scene.p_vertexs, i);
-		*v = matrix_mult_vec(env->scene.cam.mats.v_m, *v);
-	}
-
-	for (int i = 0; i < env->scene.p_vertexs.nb_cells; i++)
-	{
-		v = dyacc(&env->scene.p_vertexs, i);
-		*v = matrix_mult_vec(env->scene.cam.mats.p_m, *v);
-	}
-}
-
 static unsigned char	render_scene(t_env *env)
 {
 	GLsizeiptr	size;
 	t_mesh		*m;
 
-	compute_view_matrix(env);
-	compute_rotation_matrix(env);
-
-	pipeline(env);
-
-	size = (GLsizeiptr)sizeof(t_vec3d) * env->scene.p_vertexs.nb_cells;
-	glBufferData(GL_ARRAY_BUFFER, size, env->scene.p_vertexs.c, GL_STATIC_DRAW);
+	size = (GLsizeiptr)sizeof(t_vec3d) * env->scene.vertexs.nb_cells;
+	glBufferData(GL_ARRAY_BUFFER, size, env->scene.vertexs.c, GL_STATIC_DRAW);
 
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program);

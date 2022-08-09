@@ -22,7 +22,7 @@ void	rotate_mesh(t_env *env, t_vec3d origin, float angle,
 	rotation(&m->o, origin, fcos, fsin);
 }
 
-static void	translate_mesh(t_env *env, t_vec3d translation)
+void	translate_mesh(t_env *env, t_vec3d translation)
 {
 	t_mesh		*m;
 	t_vec3d		*v;

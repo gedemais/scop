@@ -64,7 +64,7 @@ void				normalize_vertexs(t_env *env)
 	//printf("%f %f %f -> %f\n", (double)maxs[0], (double)maxs[1], (double)maxs[2], (double)max);
 
 	// Normalize three dimensions
-	normalize_dim(vertexs, X, mins[0], maxs[0]);
-	normalize_dim(vertexs, Y, mins[1], maxs[1]);
-	normalize_dim(vertexs, Z, mins[2], maxs[2]);
+	normalize_dim(vertexs, X, min, max);
+	normalize_dim(vertexs, Y, min, max);
+	normalize_dim(vertexs, Z, min, max);
 }

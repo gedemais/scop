@@ -174,6 +174,50 @@ unsigned char	create_default_mesh(t_env *env)
 	return (ERR_NONE);
 }
 
+static unsigned char	gen_data_stride(t_env *env)
+{
+	t_dynarray	data; // New data stride array
+	uint32_t	*f; // Pointers used to transfer data
+	int			used;
+	t_vec3d		*v;
+	t_mtl		*m;
+	t_stride	s; // New element
+
+	printf("%d\n", env->scene.vertexs.nb_cells);
+	if (init_dynarray(&data, sizeof(t_stride), env->scene.vertexs.nb_cells))
+		return (ERR_MALLOC_FAILED);
+
+	// Iterate through faces array
+	for (int i = 0; i < env->scene.used_mtls.nb_cells; i++)
+	{
+		f = dyacc(&env->scene.faces, i); // Get face pointer
+		// Get a pointer on the mtl used by the face
+
+		used = *(int*)dyacc(&env->scene.used_mtls, i);
+		if (used < 0 || used > env->scene.used_mtls.nb_cells)
+			used = 0;
+
+		m = dyacc(&env->scene.mtls, used);
+		// Create 3 strides for each faces and push them into the data array
+		for (unsigned int j = 0; j < 3; j++)
+		{
+			v = dyacc(&env->scene.vertexs, (int)f[j]);
+			memcpy(&s.v, v, sizeof(t_vec3d));
+			memcpy(&s.c, &m->color, sizeof(t_color));
+
+			if (push_dynarray(&data, &s, false))
+				return (ERR_MALLOC_FAILED);
+		}
+	}
+
+	// Replace vertexs array with data
+	free_dynarray(&env->scene.vertexs);
+	env->scene.vertexs = data;
+
+	printf("%d\n", env->scene.vertexs.nb_cells);
+	return (ERR_NONE);
+}
+
 unsigned char			load_obj_file(t_env *env, char *path)
 {
 	char			**lines;
@@ -207,5 +251,5 @@ unsigned char			load_obj_file(t_env *env, char *path)
 	// Place the origin of the mesh on its center by averaging its vertexs
 	set_mesh_origin(env);
 
-	return (ERR_NONE);
+	return (gen_data_stride(env));
 }

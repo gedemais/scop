@@ -117,13 +117,16 @@ static unsigned char	init_buffers(t_env *env)
 	glBindVertexArray(env->vao); // Bind vao array
 
 	// Configurate vertexs buffer
-	size = (GLsizeiptr)sizeof(t_vec3d) * env->scene.vertexs.nb_cells;
+	size = (GLsizeiptr)sizeof(t_stride) * env->scene.vertexs.nb_cells;
 	// Copies vertexs data into buffer
 	glBufferData(GL_ARRAY_BUFFER, size, env->scene.vertexs.c, GL_STATIC_DRAW);
 
 	// Specifies the disposition of components in vertexs
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_TRUE, sizeof(float) * 4, (void*)0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(t_stride), (void*)0);
 	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(t_stride), (void*)sizeof(t_vec3d));
+	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, env->ebo); // Bind ebo buffer
 

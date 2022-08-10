@@ -18,6 +18,12 @@ typedef	struct		s_color
 	float	a;
 }					t_color;
 
+typedef struct		s_stride
+{
+	t_vec3d	v;
+	t_color	c;
+}					t_stride;
+
 typedef struct		s_texture
 {
 	unsigned char	*img_data;

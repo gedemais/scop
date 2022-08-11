@@ -23,6 +23,7 @@ static unsigned char	render_scene(t_env *env)
 {
 	GLsizeiptr	size;
 	//t_mesh		*m;
+	static float	angle = 0.0f;
 
 	compute_rotation_matrix(env);
 
@@ -30,10 +31,15 @@ static unsigned char	render_scene(t_env *env)
 	glBufferData(GL_ARRAY_BUFFER, size, env->scene.vertexs.c, GL_STATIC_DRAW);
 	//glBindVertexArray(env->vbo);
 
-	update_xrotation_matrix(env->scene.cam.mats.rx_m, (float)ft_to_radians(45.0));
-	matrix_flattener(env->scene.cam.mats.w_m, env->scene.cam.mats.flat_mvp);
+	update_xrotation_matrix(env->scene.cam.mats.rx_m, (float)ft_to_radians(angle));
+	update_yrotation_matrix(env->scene.cam.mats.ry_m, (float)ft_to_radians(angle));
+	matrix_mult_matrix(env->scene.cam.mats.rx_m, env->scene.cam.mats.ry_m, env->scene.cam.mats.mvp);
+	matrix_flattener(env->scene.cam.mats.mvp, env->scene.cam.mats.flat_mvp);
 
-	int mvp_loc = glGetUniformLocation(env->vertex_shader_id, "mvp");
+	// Launch shaders-composed program
+	glUseProgram(env->shader_program);
+
+	int mvp_loc = glGetUniformLocation(env->shader_program, "mvp");
 	printf("%d\n", mvp_loc);
 	glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, env->scene.cam.mats.flat_mvp);
 
@@ -43,6 +49,7 @@ static unsigned char	render_scene(t_env *env)
 	//if (env->settings.rotation && (m = dyacc(&env->scene.meshs, 0)))
 	//	rotate_mesh(env, m->o, (float)env->settings.rotation_speed / 100.0f, rotate_y);
 
+	angle += 1.0f;
 	return (ERR_NONE);
 }
 

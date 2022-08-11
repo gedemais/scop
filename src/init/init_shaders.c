@@ -101,9 +101,6 @@ static unsigned char	link_shader_program(t_env *env)
 		return (ERR_FAILED_TO_LINK_SHADER_PROGRAM);
 	}
 
-	// Launch shaders-composed program
-	glUseProgram(env->shader_program);
-
 	return (ERR_NONE);
 }
 /*

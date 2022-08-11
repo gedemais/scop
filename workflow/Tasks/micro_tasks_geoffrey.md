@@ -16,8 +16,8 @@ Template:
 - [x] Developper la liste de faces en une liste d'indices et une liste de materiaux
 - [x] Placer l'origine du mesh a son centre
 - [ ] Proteger tous les calls OpenGL
-- [ ] Empecher la repetition frame par frame des boutons toggles
-- [ ] Ajouter un setting fullscreen
+- [x] Empecher la repetition frame par frame des boutons toggles
+- [x] Ajouter un setting fullscreen
 - [ ] Refactor + comment review complets
 
 ----------------- DONE -----------------

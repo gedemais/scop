@@ -34,8 +34,10 @@ typedef struct		s_stride
 typedef struct		s_texture
 {
 	unsigned char	*img_data;
+	unsigned int	gl_id;
 	int				w;
 	int				h;
+	char			pad[4];
 }					t_texture;
 
 typedef	struct		s_material

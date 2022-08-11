@@ -5,6 +5,7 @@ static const char		*obj_lines_ids[OBJ_MAX] = {	[OBJ_COMMENT] = "#",
 													[OBJ_MTLLIB] = "mtllib",
 													[OBJ_OBJECT_NAME] = "o",
 													[OBJ_VERTEX] = "v",
+													[OBJ_VERTEX_TEXTURE] = "vt",
 													[OBJ_USEMTL] = "usemtl",
 													[OBJ_FACE] = "f",
 													[OBJ_SMOOTH_SHADING] = "s"
@@ -12,6 +13,7 @@ static const char		*obj_lines_ids[OBJ_MAX] = {	[OBJ_COMMENT] = "#",
 
 // Functions prototypes are here to allow the function pointer array declaration below.
 static unsigned char	obj_vertex_loader(t_env *env, char **tokens);
+static unsigned char	obj_vertex_texture_loader(t_env *env, char **tokens);
 static unsigned char	obj_object_name_loader(t_env *env, char **tokens);
 static unsigned char	obj_usemtl_loader(t_env *env, char **tokens);
 
@@ -21,6 +23,7 @@ static unsigned char	(*obj_loading_fts[OBJ_MAX])(t_env *, char **) = {
 													[OBJ_MTLLIB] = obj_mtllib_loader,
 													[OBJ_OBJECT_NAME] = obj_object_name_loader,
 													[OBJ_VERTEX] = obj_vertex_loader,
+													[OBJ_VERTEX_TEXTURE] = obj_vertex_texture_loader,
 													[OBJ_USEMTL] = obj_usemtl_loader,
 													[OBJ_FACE] = obj_face_loader,
 													[OBJ_SMOOTH_SHADING] = NULL
@@ -71,6 +74,28 @@ static unsigned char	obj_vertex_loader(t_env *env, char **tokens)
 
 	// Moves the newly created vertex into the vertexs pool
 	if (push_dynarray(&env->scene.vertexs, &new, false))
+		return (ERR_MALLOC_FAILED);
+
+	return (ERR_NONE);
+}
+
+static unsigned char	obj_vertex_texture_loader(t_env *env, char **tokens)
+{
+	t_vt	new;
+
+	ft_memset(&new, 0, sizeof(t_vt));
+	if (ft_tablen(tokens) != 3) // Check format
+		return (ERR_INVALID_VERTEX_TEXTURE_FORMAT);
+
+	if (env->scene.vertexs_txt.c == NULL // Initialization of vertexs pool
+		&& init_dynarray(&env->scene.vertexs_txt, sizeof(t_vt), 256))
+		return (ERR_MALLOC_FAILED);
+
+	new.u = (float)atof(tokens[1]);
+	new.v = (float)atof(tokens[2]);
+
+	// Moves the newly created vertex into the vertexs pool
+	if (push_dynarray(&env->scene.vertexs_txt, &new, false))
 		return (ERR_MALLOC_FAILED);
 
 	return (ERR_NONE);

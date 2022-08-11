@@ -18,10 +18,17 @@ typedef	struct		s_color
 	float	a;
 }					t_color;
 
+typedef	struct		s_vertex_texture
+{
+	float	u;
+	float	v;
+}					t_vt;
+
 typedef struct		s_stride
 {
-	t_vec3d	v;
-	t_color	c;
+	t_vec3d		v;
+	t_color		c;
+	t_vt		t;
 }					t_stride;
 
 typedef struct		s_texture
@@ -84,11 +91,12 @@ typedef struct	s_scene
 	t_cam		cam;
 	t_dynarray	meshs;
 	t_dynarray	vertexs;
-	t_dynarray	p_vertexs;
+	t_dynarray	vertexs_txt;
 	t_dynarray	faces;
 	t_dynarray	used_mtls;
 	t_dynarray	mtls;
-	uint8_t		pad[8];
+	float		ct; // Color / Texture ratio
+	uint8_t		pad[4];
 }				t_scene;
 
 #endif

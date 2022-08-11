@@ -12,6 +12,7 @@ enum	e_obj_lines_id
 	OBJ_MTLLIB,
 	OBJ_OBJECT_NAME,
 	OBJ_VERTEX,
+	OBJ_VERTEX_TEXTURE,
 	OBJ_USEMTL,
 	OBJ_FACE,
 	OBJ_SMOOTH_SHADING,
@@ -27,6 +28,7 @@ enum	e_mtl_lines_id
 	MTL_Ka,
 	MTL_Kd,
 	MTL_Ks,
+	MTL_Ke,
 	MTL_Ni,
 	MTL_d,
 	MTL_ILLUM,
@@ -42,5 +44,6 @@ char		*read_file(int fd, size_t *file_size);
  */
 static int16_t	used_mtl;
 static int32_t	current_mesh;
+static uint32_t	nb_textures;
 
 #endif

@@ -103,6 +103,11 @@ static unsigned char	link_shader_program(t_env *env)
 
 	return (ERR_NONE);
 }
+/*
+static unsigned char	init_textures(t_env *env)
+{
+	for (int i = 0; i < env->scene.mtls; i++)
+}*/
 
 static unsigned char	init_buffers(t_env *env)
 {

@@ -103,12 +103,14 @@ unsigned char   init_display(t_env *env)
 	if (!GL_VERSION_2_1)
 		return (ERR_UNCOMPATIBLE_OPENGL_VERSION);
 
+#ifdef __APPLE__
 	// Calling glfwInit changes current working directory of our process to './resources'
 	if (chdir("../") == -1)
 	{
 		perror(strerror(errno));
 		return (ERR_CHDIR_FAILED);
 	}
+#endif
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

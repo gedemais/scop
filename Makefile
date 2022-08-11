@@ -1,12 +1,21 @@
 NAME=scop
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+	FLAGS_OS = -lGL -ldl -lm
+else
+	FLAGS_OS = -Framework OpenGL -DMACOS
+	EVE = -Weverything
+endif
+
 CC=gcc
-FLAGS = -Wall -Werror -Wextra -Weverything
+FLAGS = -Wall -Werror -Wextra $(EVE)
 FLAGS += -Wno-documentation
 FLAGS += -Wno-documentation-unknown-command
 FLAGS += -Wno-reserved-id-macro
 FLAGS += -Wno-missing-noreturn
 FLAGS += -Wno-incompatible-pointer-types-discards-qualifiers
+FLAGS += -Wno-unused-variable
 #FLAGS += -Wno-poison-system-directories
 
 # Flags variables
@@ -79,7 +88,7 @@ LIB_GLAD = $(LIB_GLAD_PATH)/libglad.a
 all: $(NAME)
 
 $(NAME): $(LIB) $(LIB_VEC) $(LIBBMP) $(LIB_GLAD) $(OBJS)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIB) $(LIB_VEC) $(LIBBMP) $(LIB_GLAD) -lpthread -lglfw -framework OpenGL
+	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIB) $(LIB_VEC) $(LIBBMP) $(LIB_GLAD) -lpthread -lglfw $(FLAGS_OS)
 
 $(SRC_PATH)%.o: $(SRC_PATH)%.c $(INC)
 	@tput civis

@@ -34,7 +34,7 @@ int						main(int argc, char **argv)
 		for (unsigned int i = 0; (int)i < env.scene.vertexs.nb_cells; i++)
 		{
 			v = dyacc(&env.scene.vertexs, (int)i);
-		//	printf("%f %f %f %f\n", (double)v->x, (double)v->y, (double)v->z, (double)v->w);
+			printf("%f %f %f %f\n", (double)v->x, (double)v->y, (double)v->z, (double)v->w);
 		}
 
 		printf("---------------------- Faces ----------------------\n");

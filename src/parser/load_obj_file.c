@@ -112,10 +112,13 @@ static unsigned char	obj_usemtl_loader(t_env *env, char **tokens)
 	for (int i = 0; i < env->scene.mtls.nb_cells; i++) // Iterates through mtls pool
 	{
 		mtl = dyacc(&env->scene.mtls, i); // Material pointer assignment
+		printf("%s|%s\n", mtl->name, tokens[1]);
 		if (ft_strcmp(mtl->name, tokens[1]) == 0) // Comparison with mtl name
 		{
 			found = true;
+			printf("used_mtl = %d\n", i);
 			used_mtl = (int16_t)i; // Update of currently used mtl
+			printf("used_mtl = %d\n", used_mtl);
 			break;
 		}
 	}
@@ -219,6 +222,7 @@ static unsigned char	gen_data_stride(t_env *env)
 		// Get a pointer on the mtl used by the face
 
 		used = *(int*)dyacc(&env->scene.used_mtls, i);
+		printf("%d : %d\n", i, used);
 		if (used < 0 || used > env->scene.used_mtls.nb_cells)
 			used = 0;
 

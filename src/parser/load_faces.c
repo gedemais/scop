@@ -61,6 +61,7 @@ static unsigned char	load_face(t_env *env, char **tokens, t_mesh *parent, uint32
 		// Moves used mtl to to used materials pool
 		|| push_dynarray(&env->scene.used_mtls, &used_mtl, false))
 		return (ERR_MALLOC_FAILED);
+	printf("LA : %d\n", used_mtl);
 	// Negative / pool bound test.
 	return (check_face_indexes(env, new));
 }

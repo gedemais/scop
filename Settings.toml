@@ -1,6 +1,6 @@
 window_height = 720
 window_width = 1280
-rotation_speed = 1
+rotation_speed = 10
 transition_speed = 10
 
 exit = escape

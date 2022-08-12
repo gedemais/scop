@@ -42,7 +42,9 @@ char		*read_file(int fd, size_t *file_size);
  * Globals keeping track of the index of the mesh we are currently
  * loading, and of which material is applied for currently loaded face.
  */
-static int16_t	used_mtl;
+
+uint32_t		*used_mtl(void);
+
 static int32_t	current_mesh;
 static uint32_t	nb_textures;
 

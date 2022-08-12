@@ -116,9 +116,9 @@ static unsigned char	obj_usemtl_loader(t_env *env, char **tokens)
 		if (ft_strcmp(mtl->name, tokens[1]) == 0) // Comparison with mtl name
 		{
 			found = true;
-			printf("used_mtl = %d\n", i);
-			used_mtl = (int16_t)i; // Update of currently used mtl
-			printf("used_mtl = %d\n", used_mtl);
+			printf("%s %d : %d, %d\n", __FUNCTION__, __LINE__, i, *used_mtl());
+			*used_mtl() = (uint32_t)i; // Update of currently used mtl
+			printf("%s %d : %d, %d\n", __FUNCTION__, __LINE__, i, *used_mtl());
 			break;
 		}
 	}
@@ -202,11 +202,22 @@ unsigned char	create_default_mesh(t_env *env)
 	return (ERR_NONE);
 }
 
+void	print_used_mtls(t_env *env)
+{
+	uint32_t	*n;
+
+	for (int i = 0; i < env->scene.used_mtls.nb_cells; i++)
+	{
+		n = dyacc(&env->scene.used_mtls, i);
+		printf("%d\n", *n);
+	}
+}
+
 static unsigned char	gen_data_stride(t_env *env)
 {
 	t_dynarray	data; // New data stride array
 	uint32_t	*f; // Pointers used to transfer data
-	int			used;
+	uint32_t	used;
 	t_vec3d		*v;
 	t_mtl		*m;
 	t_stride	s; // New element
@@ -221,12 +232,11 @@ static unsigned char	gen_data_stride(t_env *env)
 		f = dyacc(&env->scene.faces, i); // Get face pointer
 		// Get a pointer on the mtl used by the face
 
-		used = *(int*)dyacc(&env->scene.used_mtls, i);
-		printf("%d : %d\n", i, used);
-		if (used < 0 || used > env->scene.used_mtls.nb_cells)
+		used = *(uint32_t*)dyacc(&env->scene.used_mtls, i);
+		if (used > (uint32_t)env->scene.mtls.nb_cells)
 			used = 0;
 
-		m = dyacc(&env->scene.mtls, used);
+		m = dyacc(&env->scene.mtls, (int)used);
 		// Create 3 strides for each faces and push them into the data array
 		for (unsigned int j = 0; j < 3; j++)
 		{
@@ -244,6 +254,13 @@ static unsigned char	gen_data_stride(t_env *env)
 	env->scene.vertexs = data;
 
 	printf("%d\n", env->scene.vertexs.nb_cells);
+	t_stride	*st;
+	for (int i = 0; (st = dyacc(&env->scene.vertexs, i)) ; i++)
+	{
+		printf("vec : %f %f %f %f | color : %f %f %f %f\n",
+			(double)st->v.x, (double)st->v.y, (double)st->v.z, (double)st->v.w, 
+			(double)st->c.r, (double)st->c.g, (double)st->c.b, (double)st->c.a);
+	}
 	return (ERR_NONE);
 }
 
@@ -252,7 +269,7 @@ unsigned char			load_obj_file(t_env *env, char *path)
 	char			**lines;
 	unsigned char	code;
 
-	used_mtl = SHRT_MAX;
+	*used_mtl() = UINT_MAX;
 	current_mesh = INT_MAX;
 	// Maps the .obj file in memory, then splits it into lines to parse it easier.
 	if ((code = readlines(path, &lines)) != ERR_NONE)

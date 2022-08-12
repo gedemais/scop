@@ -4,7 +4,7 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	FLAGS_OS = -lGL -ldl -lm
 else
-	FLAGS_OS = -Framework OpenGL -DMACOS
+	FLAGS_OS = -framework OpenGL
 	EVE = -Weverything
 endif
 

@@ -29,7 +29,7 @@
 # include "scene.h"
 # include "keys.h"
 
-# define ROTATION_SPEED_DELTA 1
+# define ROTATION_SPEED_DELTA 2
 # define MOVE_SPEED_DELTA 0.01f
 
 // Settings instances
@@ -99,6 +99,8 @@ typedef struct	s_env
 	void		(*keybinds_fts[NB_KEYS])(struct s_env *env, int key); // Function pointers array linking actions functions with key binds
 }				t_env;
 
+void	print_used_mtls(t_env *env);
+
 // Initializes scop
 unsigned char	init(t_env *env, int argc, char **argv);
 void			init_camera(t_env *env);
@@ -124,7 +126,6 @@ void			compute_rotation_matrix(t_env *env);
 void			update_xrotation_matrix(float m[4][4], float theta);
 void			update_yrotation_matrix(float m[4][4], float theta);
 void			update_zrotation_matrix(float m[4][4], float theta);
-
 
 // Parsing
 unsigned char	readlines(char *path, char ***lines);

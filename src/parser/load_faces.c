@@ -1,5 +1,12 @@
 #include "main.h"
 
+uint32_t	*used_mtl(void)
+{
+	static uint32_t	used_mtl = UINT_MAX;
+
+	return (&used_mtl);
+}
+
 static void	assign_face_indexes(t_face *new, char **tokens, int indexes[3])
 {
 	// Reads the faces components (indexes in vertexs pool)
@@ -54,14 +61,15 @@ static unsigned char	load_face(t_env *env, char **tokens, t_mesh *parent, uint32
 
 	assign_face_indexes(&new, tokens, (int[3]){1, 2, 3});
 
+	printf("prepush : %s %d : %d\n", __FUNCTION__, __LINE__, *used_mtl());
 	// Moves instance in the pool.
 	if (push_dynarray(&env->scene.faces, &new, false)
 		// Moves instance's pool index in the parent mesh.
 		|| push_dynarray(&parent->faces, &face_index, false)
 		// Moves used mtl to to used materials pool
-		|| push_dynarray(&env->scene.used_mtls, &used_mtl, false))
+		|| push_dynarray(&env->scene.used_mtls, used_mtl(), false))
 		return (ERR_MALLOC_FAILED);
-	printf("LA : %d\n", used_mtl);
+	printf("postpush : %s %d : %d\n", __FUNCTION__, __LINE__, *used_mtl());
 	// Negative / pool bound test.
 	return (check_face_indexes(env, new));
 }
@@ -86,7 +94,7 @@ unsigned char	obj_face_loader(t_env *env, char **tokens)
 		return (ERR_MALLOC_FAILED);
 
 	if (env->scene.used_mtls.c == NULL // Initialization of faces pool
-		&& init_dynarray(&env->scene.used_mtls, sizeof(uint16_t), 16))
+		&& init_dynarray(&env->scene.used_mtls, sizeof(uint32_t), 16))
 		return (ERR_MALLOC_FAILED);
 
 	if (nb_vertexs == 3) // If the face is a polygon

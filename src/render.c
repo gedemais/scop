@@ -31,10 +31,8 @@ static unsigned char	render_scene(t_env *env)
 	glBufferData(GL_ARRAY_BUFFER, size, env->scene.vertexs.c, GL_STATIC_DRAW);
 	//glBindVertexArray(env->vbo);
 
-	update_xrotation_matrix(env->scene.cam.mats.rx_m, (float)ft_to_radians(angle));
-	update_yrotation_matrix(env->scene.cam.mats.ry_m, (float)ft_to_radians(angle));
-	matrix_mult_matrix(env->scene.cam.mats.rx_m, env->scene.cam.mats.ry_m, env->scene.cam.mats.mvp);
-	matrix_flattener(env->scene.cam.mats.mvp, env->scene.cam.mats.flat_mvp);
+	update_yrotation_matrix(env->scene.cam.mats.ry_m, (float)ft_to_radians((double)angle));
+	matrix_flattener(env->scene.cam.mats.ry_m, env->scene.cam.mats.flat_mvp);
 
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program);
@@ -46,10 +44,9 @@ static unsigned char	render_scene(t_env *env)
 	// Draw triangles
 	glDrawArrays(GL_TRIANGLES, 0, env->scene.vertexs.nb_cells);
 
-	//if (env->settings.rotation && (m = dyacc(&env->scene.meshs, 0)))
-	//	rotate_mesh(env, m->o, (float)env->settings.rotation_speed / 100.0f, rotate_y);
+	if (env->settings.rotation)
+		angle += (float)env->settings.rotation_speed / 10.0f;
 
-	angle += 1.0f;
 	return (ERR_NONE);
 }
 

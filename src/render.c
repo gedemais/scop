@@ -52,10 +52,7 @@ static unsigned char	render_scene(t_env *env)
 	glDrawArrays(GL_TRIANGLES, 0, env->scene.vertexs.nb_cells);
 
 	if (env->settings.rotation)
-	{
-		//env->rot.y += (float)ft_to_radians((double)env->settings.rotation_speed / 10);
-		env->scene.cam.pitch += 0.1f;
-	}
+		env->rot.y += (float)ft_to_radians((double)env->settings.rotation_speed / 10);
 
 	return (ERR_NONE);
 }

@@ -137,6 +137,7 @@ void		mat4_projection(mat4 m, float fov, float near, float far, float ratio);
 void		mat4_view(t_cam *camera);
 void		matrix_pointat(mat4 m, t_vec3d from, t_vec3d to, t_vec3d up);
 t_vec3d		mat4_mult_vec(mat4 m, t_vec3d i);
+bool		mat4_invert(mat4 m, mat4 invOut);
 
 
 void			compute_view_matrix(t_env *env);

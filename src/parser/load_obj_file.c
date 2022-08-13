@@ -112,13 +112,10 @@ static unsigned char	obj_usemtl_loader(t_env *env, char **tokens)
 	for (int i = 0; i < env->scene.mtls.nb_cells; i++) // Iterates through mtls pool
 	{
 		mtl = dyacc(&env->scene.mtls, i); // Material pointer assignment
-		printf("%s|%s\n", mtl->name, tokens[1]);
 		if (ft_strcmp(mtl->name, tokens[1]) == 0) // Comparison with mtl name
 		{
 			found = true;
-			printf("%s %d : %d, %d\n", __FUNCTION__, __LINE__, i, *used_mtl());
 			*used_mtl() = (uint32_t)i; // Update of currently used mtl
-			printf("%s %d : %d, %d\n", __FUNCTION__, __LINE__, i, *used_mtl());
 			break;
 		}
 	}
@@ -142,7 +139,12 @@ static void				set_mesh_origin(t_env *env)
 		acc = vec_add(acc, *v);
 	}
 	m->o = vec_fdiv(acc, env->scene.vertexs.nb_cells);
-	translate_mesh(env, vec_fmult(m->o, -1.0f));
+
+	for (int i = 0; i < env->scene.vertexs.nb_cells; i++)
+	{
+		v = dyacc(&env->scene.vertexs, i);
+		*v = vec_add(*v, vec_fmult(m->o, -1.0f));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -222,7 +224,6 @@ static unsigned char	gen_data_stride(t_env *env)
 	t_mtl		*m;
 	t_stride	s; // New element
 
-	printf("%d\n", env->scene.vertexs.nb_cells);
 	if (init_dynarray(&data, sizeof(t_stride), env->scene.vertexs.nb_cells))
 		return (ERR_MALLOC_FAILED);
 
@@ -241,9 +242,8 @@ static unsigned char	gen_data_stride(t_env *env)
 		for (unsigned int j = 0; j < 3; j++)
 		{
 			v = dyacc(&env->scene.vertexs, (int)f[j]);
-			memcpy(&s.v, v, sizeof(t_vec3d));
-			memcpy(&s.c, &m->color, sizeof(t_color));
-
+			s.v = *v;
+			s.c = m  == NULL ? DEFAULT_COLOR : m->color;
 			if (push_dynarray(&data, &s, false))
 				return (ERR_MALLOC_FAILED);
 		}
@@ -253,13 +253,17 @@ static unsigned char	gen_data_stride(t_env *env)
 	free_dynarray(&env->scene.vertexs);
 	env->scene.vertexs = data;
 
-	printf("%d\n", env->scene.vertexs.nb_cells);
-	t_stride	*st;
-	for (int i = 0; (st = dyacc(&env->scene.vertexs, i)) ; i++)
+	printf("%d polygones\n", env->scene.faces.nb_cells);
+	if (DISPLAY_DATA)
 	{
-		printf("vec : %f %f %f %f | color : %f %f %f %f\n",
-			(double)st->v.x, (double)st->v.y, (double)st->v.z, (double)st->v.w, 
-			(double)st->c.r, (double)st->c.g, (double)st->c.b, (double)st->c.a);
+		printf("%d vertexs\n", env->scene.vertexs.nb_cells);
+		t_stride	*st;
+		for (int i = 0; (st = dyacc(&env->scene.vertexs, i)) ; i++)
+		{
+			printf("vec : %f %f %f %f | color : %f %f %f %f\n",
+				(double)st->v.x, (double)st->v.y, (double)st->v.z, (double)st->v.w, 
+				(double)st->c.r, (double)st->c.g, (double)st->c.b, (double)st->c.a);
+		}
 	}
 	return (ERR_NONE);
 }

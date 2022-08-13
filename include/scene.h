@@ -3,6 +3,8 @@
 
 # define OBJ_SPEED 0.01f
 
+typedef float mat4[16];
+
 typedef	struct	s_mesh
 {
 	t_dynarray	faces;
@@ -56,18 +58,10 @@ typedef	struct	s_face
 
 typedef struct	s_camera_matrices
 {
-	float		c_m[4][4];
-	float		w_m[4][4];
-	float		v_m[4][4];
-	float		p_m[4][4];
-	float		rx_m[4][4];
-	float		ry_m[4][4];
-	float		rz_m[4][4];
-	float		crx_m[4][4];
-	float		cry_m[4][4];
-	float		cr_m[4][4];
-	float		mvp[4][4];
-	float		flat_mvp[16];
+	mat4		model;
+	mat4		view;
+	mat4		projection;
+	mat4		mvp;
 }				t_cam_mat;
 
 typedef	struct	s_camera

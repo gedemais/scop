@@ -21,14 +21,15 @@
 # include "libft.h"
 # include "lib_vec.h"
 # include "bmp.h"
-# include "shaders.h"
 
 // Local headers
+# include "shaders.h"
 # include "error.h"
 # include "parser.h"
 # include "scene.h"
 # include "keys.h"
 
+# define DEFAULT_COLOR (t_color){1.0f, 1.0f, 1.0f, 1.0f}
 # define ROTATION_SPEED_DELTA 2
 # define MOVE_SPEED_DELTA 0.01f
 
@@ -112,20 +113,21 @@ unsigned char   display_loop(t_env *env);
 void			processInput(GLFWwindow *window);
 
 // Matrices
-t_vec3d			multiply_matrix(float m[4][4], t_vec3d o);
-void			matrix_mult_matrix(float m1[4][4], float m2[4][4], float ret[4][4]);
-t_vec3d			matrix_mult_vec(float m[4][4], t_vec3d i);
-void			matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up);
-void			inverse_matrix(float m[4][4], float r[4][4]);
-void			translation_matrix(float m[4][4], t_vec3d v);
-void			matrix_flattener(float m[4][4], float flat[16]);
+void		mat4_identity(mat4 m);
+void		mat4_multiply(mat4 a, mat4 b);
+void		mat4_xrotation(mat4 m, float x);
+void		mat4_yrotation(mat4 m, float x);
+void		mat4_zrotation(mat4 m, float x);
+void		mat4_rotate(mat4 m, float x, float y, float z);
+void		mat4_translate(mat4 m, float x, float y, float z);
+void		mat4_projection(mat4 m, float fov, float near, float far, float ratio);
+void		mat4_view(t_cam *camera);
+void		matrix_pointat(mat4 m, t_vec3d from, t_vec3d to, t_vec3d up);
+t_vec3d		mat4_mult_vec(mat4 m, t_vec3d i);
+
 
 void			compute_view_matrix(t_env *env);
 void			compute_rotation_matrix(t_env *env);
-
-void			update_xrotation_matrix(float m[4][4], float theta);
-void			update_yrotation_matrix(float m[4][4], float theta);
-void			update_zrotation_matrix(float m[4][4], float theta);
 
 // Parsing
 unsigned char	readlines(char *path, char ***lines);
@@ -145,15 +147,6 @@ unsigned char	mtl_texture_image_loader(t_env *env, char **tokens);
 // Ending
 void			error_handler(t_env *env, unsigned char code);
 void			free_env(t_env *env);
-
-// Transformation function
-void			translate_mesh(t_env *env, t_vec3d translation);
-void			rotate_mesh(t_env *env, t_vec3d origin, float angle,
-				void (*rotation)(t_vec3d *v, t_vec3d m, float fcos, float fsin));
-void			rotate_x(t_vec3d *v, t_vec3d m, float fcos, float fsin);
-void			rotate_y(t_vec3d *v, t_vec3d m, float fcos, float fsin);
-void			rotate_z(t_vec3d *v, t_vec3d m, float fcos, float fsin);
-
 
 // Actions functions
 void	exit_scop(t_env *env, int key);

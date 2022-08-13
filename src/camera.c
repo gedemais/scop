@@ -1,43 +1,14 @@
 #include "main.h"
 
-static void	init_projection_matrix(t_cam *cam)
-{
-	cam->mats.p_m[0][0] = cam->aspect_ratio * cam->fovr;
-	cam->mats.p_m[1][1] = cam->fovr;
-	cam->mats.p_m[2][2] = cam->ffar / cam->fdelta;
-	cam->mats.p_m[3][2] = (-cam->ffar * cam->fnear) / cam->fdelta;
-	cam->mats.p_m[2][3] = 1.0f;
-	cam->mats.p_m[3][3] = 0.0f;
-}
-
 static void	init_matrices(t_cam *cam)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		ft_memset(&cam->mats.w_m[i][0], 0, sizeof(float) * 4);
-		ft_memset(&cam->mats.v_m[i][0], 0, sizeof(float) * 4);
-		ft_memset(&cam->mats.p_m[i][0], 0, sizeof(float) * 4);
-		ft_memset(&cam->mats.rx_m[i][0], 0, sizeof(float) * 4);
-		ft_memset(&cam->mats.ry_m[i][0], 0, sizeof(float) * 4);
-		ft_memset(&cam->mats.rz_m[i][0], 0, sizeof(float) * 4);
-		ft_memset(&cam->mats.crx_m[i][0], 0, sizeof(float) * 4);
-		ft_memset(&cam->mats.cry_m[i][0], 0, sizeof(float) * 4);
-
-		cam->mats.w_m[i][i] = 1.0f;
-		cam->mats.v_m[i][i] = 1.0f;
-		cam->mats.p_m[i][i] = 1.0f;
-		cam->mats.rx_m[i][i] = 1.0f;
-		cam->mats.ry_m[i][i] = 1.0f;
-		cam->mats.rz_m[i][i] = 1.0f;
-		cam->mats.crx_m[i][i] = 1.0f;
-		cam->mats.cry_m[i][i] = 1.0f;
-		i++;
-	}
-
-	init_projection_matrix(cam);
+	/* set the model to face positive Z and stand back */
+	mat4_rotate(cam->mats.model, 0.0f, (float)M_PI, 0.0f);
+	mat4_translate(cam->mats.model, 0, 0, -5);
+	/* set the view with camera orientations and rotations */
+	mat4_view(cam);
+	/* set the projection with camera data */
+	mat4_projection(cam->mats.projection, cam->fovd, cam->fnear, cam->ffar, cam->aspect_ratio);
 }
 
 void		init_camera(t_env *env)
@@ -63,7 +34,7 @@ void		init_camera(t_env *env)
 
 	// Camera rotations
 	cam->roll = 0;
-	cam->pitch = 50;
+	cam->pitch = 0;
 	cam->yaw = 0;
 
 	init_matrices(cam);

@@ -83,6 +83,7 @@ unsigned char   init_display(t_env *env)
 {
     GLFWwindow 	*window;
 	int			err;
+	GLsizeiptr	size;
 
 	g_env = env;
     /****************************************************************
@@ -159,6 +160,9 @@ unsigned char   init_display(t_env *env)
 	glEnable(GL_CULL_FACE);
 
     env->window = window;
+
+	size = (GLsizeiptr)sizeof(t_stride) * env->scene.vertexs.nb_cells;
+	glBufferData(GL_ARRAY_BUFFER, size, env->scene.vertexs.c, GL_STATIC_DRAW);
 
     return (ERR_NONE);
 }

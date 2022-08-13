@@ -35,12 +35,12 @@ SRC_NAME=main.c\
 		 free.c\
 		 camera.c\
 		 render.c\
-		 actions/transform.c\
 		 actions/toggles.c\
-		 actions/rotate.c\
+		 actions/live.c\
+		 matrices/matrix.c \
 		 matrices/matrix_ops.c \
 		 matrices/matrix_tools.c \
-		 matrices/rotation_matrices.c \
+		 matrices/matrix_rot.c \
 		 parser/load_obj_file.c\
 		 parser/load_faces.c\
 		 parser/load_mtl_file.c\

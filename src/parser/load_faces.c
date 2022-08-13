@@ -61,7 +61,6 @@ static unsigned char	load_face(t_env *env, char **tokens, t_mesh *parent, uint32
 
 	assign_face_indexes(&new, tokens, (int[3]){1, 2, 3});
 
-	printf("prepush : %s %d : %d\n", __FUNCTION__, __LINE__, *used_mtl());
 	// Moves instance in the pool.
 	if (push_dynarray(&env->scene.faces, &new, false)
 		// Moves instance's pool index in the parent mesh.
@@ -69,7 +68,6 @@ static unsigned char	load_face(t_env *env, char **tokens, t_mesh *parent, uint32
 		// Moves used mtl to to used materials pool
 		|| push_dynarray(&env->scene.used_mtls, used_mtl(), false))
 		return (ERR_MALLOC_FAILED);
-	printf("postpush : %s %d : %d\n", __FUNCTION__, __LINE__, *used_mtl());
 	// Negative / pool bound test.
 	return (check_face_indexes(env, new));
 }

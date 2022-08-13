@@ -21,31 +21,25 @@ glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 
 static unsigned char	render_scene(t_env *env)
 {
-	GLsizeiptr	size;
 	//t_mesh		*m;
 	static float	angle = 0.0f;
 
-	compute_rotation_matrix(env);
-
-	size = (GLsizeiptr)sizeof(t_stride) * env->scene.vertexs.nb_cells;
-	glBufferData(GL_ARRAY_BUFFER, size, env->scene.vertexs.c, GL_STATIC_DRAW);
 	//glBindVertexArray(env->vbo);
 
-	update_yrotation_matrix(env->scene.cam.mats.ry_m, (float)ft_to_radians((double)angle));
-	matrix_flattener(env->scene.cam.mats.ry_m, env->scene.cam.mats.flat_mvp);
+	mat4_rotate(env->scene.cam.mats.mvp, 0.0f, angle, 0.0f);
 
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program);
 
 	int mvp_loc = glGetUniformLocation(env->shader_program, "mvp");
-	printf("%d\n", mvp_loc);
-	glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, env->scene.cam.mats.flat_mvp);
+	//printf("%d\n", mvp_loc);
+	glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, env->scene.cam.mats.mvp);
 
 	// Draw triangles
 	glDrawArrays(GL_TRIANGLES, 0, env->scene.vertexs.nb_cells);
 
 	if (env->settings.rotation)
-		angle += (float)env->settings.rotation_speed / 10.0f;
+		angle += (float)env->settings.rotation_speed / 100.0f;
 
 	return (ERR_NONE);
 }

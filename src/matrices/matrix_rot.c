@@ -45,7 +45,6 @@ void		mat4_rotate(mat4 m, float x, float y, float z)
 {
 	mat4 rot_x, rot_y, rot_z;
 
-	mat4_identity(m);
 	mat4_xrotation(rot_x, x);
 	mat4_yrotation(rot_y, y);
 	mat4_zrotation(rot_z, z);

@@ -92,7 +92,7 @@ typedef struct	s_scene
 	t_dynarray	used_mtls;
 	t_dynarray	mtls;
 	float		ct; // Color / Texture ratio
-	uint8_t		pad[4];
+	char		pad[4];
 }				t_scene;
 
 #endif

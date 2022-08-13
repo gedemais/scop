@@ -47,7 +47,7 @@ static void	mat4_pointat(mat4 m, t_vec3d from, t_vec3d to, t_vec3d up)
 void		mat4_view(t_cam *camera)
 {
 	mat4	rot;
-	t_vec3d	dir, up, target;
+	t_vec3d	target;
 	float	pitch, yaw, roll;
 
 	pitch = (float)ft_to_radians((double)camera->pitch);
@@ -55,8 +55,8 @@ void		mat4_view(t_cam *camera)
 	roll = (float)ft_to_radians((double)camera->roll);
 	mat4_rotate(rot, pitch, yaw, roll);
 
-	dir = mat4_mult_vec(rot, camera->dir);
-	up = mat4_mult_vec(rot, camera->up);
-	target = vec_add(camera->pos, dir);
-	mat4_pointat(camera->mats.view, camera->pos, target, up);
+	camera->dir = mat4_mult_vec(rot, camera->dir);
+	camera->up = mat4_mult_vec(rot, camera->up);
+	target = vec_add(camera->pos, camera->dir);
+	mat4_pointat(camera->mats.view, camera->pos, target, camera->up);
 }

@@ -93,12 +93,12 @@ static unsigned char	assign_value(t_env *env, unsigned int j, char *line, char *
 
 static unsigned char	loader(t_env *env, char **lines)
 {
-	bool			founds[SET_MAX]; // Array used to check for missing Settings.
+	bool			founds[SET_KEY_MOVE_CAM_FORWARD]; // Array used to check for missing Settings.
 	char			**tokens;
 	unsigned char	code;
 	bool			found; // Used to check if the current settings key exists.
 
-	memset(founds, 0, sizeof(bool) * SET_MAX); // No settings found yet, flat to 0.
+	memset(founds, 0, sizeof(bool) * SET_KEY_MOVE_CAM_FORWARD); // No settings found yet, flat to 0.
 	for (unsigned int i = 0; lines[i]; i++) // Iterate through lines.
 	{
 		// Split in words
@@ -115,7 +115,7 @@ static unsigned char	loader(t_env *env, char **lines)
 
 		found = false;
 		// Indentification of which setting the user is trying to set on this line.
-		for (unsigned int j = 0; j < SET_MAX; j++)
+		for (unsigned int j = 0; j < SET_KEY_MOVE_CAM_FORWARD; j++)
 			if (strcmp(tokens[0], settings_keys[j]) == 0)
 			{
 				if ((code = assign_value(env, j, lines[i], tokens[2])) != ERR_NONE)
@@ -136,7 +136,12 @@ static unsigned char	loader(t_env *env, char **lines)
 		ft_free_ctab(tokens);
 	}
 
-	for (unsigned int i = 0; i < SET_MAX; i++)
+	env->settings.keys[KEY_MOVE_CAM_LEFT] = (uint8_t)15;
+	env->settings.keys[KEY_MOVE_CAM_RIGHT] = (uint8_t)18;
+	env->settings.keys[KEY_MOVE_CAM_FORWARD] = (uint8_t)33;
+	env->settings.keys[KEY_MOVE_CAM_BACKWARD] = (uint8_t)37;
+
+	for (unsigned int i = 0; i < SET_KEY_MOVE_CAM_FORWARD; i++)
 		if (founds[i] == false) // If any settings are missing.
 		{
 			ft_putendl_fd(settings_keys[i], 2);

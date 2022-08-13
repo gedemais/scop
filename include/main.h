@@ -31,7 +31,8 @@
 
 # define DEFAULT_COLOR (t_color){1.0f, 1.0f, 1.0f, 1.0f}
 # define ROTATION_SPEED_DELTA 2
-# define MOVE_SPEED_DELTA 0.01f
+# define MOVE_SPEED 0.01f
+# define CAM_SPEED 0.05f
 
 // Settings instances
 enum					e_settings
@@ -51,6 +52,10 @@ enum					e_settings
 	SET_KEY_MOVE_OBJECT_DOWN,
 	SET_KEY_MOVE_OBJECT_LEFT,
 	SET_KEY_MOVE_OBJECT_RIGHT,
+	SET_KEY_MOVE_CAM_FORWARD,
+	SET_KEY_MOVE_CAM_BACKWARD,
+	SET_KEY_MOVE_CAM_LEFT,
+	SET_KEY_MOVE_CAM_RIGHT,
 	SET_MAX
 };
 
@@ -68,6 +73,10 @@ enum					e_keys
 	KEY_MOVE_OBJECT_DOWN,
 	KEY_MOVE_OBJECT_LEFT,
 	KEY_MOVE_OBJECT_RIGHT,
+	KEY_MOVE_CAM_FORWARD,
+	KEY_MOVE_CAM_BACKWARD,
+	KEY_MOVE_CAM_LEFT,
+	KEY_MOVE_CAM_RIGHT,
 	KEY_MAX
 };
 
@@ -81,7 +90,7 @@ typedef struct	s_settings
 	uint8_t		keys[KEY_MAX];
 	bool		rotation;
 	bool		textured;
-	char		pad[3];
+	char		pad[7];
 }				t_settings;
 
 // Main environment structure
@@ -97,6 +106,8 @@ typedef struct	s_env
 	uint32_t	ebo;
 	uint32_t	vbo;
 	uint32_t	vao;
+	t_vec3d		tst;
+	t_vec3d		rot;
 	void		(*keybinds_fts[NB_KEYS])(struct s_env *env, int key); // Function pointers array linking actions functions with key binds
 }				t_env;
 
@@ -113,13 +124,15 @@ unsigned char   display_loop(t_env *env);
 void			processInput(GLFWwindow *window);
 
 // Matrices
+void		mat4_print(mat4 m);
 void		mat4_identity(mat4 m);
 void		mat4_multiply(mat4 a, mat4 b);
 void		mat4_xrotation(mat4 m, float x);
 void		mat4_yrotation(mat4 m, float x);
 void		mat4_zrotation(mat4 m, float x);
-void		mat4_rotate(mat4 m, float x, float y, float z);
 void		mat4_translate(mat4 m, float x, float y, float z);
+void		mat4_rotate(mat4 m, float x, float y, float z);
+void		mat4_scale(mat4 m, float scale);
 void		mat4_projection(mat4 m, float fov, float near, float far, float ratio);
 void		mat4_view(t_cam *camera);
 void		matrix_pointat(mat4 m, t_vec3d from, t_vec3d to, t_vec3d up);
@@ -154,6 +167,7 @@ void	toggle_rotation(t_env *env, int key);
 void	toggle_texture(t_env *env, int key);
 void	change_rotation_speed(t_env *env, int key);
 void	move_object(t_env *env, int key);
+void	move_camera(t_env *env, int key);
 
 // Settings.toml keys
 static const char		*settings_keys[SET_MAX] = {

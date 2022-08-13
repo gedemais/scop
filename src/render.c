@@ -19,35 +19,43 @@
 glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 ************************************************************/
 
-static unsigned char	render_scene(t_env *env)
+static void	update_mvp(t_env *env, t_cam *cam)
 {
-	//t_mesh		*m;
-	t_cam			*cam;
-	static float	angle = 0.0f;
+	mat4_identity(cam->mats.model);
+	mat4_translate(cam->mats.model, env->tst.x, env->tst.y, env->tst.z);
+	mat4_rotate(cam->mats.model, env->rot.x, env->rot.y, env->rot.z);
+	mat4_scale(cam->mats.model, 1.0f);
 
-	cam = &env->scene.cam;
-	//glBindVertexArray(env->vbo);
-
-	mat4_rotate(cam->mats.model, 0.0f, angle, 0.0f);
-	mat4_translate(cam->mats.model, 0.0f, 0.0f, 0.0f);
-	
 	mat4_view(cam);
 
 	mat4_projection(cam->mats.projection, cam->fovd, cam->fnear, cam->ffar, cam->aspect_ratio);
+}
 
-
+static void	set_uniforms(t_env *env, t_cam *cam)
+{
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program);
 
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "model"), 1, GL_FALSE,cam->mats.model);
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "view"), 1, GL_FALSE, cam->mats.view);
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "projection"), 1, GL_FALSE, cam->mats.projection);
+}
+
+static unsigned char	render_scene(t_env *env)
+{
+	static float	angle = 0.0f;
+
+	update_mvp(env, &env->scene.cam);
+	set_uniforms(env, &env->scene.cam);
 
 	// Draw triangles
 	glDrawArrays(GL_TRIANGLES, 0, env->scene.vertexs.nb_cells);
 
 	if (env->settings.rotation)
-		angle += (float)env->settings.rotation_speed / 100.0f;
+	{
+		//env->rot.y += (float)ft_to_radians((double)env->settings.rotation_speed / 10);
+		env->scene.cam.pitch += 0.1f;
+	}
 
 	return (ERR_NONE);
 }
@@ -57,7 +65,7 @@ unsigned char   display_loop(t_env *env)
 	unsigned char	code;
 
 	// set clearcolor to black
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
 	// Main rendering loop
     while (!glfwWindowShouldClose(env->window))

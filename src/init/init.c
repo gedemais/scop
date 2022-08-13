@@ -15,12 +15,19 @@ static void		bind_actions_to_keys(t_env *env)
 													[KEY_MOVE_OBJECT_DOWN] = move_object,
 													[KEY_MOVE_OBJECT_LEFT] = move_object,
 													[KEY_MOVE_OBJECT_RIGHT] = move_object,
+													[KEY_MOVE_CAM_FORWARD] = move_camera,
+													[KEY_MOVE_CAM_BACKWARD] = move_camera,
+													[KEY_MOVE_CAM_LEFT] = move_camera,
+													[KEY_MOVE_CAM_RIGHT] = move_camera
 	};
 
 
 	// Assignation of actions functions in respect with handled key indices.
 	for (unsigned int i = 0; i < KEY_MAX; i++)
+	{
 		env->keybinds_fts[env->settings.keys[i]] = keys_fts[i];
+		printf("%d\n", (int)env->settings.keys[i]);
+	}
 }
 
 static unsigned char	load_obj_path(t_env *env, char *name)

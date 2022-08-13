@@ -59,5 +59,4 @@ void		mat4_view(t_cam *camera)
 	up = mat4_mult_vec(rot, camera->up);
 	target = vec_add(camera->pos, dir);
 	mat4_pointat(camera->mats.view, camera->pos, target, up);
-	// mat4_lookat(camera->view, camera->pos, target);
 }

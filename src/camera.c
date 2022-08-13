@@ -16,7 +16,7 @@ void		init_camera(t_env *env)
 	t_cam	*cam;
 
 	cam = (t_cam*)&env->scene.cam;
-	cam->aspect_ratio = (float)env->settings.w_hgt / (float)env->settings.w_wdt;
+	cam->aspect_ratio = (float)env->settings.w_wdt / (float)env->settings.w_hgt;
 
 	// Far and near plane definitions
 	cam->fnear = 0.01f;

@@ -22,18 +22,26 @@ glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 static unsigned char	render_scene(t_env *env)
 {
 	//t_mesh		*m;
+	t_cam			*cam;
 	static float	angle = 0.0f;
 
+	cam = &env->scene.cam;
 	//glBindVertexArray(env->vbo);
 
-	mat4_rotate(env->scene.cam.mats.mvp, 0.0f, angle, 0.0f);
+	mat4_rotate(cam->mats.model, 0.0f, angle, 0.0f);
+	mat4_translate(cam->mats.model, 0.0f, 0.0f, 0.0f);
+	
+	mat4_view(cam);
+
+	mat4_projection(cam->mats.projection, cam->fovd, cam->fnear, cam->ffar, cam->aspect_ratio);
+
 
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program);
 
-	int mvp_loc = glGetUniformLocation(env->shader_program, "mvp");
-	//printf("%d\n", mvp_loc);
-	glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, env->scene.cam.mats.mvp);
+	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "model"), 1, GL_FALSE,cam->mats.model);
+	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "view"), 1, GL_FALSE, cam->mats.view);
+	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "projection"), 1, GL_FALSE, cam->mats.projection);
 
 	// Draw triangles
 	glDrawArrays(GL_TRIANGLES, 0, env->scene.vertexs.nb_cells);

@@ -180,9 +180,11 @@ void		mat4_view(t_cam *camera)
 	camera->up = (t_vec3d){0, 1, 0, 0};
 	camera->dir = (t_vec3d){0, 0, 1, 0};
 	target = (t_vec3d){0, 0, 1, 0};
+
 	pitch = (float)ft_to_radians((double)camera->pitch);
 	yaw = (float)ft_to_radians((double)camera->yaw);
 	roll = (float)ft_to_radians((double)camera->roll);
+
 	mat4_identity(camera->mats.view);
 	mat4_translate(camera->mats.view, camera->pos.x, camera->pos.y, camera->pos.z);
 	mat4_rotate(rot, pitch, yaw, roll);

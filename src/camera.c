@@ -1,16 +1,5 @@
 #include "main.h"
 
-//static void	init_matrices(t_cam *cam)
-//{
-	/* set the model to face positive Z and stand back */
-//	mat4_rotate(cam->mats.model, 0.0f, (float)M_PI, 0.0f);
-//	mat4_translate(cam->mats.model, 0, 0, -5);
-//	/* set the view with camera orientations and rotations */
-//	mat4_view(cam);
-//	/* set the projection with camera data */
-//	mat4_projection(cam->mats.projection, cam->fovd, cam->fnear, cam->ffar, cam->aspect_ratio);
-//}
-
 void		init_camera(t_env *env)
 {
 	t_cam	*cam;
@@ -37,6 +26,6 @@ void		init_camera(t_env *env)
 	cam->pitch = 0;
 	cam->yaw = 0;
 
-	env->tst = (t_vec3d){0, 0, -1, 0}; // Initialize object position further
-//	init_matrices(cam);
+	env->tst = (t_vec3d){0, 0, -0.8f, 0}; // Initialize object position further
+	env->rot = (t_vec3d){0, ft_to_radians(-90.0f), 0, 0}; // Initialize object angle
 }

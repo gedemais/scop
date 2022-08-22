@@ -19,23 +19,3 @@ void	move_object(t_env *env, int key)
 
 	env->tst = vec_add(env->tst, translation);
 }
-
-void	move_camera(t_env *env, int key)
-{
-	t_cam	*cam;
-	t_vec3d	up;
-	t_vec3d	right;
-
-	cam = &env->scene.cam;
-	right = (t_vec3d){cam->dir.z, 0, -cam->dir.x, cam->dir.w};
-
-	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_CAM_RIGHT]])
-		cam->pos = vec_add(cam->pos, vec_fmult(right, CAM_SPEED));
-	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_CAM_LEFT]])
-		cam->pos = vec_add(cam->pos, vec_fmult(right, -CAM_SPEED));
-
-	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_CAM_FORWARD]])
-		cam->pos = vec_add(cam->pos, vec_fmult(cam->dir, CAM_SPEED));
-	if (key == gl_keys_values[env->settings.keys[KEY_MOVE_CAM_BACKWARD]])
-		cam->pos = vec_add(cam->pos, vec_fmult(cam->dir, -CAM_SPEED));
-}

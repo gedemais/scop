@@ -14,6 +14,7 @@ static void	free_scene(t_scene *scene)
 
 	free_dynarray(&scene->meshs);
 	free_dynarray(&scene->vertexs);
+	free_dynarray(&scene->vertexs_txt);
 	free_dynarray(&scene->faces);
 
 	for (int i = 0; i < scene->mtls.nb_cells; i++)

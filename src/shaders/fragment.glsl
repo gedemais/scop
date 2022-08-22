@@ -11,6 +11,4 @@ uniform float tc_ratio;
 void main()
 {
 	FragColor = mix(vertexColor, texture(Texture, TexCoord), tc_ratio);
-
-	//FragColor = vec4(1.0, 1.0, 1.0, 0.0);
 }

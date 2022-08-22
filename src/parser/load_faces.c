@@ -34,6 +34,9 @@ static unsigned char	assign_face_indexes(t_face *new, char **tokens, int indexes
 	new->vb = (uint32_t)ft_atoi(subs[1][1]) - 1;
 	new->vc = (uint32_t)ft_atoi(subs[2][1]) - 1;
 
+	for (unsigned int i = 0; i < 3; i++)
+		ft_free_ctab(subs[i]);
+
 	return (ERR_NONE);
 }
 

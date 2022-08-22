@@ -21,6 +21,7 @@ glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 
 static void	update_mvp(t_env *env, t_cam *cam)
 {
+	// This function will compute model, view and projection matrices
 	mat4_identity(cam->mats.model);
 	mat4_translate(cam->mats.model, env->tst.x, env->tst.y, env->tst.z);
 	mat4_rotate(cam->mats.model, env->rot.x, env->rot.y, env->rot.z);
@@ -33,14 +34,33 @@ static void	update_mvp(t_env *env, t_cam *cam)
 
 static void	set_uniforms(t_env *env, t_cam *cam)
 {
+	// This function will set uniforms, which are variables usable into our shaders program.
+
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program);
 
-	glUniform1i(glGetUniformLocation(env->shader_program, "txt"),  (GLint)env->txt);
-	glUniform1f(glGetUniformLocation(env->shader_program, "tc_ratio"),  (GLfloat)env->tc_ratio);
+	glUniform1i(glGetUniformLocation(env->shader_program, "txt"),  (GLint)env->txt); // Texture ID
+	glUniform1f(glGetUniformLocation(env->shader_program, "tc_ratio"),  (GLfloat)env->tc_ratio); // Texture-Color ratio
+
+	// Matrices
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "model"), 1, GL_FALSE, cam->mats.model);
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "view"), 1, GL_FALSE, cam->mats.view);
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "projection"), 1, GL_FALSE, cam->mats.projection);
+}
+
+static void				actions(t_env *env)
+{
+	// Rotation of the object on y axis
+	if (env->settings.rotation)
+		env->rot.y += (float)ft_to_radians((double)env->settings.rotation_speed / 10);
+
+	// Color to object and object to color transitions (transparency value)
+	if (env->settings.textured && env->tc_ratio < 1.0f)
+		env->tc_ratio += env->settings.transition_speed / 1000.0f;
+	else if (!env->settings.textured && env->tc_ratio > 0.0f)
+		env->tc_ratio -= env->settings.transition_speed / 1000.0f;
+	else
+		env->tc_ratio = roundf(env->tc_ratio); // ratio used in fragment shader
 }
 
 static unsigned char	render_scene(t_env *env)
@@ -50,18 +70,11 @@ static unsigned char	render_scene(t_env *env)
 	update_mvp(env, &env->scene.cam);
 	set_uniforms(env, &env->scene.cam);
 
-	// Draw triangles
+	// Draw triangles with provided data stride and binded texture
 	glDrawArrays(GL_TRIANGLES, 0, env->scene.vertexs.nb_cells);
 
-	if (env->settings.rotation)
-		env->rot.y += (float)ft_to_radians((double)env->settings.rotation_speed / 10);
-
-	if (env->settings.textured && env->tc_ratio < 1.0f)
-		env->tc_ratio += env->settings.transition_speed / 1000.0f;
-	else if (!env->settings.textured && env->tc_ratio > 0.0f)
-		env->tc_ratio -= env->settings.transition_speed / 1000.0f;
-	else
-		env->tc_ratio = roundf(env->tc_ratio);
+	// Applies transformations according to user's inputs
+	actions(env);
 
 	return (ERR_NONE);
 }

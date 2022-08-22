@@ -33,7 +33,6 @@ endif
 
 SRC_PATH=src/
 SRC_NAME=main.c\
-		 aim.c\
 		 error.c\
 		 free.c\
 		 camera.c\

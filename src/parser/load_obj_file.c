@@ -256,19 +256,6 @@ static unsigned char	gen_data_stride(t_env *env)
 	free_dynarray(&env->scene.vertexs);
 	env->scene.vertexs = data;
 
-	printf("%d polygones\n", env->scene.faces.nb_cells);
-	if (DISPLAY_DATA)
-	{
-		printf("%d vertexs\n", env->scene.vertexs.nb_cells);
-		t_stride	*st;
-		for (int i = 0; (st = dyacc(&env->scene.vertexs, i)) ; i++)
-		{
-			printf("vec : %f %f %f %f | color : %f %f %f %f | vec txt : %f %f\n",
-				(double)st->v.x, (double)st->v.y, (double)st->v.z, (double)st->v.w, 
-				(double)st->c.r, (double)st->c.g, (double)st->c.b, (double)st->c.a,
-				(double)st->t.u, (double)st->t.v);
-		}
-	}
 	return (ERR_NONE);
 }
 

@@ -82,7 +82,7 @@ unsigned char	obj_mtllib_loader(t_env *env, char **tokens)
 
 	(void)tokens;
 	/* Making new path, assuming that mtl file is named the same as its
-	 * corresponding obj file, and is located in the same directory.*/
+	 * corresponding obj file, and is located in the same directory (convention).*/
 	ft_strcpy(&env->obj_path[ft_strlen(env->obj_path) - 4], ".mtl");
 
 	if ((code = load_mtl_file(env)) != ERR_NONE)

@@ -170,7 +170,7 @@ unsigned char			load_settings(t_env *env)
 	ft_free_ctab(lines);
 
 	// Settings debugging displays
-	if (DISPLAY_DATA)
+/*	if (DISPLAY_DATA)
 	{
 		printf("w_hgt : %d\n", env->settings.w_hgt);
 		printf("w_wdt : %d\n", env->settings.w_wdt);
@@ -179,6 +179,6 @@ unsigned char			load_settings(t_env *env)
 
 		for (unsigned int i = 0; i < KEY_MAX; i++)
 			printf("%s : %s\n", settings_keys[i], gl_str_ids[env->settings.keys[i]]);
-	}
+	}*/
 	return (ERR_NONE);
 }

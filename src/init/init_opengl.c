@@ -146,6 +146,8 @@ unsigned char   init_display(t_env *env)
     ****************************************************************/
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetCursorPos(window, env->settings.w_wdt / 2, env->settings.w_hgt / 2);
+//	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
     /****************************************************************
      * We pass GLAD the function to load the address of the OpenGL

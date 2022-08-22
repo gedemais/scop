@@ -133,10 +133,24 @@ static unsigned char	init_buffers(t_env *env)
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(t_stride), (void*)sizeof(t_vec3d));
 	glEnableVertexAttribArray(1);
 
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(t_stride), (void*)(sizeof(t_vec3d) + sizeof(t_color)));
+	glEnableVertexAttribArray(2);
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, env->ebo); // Bind ebo buffer
 
 	// Copies faces indices data in ebo
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)env->scene.faces.nb_cells * (GLsizeiptr)sizeof(uint32_t) * 3, env->scene.faces.c, GL_STATIC_DRAW);
+
+	glGenTextures(1, &env->txt);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // set texture filtering parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	t_texture *txt = &((t_mtl*)(dyacc(&env->scene.mtls, 0)))->texture;
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, txt->w, txt->h, 0, GL_RGB, GL_UNSIGNED_BYTE, txt->img_data);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
 	return (ERR_NONE);
 }

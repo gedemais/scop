@@ -16,6 +16,8 @@ FLAGS += -Wno-reserved-id-macro
 FLAGS += -Wno-missing-noreturn
 FLAGS += -Wno-incompatible-pointer-types-discards-qualifiers
 FLAGS += -Wno-unused-variable
+FLAGS += -Wno-implicit-float-conversion
+FLAGS += -Wno-double-promotion
 #FLAGS += -Wno-poison-system-directories
 
 # Flags variables
@@ -31,6 +33,7 @@ endif
 
 SRC_PATH=src/
 SRC_NAME=main.c\
+		 aim.c\
 		 error.c\
 		 free.c\
 		 camera.c\

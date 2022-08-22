@@ -36,7 +36,8 @@ static void	set_uniforms(t_env *env, t_cam *cam)
 	// Launch shaders-composed program
 	glUseProgram(env->shader_program);
 
-	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "model"), 1, GL_FALSE,cam->mats.model);
+	glUniform1i(glGetUniformLocation(env->shader_program, "txt"),  (GLint)env->txt);
+	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "model"), 1, GL_FALSE, cam->mats.model);
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "view"), 1, GL_FALSE, cam->mats.view);
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "projection"), 1, GL_FALSE, cam->mats.projection);
 }
@@ -45,6 +46,7 @@ static unsigned char	render_scene(t_env *env)
 {
 	static float	angle = 0.0f;
 
+//	camera_aim(env);
 	update_mvp(env, &env->scene.cam);
 	set_uniforms(env, &env->scene.cam);
 

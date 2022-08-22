@@ -8,7 +8,7 @@ static unsigned char	scop(t_env *env, int argc, char **argv)
 	if ((code = init(env, argc, argv)) != ERR_NONE)
 		return (code);
 
-	if (DISPLAY_DATA)
+/*	if (DISPLAY_DATA)
 	{
 		printf("---------------------- Vertexs ----------------------\n");
 		t_vec3d	*v;
@@ -48,7 +48,7 @@ static unsigned char	scop(t_env *env, int argc, char **argv)
 			if (mtl->texture.img_data)
 				printf("Texture : %p\n------------------\n", (void*)mtl->texture.img_data);
 		}
-	}
+	}*/
 	//exit(EXIT_SUCCESS); // chrono init time
 	// Main loop launcher
 	return (display_loop(env));

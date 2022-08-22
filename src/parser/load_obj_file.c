@@ -221,6 +221,7 @@ static unsigned char	gen_data_stride(t_env *env)
 	uint32_t	*f; // Pointers used to transfer data
 	uint32_t	used;
 	t_vec3d		*v;
+	t_vt		*vt;
 	t_mtl		*m;
 	t_stride	s; // New element
 
@@ -242,8 +243,10 @@ static unsigned char	gen_data_stride(t_env *env)
 		for (unsigned int j = 0; j < 3; j++)
 		{
 			v = dyacc(&env->scene.vertexs, (int)f[j]);
+			vt = dyacc(&env->scene.vertexs_txt, (int)f[j + 3]);
 			s.v = *v;
 			s.c = m  == NULL ? DEFAULT_COLOR : m->color;
+			s.t = vt == NULL ? (t_vt){0.0f, 0.0f} : *vt;
 			if (push_dynarray(&data, &s, false))
 				return (ERR_MALLOC_FAILED);
 		}
@@ -260,9 +263,10 @@ static unsigned char	gen_data_stride(t_env *env)
 		t_stride	*st;
 		for (int i = 0; (st = dyacc(&env->scene.vertexs, i)) ; i++)
 		{
-			printf("vec : %f %f %f %f | color : %f %f %f %f\n",
+			printf("vec : %f %f %f %f | color : %f %f %f %f | vec txt : %f %f\n",
 				(double)st->v.x, (double)st->v.y, (double)st->v.z, (double)st->v.w, 
-				(double)st->c.r, (double)st->c.g, (double)st->c.b, (double)st->c.a);
+				(double)st->c.r, (double)st->c.g, (double)st->c.b, (double)st->c.a,
+				(double)st->t.u, (double)st->t.v);
 		}
 	}
 	return (ERR_NONE);

@@ -37,5 +37,6 @@ void		init_camera(t_env *env)
 	cam->pitch = 0;
 	cam->yaw = 0;
 
+	env->tst = (t_vec3d){0, 0, -1, 0}; // Initialize object position further
 //	init_matrices(cam);
 }

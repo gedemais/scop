@@ -54,6 +54,9 @@ typedef	struct	s_face
 	uint32_t		a;
 	uint32_t		b;
 	uint32_t		c;
+	uint32_t		va;
+	uint32_t		vb;
+	uint32_t		vc;
 }				t_face;
 
 typedef struct	s_camera_matrices
@@ -68,8 +71,10 @@ typedef	struct	s_camera
 {
 	t_cam_mat	mats;
 	t_vec3d		pos;
+	t_vec3d		target;
 	t_vec3d		dir;
 	t_vec3d		up;
+	t_vec3d		right;
 	float		roll;
 	float		pitch;
 	float		yaw;

@@ -7,12 +7,34 @@ uint32_t	*used_mtl(void)
 	return (&used_mtl);
 }
 
-static void	assign_face_indexes(t_face *new, char **tokens, int indexes[3])
+static unsigned char	assign_face_indexes(t_face *new, char **tokens, int indexes[3])
 {
+	char	**subs[3];
+	int		n[3];
+
+	for (unsigned int i = 0; i < 3; i++)
+	{
+		if (!(subs[i] = ft_strsplit(tokens[indexes[i]], "/")))
+			return (ERR_MALLOC_FAILED);
+
+		n[i] = ft_tablen(subs[i]);
+		if (i > 0 && n[i] != n[i - 1])
+			return (ERR_INCOHERENT_FACE_INDEXES);
+	}
+
 	// Reads the faces components (indexes in vertexs pool)
-	new->a = (uint32_t)ft_atoi(tokens[indexes[0]]) - 1;
-	new->b = (uint32_t)ft_atoi(tokens[indexes[1]]) - 1;
-	new->c = (uint32_t)ft_atoi(tokens[indexes[2]]) - 1;
+	new->a = (uint32_t)ft_atoi(subs[0][0]) - 1;
+	new->b = (uint32_t)ft_atoi(subs[1][0]) - 1;
+	new->c = (uint32_t)ft_atoi(subs[2][0]) - 1;
+
+	if (n[0] < 2)
+		return (ERR_NONE);
+
+	new->va = (uint32_t)ft_atoi(subs[0][1]) - 1;
+	new->vb = (uint32_t)ft_atoi(subs[1][1]) - 1;
+	new->vc = (uint32_t)ft_atoi(subs[2][1]) - 1;
+
+	return (ERR_NONE);
 }
 
 static unsigned char	check_face_indexes(t_env *env, t_face new)
@@ -22,6 +44,13 @@ static unsigned char	check_face_indexes(t_env *env, t_face new)
 		|| new.b >= (unsigned int)env->scene.vertexs.nb_cells
 		|| new.c >= (unsigned int)env->scene.vertexs.nb_cells)
 		return (ERR_INVALID_VERTEX_INDEX_FOR_FACE);
+
+	if (env->scene.vertexs_txt.nb_cells > 0)
+		if (new.va >= (unsigned int)env->scene.vertexs_txt.nb_cells
+			|| new.vb >= (unsigned int)env->scene.vertexs_txt.nb_cells
+			|| new.vc >= (unsigned int)env->scene.vertexs_txt.nb_cells)
+			return (ERR_INVALID_VERTEX_TEXTURE_INDEX_FOR_FACE);
+
 	return (ERR_NONE);
 }
 
@@ -32,8 +61,9 @@ static unsigned char	split_quad(t_env *env, t_mesh *parent, uint32_t a_index, ch
 
 	ft_memset(news, 0, sizeof(t_face) * 2);
 	// Polygon faces indexes assignment
-	assign_face_indexes(&news[0], tokens, (int[3]){1, 2, 3});
-	assign_face_indexes(&news[1], tokens, (int[3]){1, 3, 4});
+	if (assign_face_indexes(&news[0], tokens, (int[3]){1, 2, 3})
+		|| assign_face_indexes(&news[1], tokens, (int[3]){1, 3, 4}))
+		return (ERR_MALLOC_FAILED);
 
 	// Checks indexes values
 	if (check_face_indexes(env, news[0]) != ERR_NONE

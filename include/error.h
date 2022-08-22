@@ -44,6 +44,8 @@ enum	e_error_id
 	ERR_CHDIR_FAILED,
 	ERR_FAILED_TO_LINK_SHADER_PROGRAM,
 	ERR_PRIMARY_MONITOR_NOT_FOUND,
+	ERR_INCOHERENT_FACE_INDEXES,
+	ERR_INVALID_VERTEX_TEXTURE_INDEX_FOR_FACE,
 	ERR_MAX
 };
 
@@ -91,9 +93,9 @@ static const t_error	errors[ERR_MAX] = {
 		[ERR_UNCOMPATIBLE_OPENGL_VERSION] = {"Incompatible version of OpenGL.", false},
 		[ERR_CHDIR_FAILED] = {"Chdir failed.", false},
 		[ERR_FAILED_TO_LINK_SHADER_PROGRAM] = {"OpenGL : Failed to link shader program.", false},
-		[ERR_PRIMARY_MONITOR_NOT_FOUND] = {"OpenGL : Failed to find primary monitor", false}
-		//[] = {"", false}
-		//[] = {"", false}
+		[ERR_PRIMARY_MONITOR_NOT_FOUND] = {"OpenGL : Failed to find primary monitor", false},
+		[ERR_INCOHERENT_FACE_INDEXES] = {"Incoherent faces indexes in .obj file", false},
+		[ERR_INVALID_VERTEX_TEXTURE_INDEX_FOR_FACE] = {"Invalid vertex texture index for face in .obj file", false}
 		//[] = {"", false}
 		//[] = {"", false}
 };

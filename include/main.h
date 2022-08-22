@@ -33,6 +33,7 @@
 # define ROTATION_SPEED_DELTA 2
 # define MOVE_SPEED 0.01f
 # define CAM_SPEED 0.05f
+# define SENSI 0.1f
 
 // Settings instances
 enum					e_settings
@@ -103,11 +104,13 @@ typedef struct	s_env
 	uint32_t	vertex_shader_id;
 	uint32_t	fragment_shader_id;
 	uint32_t	shader_program;
+	GLuint		txt;
 	uint32_t	ebo;
 	uint32_t	vbo;
 	uint32_t	vao;
 	t_vec3d		tst;
 	t_vec3d		rot;
+	char		pad[4];
 	void		(*keybinds_fts[NB_KEYS])(struct s_env *env, int key); // Function pointers array linking actions functions with key binds
 }				t_env;
 
@@ -122,6 +125,7 @@ unsigned char   init_display(t_env *env);
 unsigned char	init_shaders(t_env *env);
 unsigned char   display_loop(t_env *env);
 void			processInput(GLFWwindow *window);
+void			camera_aim(t_env *env);
 
 // Matrices
 void		mat4_print(mat4 m);

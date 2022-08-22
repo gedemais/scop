@@ -1,7 +1,7 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# define DISPLAY_DATA false
+# define DISPLAY_DATA true
 
 # define VERTEX_NORMALIZE_RANGE 0.5f
 

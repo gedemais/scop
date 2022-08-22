@@ -24,10 +24,7 @@ static void		bind_actions_to_keys(t_env *env)
 
 	// Assignation of actions functions in respect with handled key indices.
 	for (unsigned int i = 0; i < KEY_MAX; i++)
-	{
 		env->keybinds_fts[env->settings.keys[i]] = keys_fts[i];
-		printf("%d\n", (int)env->settings.keys[i]);
-	}
 }
 
 static unsigned char	load_obj_path(t_env *env, char *name)

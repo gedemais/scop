@@ -114,8 +114,6 @@ typedef struct	s_env
 	void		(*keybinds_fts[NB_KEYS])(struct s_env *env, int key); // Function pointers array linking actions functions with key binds
 }				t_env;
 
-void	print_used_mtls(t_env *env);
-
 // Initializes scop
 unsigned char	init(t_env *env, int argc, char **argv);
 void			init_camera(t_env *env);

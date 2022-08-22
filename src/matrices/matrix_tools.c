@@ -10,12 +10,6 @@ void		mat4_identity(mat4 m)
 	m[15] = 1.0f;
 }
 
-void		mat4_print(mat4 m)
-{
-	for (unsigned int i = 0; i < 16; i += 4)
-		printf("[ %4f | %4f | %4f | %4f ]\n", (double)m[0 + i], (double)m[1 + i], (double)m[2 + i], (double)m[3 + i]);
-}
-
 void		mat4_scale(mat4 m, float scale)
 {
 	mat4	s;

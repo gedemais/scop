@@ -13,7 +13,6 @@ FLAGS = -Wall -Werror -Wextra $(EVE)
 FLAGS += -Wno-documentation
 FLAGS += -Wno-documentation-unknown-command
 FLAGS += -Wno-reserved-id-macro
-FLAGS += -Wno-missing-noreturn
 FLAGS += -Wno-incompatible-pointer-types-discards-qualifiers
 FLAGS += -Wno-unused-variable
 FLAGS += -Wno-implicit-float-conversion

@@ -1,6 +1,6 @@
 #include "main.h"
 
-void	exit_scop(t_env *env, int key)
+__attribute__((noreturn)) void	exit_scop(t_env *env, int key)
 {
 	(void)key;
 	free_env(env);

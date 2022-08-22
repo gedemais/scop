@@ -204,17 +204,6 @@ unsigned char	create_default_mesh(t_env *env)
 	return (ERR_NONE);
 }
 
-void	print_used_mtls(t_env *env)
-{
-	uint32_t	*n;
-
-	for (int i = 0; i < env->scene.used_mtls.nb_cells; i++)
-	{
-		n = dyacc(&env->scene.used_mtls, i);
-		printf("%d\n", *n);
-	}
-}
-
 static unsigned char	gen_data_stride(t_env *env)
 {
 	t_dynarray	data; // New data stride array

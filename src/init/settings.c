@@ -136,11 +136,6 @@ static unsigned char	loader(t_env *env, char **lines)
 		ft_free_ctab(tokens);
 	}
 
-	env->settings.keys[KEY_MOVE_CAM_LEFT] = (uint8_t)15;
-	env->settings.keys[KEY_MOVE_CAM_RIGHT] = (uint8_t)18;
-	env->settings.keys[KEY_MOVE_CAM_FORWARD] = (uint8_t)33;
-	env->settings.keys[KEY_MOVE_CAM_BACKWARD] = (uint8_t)37;
-
 	for (unsigned int i = 0; i < SET_KEY_MOVE_CAM_FORWARD; i++)
 		if (founds[i] == false) // If any settings are missing.
 		{

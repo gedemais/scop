@@ -14,13 +14,8 @@ static void		bind_actions_to_keys(t_env *env)
 													[KEY_MOVE_OBJECT_UP] = move_object,
 													[KEY_MOVE_OBJECT_DOWN] = move_object,
 													[KEY_MOVE_OBJECT_LEFT] = move_object,
-													[KEY_MOVE_OBJECT_RIGHT] = move_object,
-													[KEY_MOVE_CAM_FORWARD] = move_camera,
-													[KEY_MOVE_CAM_BACKWARD] = move_camera,
-													[KEY_MOVE_CAM_LEFT] = move_camera,
-													[KEY_MOVE_CAM_RIGHT] = move_camera
+													[KEY_MOVE_OBJECT_RIGHT] = move_object
 	};
-
 
 	// Assignation of actions functions in respect with handled key indices.
 	for (unsigned int i = 0; i < KEY_MAX; i++)
@@ -58,5 +53,6 @@ unsigned char	init(t_env *env, int argc, char **argv)
 	init_camera(env); // Initializes scene's camera
 	bind_actions_to_keys(env); // Attribute action functions to keys loaded from settings file
 
+	env->tc_ratio = 0.0f;
 	return (ERR_NONE);
 }

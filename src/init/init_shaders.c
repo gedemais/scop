@@ -103,11 +103,6 @@ static unsigned char	link_shader_program(t_env *env)
 
 	return (ERR_NONE);
 }
-/*
-static unsigned char	init_textures(t_env *env)
-{
-	for (int i = 0; i < env->scene.mtls; i++)
-}*/
 
 static unsigned char	init_buffers(t_env *env)
 {
@@ -149,8 +144,11 @@ static unsigned char	init_buffers(t_env *env)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	t_texture *txt = &((t_mtl*)(dyacc(&env->scene.mtls, 0)))->texture;
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, txt->w, txt->h, 0, GL_RGB, GL_UNSIGNED_BYTE, txt->img_data);
-    glGenerateMipmap(GL_TEXTURE_2D);
+	if (txt)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, txt->w, txt->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, txt->img_data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
 
 	return (ERR_NONE);
 }

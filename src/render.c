@@ -37,6 +37,7 @@ static void	set_uniforms(t_env *env, t_cam *cam)
 	glUseProgram(env->shader_program);
 
 	glUniform1i(glGetUniformLocation(env->shader_program, "txt"),  (GLint)env->txt);
+	glUniform1f(glGetUniformLocation(env->shader_program, "tc_ratio"),  (GLfloat)env->tc_ratio);
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "model"), 1, GL_FALSE, cam->mats.model);
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "view"), 1, GL_FALSE, cam->mats.view);
 	glUniformMatrix4fv(glGetUniformLocation(env->shader_program, "projection"), 1, GL_FALSE, cam->mats.projection);
@@ -46,7 +47,6 @@ static unsigned char	render_scene(t_env *env)
 {
 	static float	angle = 0.0f;
 
-//	camera_aim(env);
 	update_mvp(env, &env->scene.cam);
 	set_uniforms(env, &env->scene.cam);
 
@@ -55,6 +55,13 @@ static unsigned char	render_scene(t_env *env)
 
 	if (env->settings.rotation)
 		env->rot.y += (float)ft_to_radians((double)env->settings.rotation_speed / 10);
+
+	if (env->settings.textured && env->tc_ratio < 1.0f)
+		env->tc_ratio += env->settings.transition_speed / 1000.0f;
+	else if (!env->settings.textured && env->tc_ratio > 0.0f)
+		env->tc_ratio -= env->settings.transition_speed / 1000.0f;
+	else
+		env->tc_ratio = roundf(env->tc_ratio);
 
 	return (ERR_NONE);
 }

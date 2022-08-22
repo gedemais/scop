@@ -3,6 +3,7 @@
 enum	e_toggles
 {
 	TOGGLE_ROTATION,
+	TOGGLE_TEXTURE,
 	TOGGLE_ROTSPEED_UP,
 	TOGGLE_ROTSPEED_DOWN,
 	TOGGLE_MAX
@@ -15,6 +16,7 @@ static bool	switch_toggles(t_env *env, bool toggles[TOGGLE_MAX], int key, bool p
 	uint8_t	*keys = &env->settings.keys[0];
 	int		toggle_ids[TOGGLE_MAX] = {
 					gl_keys_values[keys[KEY_TOGGLE_ROTATION]],
+					gl_keys_values[keys[KEY_TOGGLE_TEXTURE]],
 					gl_keys_values[keys[KEY_INCREASE_ROTATION_SPEED]],
 					gl_keys_values[keys[KEY_DECREASE_ROTATION_SPEED]]
 					};

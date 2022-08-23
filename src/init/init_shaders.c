@@ -49,10 +49,10 @@ static unsigned char	compile_shader(t_env *env, GLenum type, const GLchar *sourc
 		bzero(info_log, sizeof(info_log));
 		glGetShaderInfoLog(shader_id, sizeof(info_log), NULL, info_log);
 		ft_putstr_fd(info_log, 2);
-		munmap(source, size);
+		munmap((void*)source, size);
 		return (ERR_FAILED_TO_COMPILE_SHADER);
 	}
-	munmap(source, size); // Free memory mapping used for shader source file
+	munmap((void*)source, size); // Free memory mapping used for shader source file
 
 	return (ERR_NONE);
 }

@@ -174,12 +174,11 @@ bool	mat4_invert(mat4 m, mat4 invOut)
 void		mat4_view(t_cam *camera)
 {
 	mat4	rot;
-	t_vec3d	target;
 	float	pitch, yaw, roll;
 
 	camera->up = (t_vec3d){0, 1, 0, 0};
 	camera->dir = (t_vec3d){0, 0, 1, 0};
-	target = (t_vec3d){0, 0, 1, 0};
+	camera->target = (t_vec3d){0, 0, 1, 0};
 
 	pitch = (float)ft_to_radians((double)camera->pitch);
 	yaw = (float)ft_to_radians((double)camera->yaw);
@@ -189,9 +188,9 @@ void		mat4_view(t_cam *camera)
 	mat4_translate(camera->mats.view, camera->pos.x, camera->pos.y, camera->pos.z);
 	mat4_rotate(rot, pitch, yaw, roll);
 
-	camera->dir = vec_normalize(mat4_mult_vec(rot, target));
+	camera->dir = vec_normalize(mat4_mult_vec(rot, camera->target));
 	camera->up = vec_normalize(mat4_mult_vec(rot, (t_vec3d){0, 1, 0, 0}));
-	target = vec_normalize(vec_add(camera->pos, camera->dir));
-	mat4_pointat(camera->mats.view, camera->pos, target, camera->up);
+	camera->target = vec_normalize(vec_add(camera->pos, camera->dir));
+	mat4_pointat(camera->mats.view, camera->pos, camera->target, camera->up);
 	mat4_invert(camera->mats.view, camera->mats.view);
 }

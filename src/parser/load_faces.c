@@ -19,7 +19,11 @@ static unsigned char	assign_face_indexes(t_face *new, char **tokens, int indexes
 
 		n[i] = ft_tablen(subs[i]);
 		if (i > 0 && n[i] != n[i - 1])
+		{
+			for (unsigned int j = 0; j <= i; j++)
+				ft_free_ctab(subs[j]);
 			return (ERR_INCOHERENT_FACE_INDEXES);
+		}
 	}
 
 	// Reads the faces components (indexes in vertexs pool)
@@ -28,7 +32,11 @@ static unsigned char	assign_face_indexes(t_face *new, char **tokens, int indexes
 	new->c = (uint32_t)ft_atoi(subs[2][0]) - 1;
 
 	if (n[0] < 2)
+	{
+		for (unsigned int j = 0; j < 3; j++)
+			ft_free_ctab(subs[j]);
 		return (ERR_NONE);
+	}
 
 	new->va = (uint32_t)ft_atoi(subs[0][1]) - 1;
 	new->vb = (uint32_t)ft_atoi(subs[1][1]) - 1;

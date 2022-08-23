@@ -243,6 +243,8 @@ static unsigned char	gen_data_stride(t_env *env)
 
 	// Replace vertexs array with data
 	free_dynarray(&env->scene.vertexs);
+	free_dynarray(&env->scene.vertexs_txt);
+	free_dynarray(&env->scene.used_mtls);
 	env->scene.vertexs = data;
 
 	return (ERR_NONE);

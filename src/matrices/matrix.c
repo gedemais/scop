@@ -185,6 +185,7 @@ void		mat4_view(t_cam *camera)
 	roll = (float)ft_to_radians((double)camera->roll);
 
 	mat4_identity(camera->mats.view);
+	mat4_identity(rot);
 	mat4_translate(camera->mats.view, camera->pos.x, camera->pos.y, camera->pos.z);
 	mat4_rotate(rot, pitch, yaw, roll);
 
